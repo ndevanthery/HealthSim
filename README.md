@@ -19,6 +19,11 @@ The health prevention survey project was developed using Flutter. The Database m
 ## How to Use
 The Application is deployed on web at this address : https://calm-pastelito-5ab11c.netlify.app/#/ .
 and for the mobile version, it is only opened to internal testers. 
+
+
+## Future improvement
+This project just Started, so there is still plenty of things to do on it. It should take an end by the month of May 2023. 
+
 ## Conclusion
 
 Overall, the health prevention survey project is a valuable tool for users who want to understand their risks for diabetes, heart disease, and cancer. The application provides personalized results and suggestions for lifestyle changes that could help reduce the user's risk. The educational resources also provide valuable information for users who want to learn more about disease prevention and healthy habits.
