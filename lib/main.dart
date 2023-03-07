@@ -8,6 +8,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final _firebaseApp = await Firebase.initializeApp(
+    name: DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.web
+        ? null
+        : "healthApp",
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
