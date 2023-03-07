@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:healthsim/authentification/login.dart';
 import 'package:healthsim/authentification/register.dart';
@@ -30,7 +28,7 @@ class WelcomePage extends StatelessWidget {
                     width: double.maxFinite,
                     height: constraints.maxHeight / 10 * 5,
                   ),
-                  Container(
+                  SizedBox(
                     height: constraints.maxHeight / 10 * 2,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -40,25 +38,25 @@ class WelcomePage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => RegisterPage(),
+                                  builder: (context) => const RegisterPage(),
                                 ));
                           },
-                          child: Text("Get Started"),
                           style: ElevatedButton.styleFrom(
-                              fixedSize: Size(1000, 50),
+                              fixedSize: const Size(1000, 50),
                               backgroundColor: Colors.grey[800],
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20))),
+                          child: const Text("Get Started"),
                         ),
                         TextButton(
                             onPressed: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LoginPage(),
+                                    builder: (context) => const LoginPage(),
                                   ));
                             },
-                            child: Text("I already have an account"))
+                            child: const Text("I already have an account"))
                       ],
                     ),
                   ),
