@@ -8,7 +8,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final _firebaseApp = await Firebase.initializeApp(
-    name: "gymbroAndroid",
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());

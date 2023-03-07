@@ -9,6 +9,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("HOMEPAGE")),
+      body: Center(
+          child: Text(
+        "YOU ARE LOGGED IN",
+        style: TextStyle(fontSize: 30),
+      )),
     );
   }
 }

@@ -17,6 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
+      print("WEB!!!");
       return web;
     }
     switch (defaultTargetPlatform) {
@@ -44,13 +45,13 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAP0bduWg5o3sYdBLgPcpriCLPkLWzZaTY',
-    appId: '1:570032156758:web:f3d88dd61e1f4bea8f4bf7',
-    messagingSenderId: '570032156758',
-    projectId: 'rideon-dc993',
-    authDomain: 'rideon-dc993.firebaseapp.com',
-    storageBucket: 'rideon-dc993.appspot.com',
-  );
+      apiKey: "AIzaSyA78OHKbgG6KPKAU8gQugAco9Dn0NB_M70",
+      authDomain: "healthsim-3e354.firebaseapp.com",
+      projectId: "healthsim-3e354",
+      storageBucket: "healthsim-3e354.appspot.com",
+      messagingSenderId: "404737998798",
+      appId: "1:404737998798:web:84d841d21085f7dfeff59f",
+      measurementId: "G-E8P711DPZ0");
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCKBx4M0wb7_JXH3GggyPbgC8py7qni3Hs',
