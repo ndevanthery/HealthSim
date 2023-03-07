@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:healthsim/home.dart';
+
+import '../database/auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -89,8 +92,30 @@ class _LoginPageState extends State<LoginPage> {
                                   backgroundColor: Colors.grey[800],
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(25))),
-                              onPressed: () {},
+                              onPressed: () async {
+                                await login(
+                                    emailController.text, passController.text);
+                              },
                               child: const Text("Log in "))
                         ]))))));
   }
+
+  login(String email, String password) async {
+    AuthService myService = AuthService();
+
+    var registerId = await myService.loginWithEmail(
+      email,
+      password,
+    );
+    if (registerId != null) {
+      Navigator.pop(context);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    }
+  }
 }
+
+class Home {}

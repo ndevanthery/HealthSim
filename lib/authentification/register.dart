@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:healthsim/Models/user_model.dart';
+
+import '../database/auth.dart';
+import '../home.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -128,12 +132,32 @@ class _RegisterPageState extends State<RegisterPage> {
                           backgroundColor: Colors.grey[800],
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25))),
-                      onPressed: () {},
+                      onPressed: () {
+                        register(
+                            emailController.text,
+                            passController.text,
+                            UserM(
+                                email: emailController.text,
+                                fullName: fullnameController.text));
+                      },
                       child: const Text("Create Account ")),
                 ]),
               ),
             ),
           ),
         ));
+  }
+
+  register(String email, String password, UserM userM) async {
+    AuthService myService = AuthService();
+
+    var registerId = await myService.registerWithEmail(email, password, userM);
+    if (registerId != null) {
+      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    }
   }
 }
