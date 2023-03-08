@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "404737998798",
+    "project_id": "healthsim-3e354",
+    "storage_bucket": "healthsim-3e354.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404737998798:android:d9145faa55be77a4eff59f",
+        "android_client_info": {
+          "package_name": "com.hesso.healthsim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404737998798-rm7i028hou7qrq0oqcv86a5sftl6b85p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDr5Fdgy6g3FiaT5i-TUxf9Ic5VmN4UdSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404737998798-rm7i028hou7qrq0oqcv86a5sftl6b85p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
