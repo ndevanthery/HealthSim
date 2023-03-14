@@ -2,9 +2,9 @@ import 'dart:math';
 
 void algo() {
   //results
-  var resultAVC = 0.0,
-      resultDiab = 0.0,
-      resultCancer = 0.0;
+  var resultAVC = 0,
+      resultDiab = 0,
+      resultCancer = 0;
   //standard score
   var alimH = 0.99,
       alimF = 1.35,
@@ -62,7 +62,7 @@ void algo() {
   print("The risk of AVC is $resultAVC%.\n The risk of diabete is $resultDiab%.\n The risk of cancer is $resultCancer%");
 }
 
-double riskAVC(int inf, int avc, int afinf, int age, int smoke, double syst, double chol,
+int riskAVC(int inf, int avc, int afinf, int age, int smoke, double syst, double chol,
     double hdl, int gender, int alim, double alimH, double alimF, double alimFH , int sport,
     double sportH, double sportF, double sportFH, int diab) {
   //algo risk heart attack/infractus/avc
@@ -162,15 +162,14 @@ double riskAVC(int inf, int avc, int afinf, int age, int smoke, double syst, dou
     var riskSport = sumAVC - (sumAVC * sportP * baseSport);
     resultAVC = (riskAlim + riskSport) / 2 * 100;
   }
-  resultAVC = double.parse((resultAVC).toStringAsFixed(1));
 
-  return resultAVC;
+  return resultAVC.round();
 }
 
-double riskDiabete(int age, double bmi, int highSyst, int highGlyc, int sport,
+int riskDiabete(int age, double bmi, int highSyst, int highGlyc, int sport,
     int alim, int gender ) {
   //diabete algo
-  var resultDiab = 0.0;
+  var resultDiab = 0;
   //score table
   var scoreTable = [2, 1.9333, 1.8667, 1.8, 1.7333, 1.6667, 1.6, 1.5333, 1.4667,
     1.4, 1.3333, 1.2667, 1.2, 1.1333, 1.2667, 1.2, 1.1333, 1.0667, 1, 0.9333,
@@ -216,15 +215,15 @@ double riskDiabete(int age, double bmi, int highSyst, int highGlyc, int sport,
     points += 1;
   }
   if (gender == 0) {
-    resultDiab = riskTableH.elementAt(points.round()) as double;
+    resultDiab = riskTableH.elementAt(points.round());
   } else {
-    resultDiab = riskTableF.elementAt(points.round()) as double;
+    resultDiab = riskTableF.elementAt(points.round());
   }
 
   return resultDiab;
 }
 
-double riskCancer(int afcancer, int smoke, double bmi, int sport, int alcool, int alim){
+int riskCancer(int afcancer, int smoke, double bmi, int sport, int alcool, int alim){
   //cancer algo
   //points calcul
   var sumCancer= afcancer + smoke + 0.0;
@@ -235,8 +234,7 @@ double riskCancer(int afcancer, int smoke, double bmi, int sport, int alcool, in
   sumCancer += (3-alim)/3*0.5;
 
   var resultCancer = sumCancer/4.0*100 +9;
-  resultCancer = double.parse((resultCancer).toStringAsFixed(1));
 
-  return resultCancer;
+  return resultCancer.round();
 
 }
