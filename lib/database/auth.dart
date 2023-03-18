@@ -35,9 +35,7 @@ class AuthService {
           .doc(res.user!.uid)
           .get();
 
-      var data = myDoc.data();
-      data?.putIfAbsent('uid', () => res.user!.uid);
-      return data;
+      return res.user!.uid;
     } catch (e) {
 /*       print(e.toString());
  */
