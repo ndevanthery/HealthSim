@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class ResultPage extends StatefulWidget {
   bool _showSimulationSection = false;
+
+  ResultPage({super.key});
 
   @override
   _ResultPageState createState() => _ResultPageState();
@@ -17,7 +20,7 @@ class _ResultPageState extends State<ResultPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Health Survey Result'),
+        title: const Text('Result'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -35,29 +38,29 @@ class _ResultPageState extends State<ResultPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildResultsCard(
-                    context,
-                    'Cancer Risk',
-                    'Medium',
-                    'Higher than Normal',
-                  ),
-                  _buildResultsCard(
-                    context,
-                    'Heart Disease Risk',
-                    'High',
-                    'Higher than Normal',
-                  ),
-                  _buildResultsCard(
-                    context,
-                    'Diabetes Risk',
-                    'Low',
-                    'Lower than Normal',
-                  ),
-                ],
-              ),
+              MediaQuery.of(context).size.width < 600
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildResultsCard(context, 'Cancer Risk', 'Medium',
+                            'Higher than Normal', 12),
+                        _buildResultsCard(context, 'Heart Disease Risk', 'High',
+                            'Higher than Normal', 56),
+                        _buildResultsCard(context, 'Diabetes Risk', 'Low',
+                            'Lower than Normal', 76),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildResultsCard(context, 'Cancer Risk', 'Medium',
+                            'Higher than Normal', 12),
+                        _buildResultsCard(context, 'Heart Disease Risk', 'High',
+                            'Higher than Normal', 56),
+                        _buildResultsCard(context, 'Diabetes Risk', 'Low',
+                            'Lower than Normal', 76),
+                      ],
+                    ),
               const SizedBox(height: 20),
               Visibility(
                 visible: widget._showSimulationSection,
@@ -161,6 +164,18 @@ class _ResultPageState extends State<ResultPage> {
                       },
                     ),
                     const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildResultsCard(context, 'Cancer Risk', 'Medium',
+                            'Higher than Normal', 12),
+                        _buildResultsCard(context, 'Heart Disease Risk', 'High',
+                            'Higher than Normal', 56),
+                        _buildResultsCard(context, 'Diabetes Risk', 'Low',
+                            'Lower than Normal', 76),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -192,46 +207,144 @@ class _ResultPageState extends State<ResultPage> {
     );
   }
 
-  Widget _buildResultsCard(
-      BuildContext context, String title, String subtitle, String rank) {
+  Widget _buildResultsCard(BuildContext context, String title, String subtitle,
+      String rank, double risk) {
     return Card(
       elevation: 10,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        width: MediaQuery.of(context).size.width / 3.5,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+      child: MediaQuery.of(context).size.width < 600
+          ? Container(
+              padding: const EdgeInsets.all(16),
+              width: MediaQuery.of(context).size.width / 1.2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2.2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 60,
+                          child: Text(
+                            title,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          _getRisk(risk),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        const SizedBox(height: 10),
+                        Text(
+                          "99th percentile",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  CircularPercentIndicator(
+                    radius: MediaQuery.of(context).size.width / 8,
+                    lineWidth: 6.0,
+                    percent: risk / 100,
+                    center: Text("${risk.round()}",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18.0)),
+                    progressColor: _getRiskColor(risk),
+                    backgroundColor: Colors.grey.shade200,
+                    animation: true,
+                    animationDuration: 2000,
+                  ),
+                ],
+              ),
+            )
+          : Container(
+              padding: const EdgeInsets.all(16),
+              width: MediaQuery.of(context).size.width / 3.5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 60,
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    _getRisk(risk),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  CircularPercentIndicator(
+                    radius: 40.0,
+                    lineWidth: 6.0,
+                    percent: risk / 100,
+                    center: Text("${risk.round()}",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18.0)),
+                    progressColor: _getRiskColor(risk),
+                    backgroundColor: Colors.grey.shade200,
+                    animation: true,
+                    animationDuration: 2000,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "99th percentile",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 10),
-            Text(
-              subtitle,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.grey,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              rank,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
+  }
+
+  Color _getRiskColor(double risk) {
+    if (risk < 25) {
+      return Colors.green;
+    } else if (risk < 50) {
+      return Colors.yellow;
+    } else if (risk < 75) {
+      return Colors.orange;
+    } else {
+      return Colors.red;
+    }
+  }
+
+  String _getRisk(double risk) {
+    if (risk < 25) {
+      return "Low";
+    } else if (risk < 50) {
+      return "Medium";
+    } else if (risk < 75) {
+      return "High";
+    } else {
+      return "Very High";
+    }
   }
 }

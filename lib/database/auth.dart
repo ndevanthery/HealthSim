@@ -1,8 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
 import '../Models/user_model.dart';
 
 class AuthService {
@@ -23,8 +20,8 @@ class AuthService {
       map.putIfAbsent('uid', () => res.user!.uid);
       return map;
     } catch (e) {
-      print(e.toString());
-      print("ERROR");
+      /* print(e.toString());
+      print("ERROR"); */
       return null;
     }
   }
@@ -42,7 +39,8 @@ class AuthService {
       data?.putIfAbsent('uid', () => res.user!.uid);
       return data;
     } catch (e) {
-      print(e.toString());
+/*       print(e.toString());
+ */
       return null;
     }
   }
