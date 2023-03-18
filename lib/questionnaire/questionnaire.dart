@@ -4,12 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:healthsim/questionnaire/ModelAnswer.dart';
 import 'package:provider/provider.dart';
 import 'package:survey_kit/survey_kit.dart';
 
 import '../authentification/user_provider.dart';
 import '../result/result.dart';
-
+var resultQuestionnaire;
 class QuestionnairePage extends StatefulWidget {
   QuestionnairePage({super.key});
 
@@ -19,12 +20,13 @@ class QuestionnairePage extends StatefulWidget {
 
 class _QuestionnaireState extends State<QuestionnairePage> {
   var db = FirebaseFirestore.instance;
-  var resultQuestionnaire = null;
   @override
   Widget build(BuildContext context) {
+    //go research the user id
+    final user = Provider.of<UserProvider>(context).user?.id;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Questionnaire"),
+        title:  const Text("Questionnaire"),
         flexibleSpace:  Container(
         decoration:const BoxDecoration(
             gradient: LinearGradient(
@@ -41,18 +43,16 @@ class _QuestionnaireState extends State<QuestionnairePage> {
             alignment: Alignment.center,
             child: SurveyKit(
                     onResult: (SurveyResult result) {
-                      // print("before provider");
-                      // var user = Provider.of<UserProvider>(context);
-                      // print("provider done");
-                      // var userFinal;
-                      // if(Provider.of<UserProvider>(context).user == null){
-                      //   user="Guest";
-                      // }
-                      // else{
-                      //   user=Provider.of<UserProvider>(context).user!.id.toString();
-                      // }
-                      // print("user : ${user.toString()}");
-                      // print("userFinal : $userFinal");
+                      //See id the user is connected
+                      var userFinal;
+                      if(user == null){
+                        userFinal="Guest";
+                      }
+                      else{
+                        userFinal=user;
+                      }
+
+                      //Pick the results and put it in variables
                       var gender = result.results.elementAt(1).results.first.result,
                           age = result.results.elementAt(2).results.first.result,
                           height = result.results.elementAt(3).results.first.result,
@@ -73,9 +73,11 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                           sport = result.results.elementAt(20).results.first.result,
                           alcool = result.results.elementAt(21).results.first.result;
 
-                      var genderFinal,glycFinal,highSystFinal,highCholFinal,diabFinal,
+                      //create new variable that be in the database
+                      int genderFinal,glycFinal,highSystFinal,highCholFinal,diabFinal,
                           infFinal,avcFinal,afinfFinal,afcancerFinal,smokeFinal;
 
+                      //change the boolean results in int
                       if(gender == BooleanResult.POSITIVE){
                         genderFinal=1;
                       }
@@ -94,15 +96,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                       else{
                         highSystFinal=0;
                       }
-                      if(syst==null){
-                        syst=-1;
-                      }
-                      if(chol==null){
-                        chol=-1;
-                      }
-                      if(hdl==null){
-                        hdl=-1;
-                      }
+
                       if(highChol == BooleanResult.POSITIVE){
                         highCholFinal=1;
                       }
@@ -145,37 +139,29 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                       else{
                         smokeFinal=0;
                       }
-                      final answers = {
-                        "gender": genderFinal,
-                        "age": age,
-                        "height": height,
-                        "weight": weight,
-                        "glyc" : glycFinal,
-                        "highSyst" : highSystFinal,
-                        "syst" : syst,
-                        "highChol" : highCholFinal,
-                        "chol" : chol,
-                        "hdl" : hdl,
-                        "diab" : diabFinal,
-                        "inf" : infFinal,
-                        "avc" : avcFinal,
-                        "afinf" : afinfFinal,
-                        "afcancer" : afcancerFinal,
-                        "smoke" : smokeFinal,
-                        "alim" : alim,
-                        "sport" : sport,
-                        "alcool" : alcool,
-                        "date" : "${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}",
-                      };
 
-                      var dbAnswers = db
+                      //put a value in the null values
+                      syst ??= -1;
+                      chol ??= -1;
+                      hdl ??= -1;
+
+                      //Put all the answers in the Model
+                      final answers = ModelAnswer(genderFinal, age, height, weight, glycFinal, highSystFinal,
+                          syst, highCholFinal, chol, hdl, diabFinal, infFinal, avcFinal, afinfFinal, afcancerFinal,
+                          smokeFinal, alim, sport, alcool);
+
+                      //Put the model in a global value
+                      resultQuestionnaire = answers;
+
+                      //Put the answers in the database
+                      db
                           .collection("users")
-                          .doc("Guest")
+                          .doc(userFinal)
                           .collection("questionnaires")
-                          .add(answers);
+                          .add(answers.toJson());
 
 
-
+                      //go to the result page
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -197,9 +183,11 @@ class _QuestionnaireState extends State<QuestionnairePage> {
   }
 
   Task getSampleTask() {
+    //see all the questions in this order
     var task = OrderedTask(
       id: TaskIdentifier(),
       steps: [
+        //just information
         InstructionStep(
           title: 'Ce questionnaire est divisée en 3 partie et en voici la première',
           text: 'Toi-même\n Si vous n\'avez pas de réponse pour certaines questions passer directement à la prochaine' ,
@@ -373,12 +361,13 @@ class _QuestionnaireState extends State<QuestionnairePage> {
         ),
         CompletionStep(
           stepIdentifier: StepIdentifier(id: '23'),
-          text: 'Félicitation !',
-          title: 'Vous avez terminé le questionnaire',
+          text: 'Vous avez terminé le questionnaire',
+          title: 'Félicitation !',
           buttonText: 'Envoyer',
         ),
       ],
     );
+
     return task;
   }
 }

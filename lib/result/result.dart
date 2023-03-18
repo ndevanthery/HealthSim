@@ -47,22 +47,22 @@ class _ResultPageState extends State<ResultPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         _buildResultsCard(context, 'Cancer Risk', 'Medium',
-                            'Higher than Normal', riskCancer(0, 0, 30, 1, 0, 1) as double),
+                            'Higher than Normal', riskCancer()),
                         _buildResultsCard(context, 'Heart Disease Risk', 'High',
-                            'Higher than Normal', 56),
+                            'Higher than Normal', riskAVC()),
                         _buildResultsCard(context, 'Diabetes Risk', 'Low',
-                            'Lower than Normal', 76),
+                            'Lower than Normal', riskDiabete()),
                       ],
                     )
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         _buildResultsCard(context, 'Cancer Risk', 'Medium',
-                            'Higher than Normal', riskCancer(0, 0, 30, 1, 0, 1) as double),
+                            'Higher than Normal', riskCancer()),
                         _buildResultsCard(context, 'Heart Disease Risk', 'High',
-                            'Higher than Normal', 56),
+                            'Higher than Normal', riskAVC()),
                         _buildResultsCard(context, 'Diabetes Risk', 'Low',
-                            'Lower than Normal', 76),
+                            'Lower than Normal', riskDiabete()),
                       ],
                     ),
               const SizedBox(height: 20),
@@ -173,22 +173,22 @@ class _ResultPageState extends State<ResultPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               _buildResultsCard(context, 'Cancer Risk',
-                                  'Medium', 'Higher than Normal', riskCancer(0, 0, 30, 1, 0, 1) as double),
+                                  'Medium', 'Higher than Normal', riskCancer()),
                               _buildResultsCard(context, 'Heart Disease Risk',
-                                  'High', 'Higher than Normal', 56),
+                                  'High', 'Higher than Normal', riskAVC()),
                               _buildResultsCard(context, 'Diabetes Risk', 'Low',
-                                  'Lower than Normal', 76),
+                                  'Lower than Normal', riskDiabete()),
                             ],
                           )
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               _buildResultsCard(context, 'Cancer Risk',
-                                  'Medium', 'Higher than Normal', riskCancer(0, 0, 30, 1, 0, 1) as double),
+                                  'Medium', 'Higher than Normal', riskCancer()),
                               _buildResultsCard(context, 'Heart Disease Risk',
-                                  'High', 'Higher than Normal', 56),
+                                  'High', 'Higher than Normal', riskAVC()),
                               _buildResultsCard(context, 'Diabetes Risk', 'Low',
-                                  'Lower than Normal', 76),
+                                  'Lower than Normal', riskDiabete()),
                             ],
                           ),
                     const SizedBox(height: 20),
@@ -362,10 +362,5 @@ class _ResultPageState extends State<ResultPage> {
     } else {
       return "Very High";
     }
-  }
-  double getRiskCancer(){
-    var risk;
-    riskCancer(0, 0, 30, 1, 0, 1).then((value) => risk = value);
-    return  risk;
   }
 }

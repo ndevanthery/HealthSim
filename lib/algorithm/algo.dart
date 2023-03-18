@@ -1,13 +1,7 @@
-import 'dart:async';
 import 'dart:math';
+import '../questionnaire/questionnaire.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-void algo() {
-  //results
-  var resultAVC = 0,
-      resultDiab = 0,
-      resultCancer = 0;
+double riskAVC() {
   //standard score
   var alimH = 0.99,
       alimF = 1.35,
@@ -15,70 +9,40 @@ void algo() {
       sportH = 1.74,
       sportF = 1.95,
       sportFH = 1.84;
-  // syst, glyc, chol, hdl
-  List<double> difIfHigh = [ 40, 0.6, 2.9, -1.1],
-      nbStandard = [ 110, 5.0, 3.0, 2.0];
-  //questionnaire values
-  var age = 22,
-      glyc = -1.0,
-      syst = -1.0,
-      chol = -1.0,
-      hdl = -1.0,
-      alim = 2,
-      sport = 1,
-      weight = 68,
-      height = 170,
-      alcool = 0;
-  //0=man 1=woman
-  var gender = 1;
-  //0=false 1=true
-  var inf = 0,
-      highSyst = 0,
-      highGlyc = 0,
-      highChol = 0,
-      highHdl = 0,
-      afinf = 0,
-      diab = 0,
-      avc = 0,
-      afcancer = 0,
-      smoke = 0;
-  //BMI
-  var bmi = weight / (height / 100 * height / 100);
-  print(bmi);
 
-  //put syst,glyc,chol,hdl value if needed
-  if (syst == -1) {
-    syst = nbStandard.elementAt(0) + difIfHigh.elementAt(0) * highSyst;
-  }
-  if (glyc == -1) {
-    glyc = nbStandard.elementAt(1) + difIfHigh.elementAt(1) * highGlyc;
-  }
-  if (chol == -1) {
-    chol = nbStandard.elementAt(2) + difIfHigh.elementAt(2) * highChol;
-  }
-  if (hdl == -1) {
-    hdl = nbStandard.elementAt(3) + difIfHigh.elementAt(3) * highHdl;
-  }
-  resultAVC = riskAVC(inf, avc, afinf, age, smoke, syst, chol, hdl, gender, alim, alimH, alimF, alimFH, sport, sportH, sportF, sportFH, diab);
-  resultDiab = riskDiabete(age, bmi, highSyst, highGlyc, sport, alim, gender);
-  resultCancer = riskCancer(afcancer, smoke, bmi, sport, alcool, alim) as int;
-  print("The risk of AVC is $resultAVC%.\n The risk of diabete is $resultDiab%.\n The risk of cancer is $resultCancer%");
-}
+// syst, chol, hdl
+  List<double> difIfHigh = [ 40, 2.9, -1.1],
+      nbStandard = [ 110, 3.0, 2.0];
 
-int riskAVC(int inf, int avc, int afinf, int age, int smoke, double syst, double chol,
-    double hdl, int gender, int alim, double alimH, double alimF, double alimFH , int sport,
-    double sportH, double sportF, double sportFH, int diab) {
-  //algo risk heart attack/infractus/avc
+  var syst, chol, hdl;
+//put value in syst, chol and hdl if don't have it
+  if (resultQuestionnaire.syst == -1) {
+    syst = nbStandard.elementAt(0) + difIfHigh.elementAt(0) * resultQuestionnaire.highSyst;
+  } else{
+    syst = resultQuestionnaire.syst;
+  }
+  if (resultQuestionnaire.chol == -1) {
+    chol = nbStandard.elementAt(1) + difIfHigh.elementAt(1) * resultQuestionnaire.highChol;
+  } else{
+    chol = resultQuestionnaire.chol;
+  }
+  if (resultQuestionnaire.hdl == -1) {
+    hdl = nbStandard.elementAt(2) + difIfHigh.elementAt(2) * resultQuestionnaire.highChol;
+  } else{
+    hdl = resultQuestionnaire.hdl;
+  }
+
   var resultAVC = 0.0;
   //reduction risk
   var alimP = 0.65,
       sportP = 0.45;
-  //if never had heart attack/infractus/avc
-  if (inf == 0 && avc == 0) {
+
+  //if never had heart attack/avc
+  if (resultQuestionnaire.inf == 0 && resultQuestionnaire.avc == 0) {
     //base calcul
-    double baseAfinf = 1 + 0.3 * afinf;
-    double baseAge = (age - 60) / 5,
-        baseSmoke = smoke * 1.0,
+    double baseAfinf = 1 + 0.3 * resultQuestionnaire.afinf;
+    double baseAge = (resultQuestionnaire.age - 60) / 5,
+        baseSmoke = resultQuestionnaire.smoke * 1.0,
         baseSyst = (syst - 120) / 20,
         baseChol = (chol - 6) / 1,
         baseHdl = (hdl - 1.3) / 0.5;
@@ -99,9 +63,9 @@ int riskAVC(int inf, int avc, int afinf, int age, int smoke, double syst, double
         coeffCholAge = -0,
         coeffHdlAge = 0;
 
-    if (gender == 0) {
-      baseAlim = (alim - alimH) / 3;
-      baseSport = (sport - sportH) / 3;
+    if (resultQuestionnaire.gender == 0) {
+      baseAlim = (resultQuestionnaire.alim - alimH) / 3;
+      baseSport = (resultQuestionnaire.sport - sportH) / 3;
       //coefficients
       coeffAge = 0.3742;
       coeffSmoke = 0.6012;
@@ -114,8 +78,8 @@ int riskAVC(int inf, int avc, int afinf, int age, int smoke, double syst, double
       coeffHdlAge = 0.0426;
     }
     else {
-      baseAlim = (alim - alimF) / 3;
-      baseSport = (sport - sportF) / 3;
+      baseAlim = (resultQuestionnaire.alim - alimF) / 3;
+      baseSport = (resultQuestionnaire.sport - sportF) / 3;
       //coefficients
       coeffAge = 0.4648;
       coeffSmoke = 0.7744;
@@ -142,8 +106,8 @@ int riskAVC(int inf, int avc, int afinf, int age, int smoke, double syst, double
   //if had heart attack/infractus/avc
   else {
     //  base calcul
-    var baseAlim = (alim - alimFH) / 3,
-        baseSport = (sport - sportFH) / 3;
+    var baseAlim = (resultQuestionnaire.alim - alimFH) / 3,
+        baseSport = (resultQuestionnaire.sport - sportFH) / 3;
     //coefficients
     var coeffAge = 0.0116,
         coeffGender = 0.2148,
@@ -156,21 +120,21 @@ int riskAVC(int inf, int avc, int afinf, int age, int smoke, double syst, double
         coeffHdl = -0.2989;
     var corr = -2.2094;
 
-    double sumAVC = age * coeffAge + gender * coeffGender + smoke * coeffSmoke +
-        syst * coeffSyst
-        + diab * coeffDiab + inf * coeffInf + avc * coeffAvc + chol * coeffChol
-        + hdl * coeffHdl + corr;
+    double sumAVC = resultQuestionnaire.age * coeffAge + resultQuestionnaire.gender
+        * coeffGender + resultQuestionnaire.smoke * coeffSmoke + syst * coeffSyst
+        + resultQuestionnaire.diab * coeffDiab + resultQuestionnaire.inf * coeffInf
+        + resultQuestionnaire.avc * coeffAvc + chol * coeffChol + hdl * coeffHdl
+        + corr;
     sumAVC = 1.0 - pow(0.61789, exp(sumAVC - 2.0869));
     var riskAlim = sumAVC - (sumAVC * alimP * baseAlim);
     var riskSport = sumAVC - (sumAVC * sportP * baseSport);
     resultAVC = (riskAlim + riskSport) / 2 * 100;
   }
 
-  return resultAVC.round();
+  return resultAVC.roundToDouble();
 }
 
-int riskDiabete(int age, double bmi, int highSyst, int highGlyc, int sport,
-    int alim, int gender ) {
+double riskDiabete() {
   //diabete algo
   var resultDiab = 0;
   //score table
@@ -185,12 +149,14 @@ int riskDiabete(int age, double bmi, int highSyst, int highGlyc, int sport,
       riskTableH = [0, 0, 0, 0, 0, 0, 1, 2, 4, 7, 11, 15, 21, 28, 36, 46, 58,71,
         86, 100, 100, 100, 100];
 
+  var bmi = resultQuestionnaire.weight / (resultQuestionnaire.height / 100 * resultQuestionnaire.height / 100);
+
   //points
   var points = 3.0;
 
-  if (age < 45) {
+  if (resultQuestionnaire.age < 45) {
     points = 0;
-  } else if (age <= 54) {
+  } else if (resultQuestionnaire.age <= 54) {
     points = 2;
   } else {
     points = 3;
@@ -204,63 +170,43 @@ int riskDiabete(int age, double bmi, int highSyst, int highGlyc, int sport,
     points += 3;
   }
 
-  if (highSyst == 1) {
+  if (resultQuestionnaire.highSyst == 1) {
     points += 2;
   }
-  if (highGlyc == 1) {
+  if (resultQuestionnaire.glyc == 1) {
     points += 5;
   }
 
-  points += scoreTable.elementAt(sport * 10) + scoreTable.elementAt(alim * 10);
+  points += scoreTable.elementAt(resultQuestionnaire.sport * 10) + scoreTable.elementAt(resultQuestionnaire.alim * 10);
 
 
   if (points - points.round() != 0) {
     points += 1;
   }
-  if (gender == 0) {
+  if (resultQuestionnaire.gender == 0) {
     resultDiab = riskTableH.elementAt(points.round());
   } else {
     resultDiab = riskTableF.elementAt(points.round());
   }
 
-  return resultDiab;
+  return resultDiab*1.0;
 }
 
-Future<double> riskCancer(int afcancer, int smoke, double bmi, int sport, int alcool, int alim) async {
-  print("in the riskCancer");
-  int afinf = -6;
-  afinf = await getAnswers();
-  print("afinf : ${afinf.toString()}");
+double riskCancer() {
+
   //cancer algo
   //points calcul
-  var sumCancer= afcancer + smoke + 0.0;
+  var sumCancer= resultQuestionnaire.afcancer + resultQuestionnaire.smoke + 0.0;
+
+  var bmi = resultQuestionnaire.weight / (resultQuestionnaire.height / 100 * resultQuestionnaire.height / 100);
 
   sumCancer += ((bmi-25)/10)*0.5;
-  sumCancer += (3-sport)/3*0.5;
-  sumCancer += (4-alcool)/4*0.5;
-  sumCancer += (3-alim)/3*0.5;
+  sumCancer += (3-resultQuestionnaire.sport)/3*0.5;
+  sumCancer += (4-resultQuestionnaire.alcool)/4*0.5;
+  sumCancer += (3-resultQuestionnaire.alim)/3*0.5;
 
   var resultCancer = sumCancer/4.0*100 +9;
 
   return resultCancer.roundToDouble();
 
-}
-Future<int> getAnswers() async {
-  var db = FirebaseFirestore.instance;
-  int age = -9;
-  await db.collection("users").doc("Guest").collection("questionnaires").where("date", isEqualTo: "${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}").get().then(
-        (querySnapshot) {
-      print("Successfully completed");
-      for (var docSnapshot in querySnapshot.docs) {
-        age = docSnapshot.data().values.first;
-        print(" dans for age: $age");
-        print('${docSnapshot.id} => ${docSnapshot.data()}');
-        break;
-      }
-    },
-    onError: (e) => print("Error completing: $e"),
-  );
-  print("age: $age");
-  FutureOr<int> fAge =  Future(() => age);
-  return fAge;
 }
