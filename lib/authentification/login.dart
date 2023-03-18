@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:healthsim/authentification/user_provider.dart';
 import 'package:healthsim/home.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:provider/provider.dart';
 
 import '../database/auth.dart';
 
@@ -39,24 +41,30 @@ class _LoginPageState extends State<LoginPage> {
                 TextField(
                   controller: emailController,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                     alignLabelWithHint: true,
-                    label: Text("E-Mail"),
+                    label: const Text("E-Mail"),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color:
-                                error ? Color(0xFFFF00000) : Color(0xFF000000)),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                            color: error
+                                ? const Color(0xffff0000)
+                                : const Color(0xFF000000)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50))),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color:
-                                error ? Color(0xFFFF00000) : Color(0xFF000000)),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                            color: error
+                                ? const Color(0xffff0000)
+                                : const Color(0xFF000000)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50))),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color:
-                                error ? Color(0xFFFF00000) : Color(0xFF000000)),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                            color: error
+                                ? const Color(0xffff0000)
+                                : const Color(0xFF000000)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50))),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -81,26 +89,31 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
-                          color:
-                              error ? Color(0xFFFF00000) : Color(0xFF000000)),
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                          color: error
+                              ? const Color(0xffff0000)
+                              : const Color(0xFF000000)),
+                      borderRadius: const BorderRadius.all(Radius.circular(50)),
                     ),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color:
-                                error ? Color(0xFFFF00000) : Color(0xFF000000)),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                            color: error
+                                ? const Color(0xffff0000)
+                                : const Color(0xFF000000)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50))),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color:
-                                error ? Color(0xFFFF00000) : Color(0xFF000000)),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                            color: error
+                                ? const Color(0xffff0000)
+                                : const Color(0xFF000000)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50))),
                   ),
                 ),
                 const SizedBox(height: 20),
                 Text(
                   error ? "Wrong username or password ! " : "",
-                  style: TextStyle(fontSize: 18, color: Colors.red),
+                  style: const TextStyle(fontSize: 18, color: Colors.red),
                 ),
                 const SizedBox(height: 60),
                 ElevatedButton(
@@ -122,11 +135,11 @@ class _LoginPageState extends State<LoginPage> {
                       });
                     },
                     child: const Text("Log in ")),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 if (loading)
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                     width: 50,
                     child: LoadingIndicator(
@@ -138,17 +151,22 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<bool> login(String email, String password) async {
     AuthService myService = AuthService();
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context, listen: false);
 
     var registerId = await myService.loginWithEmail(
       email,
       password,
     );
     if (registerId != null) {
+      var user = User(email, password);
+      userProvider.setUser(user);
+
       Navigator.pop(context);
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
       return false;
     }
