@@ -15,16 +15,7 @@ class HomePage extends StatelessWidget {
       body: Center(
           child: Column(
         children: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ResultPage(),
-                  ));
-
-              },
-              child: const Text("RESULT ")),
+          ElevatedButton(onPressed: () {}, child: const Text("RESULT ")),
           Text(Provider.of<UserProvider>(context).user != null
               ? Provider.of<UserProvider>(context).user!.email
               : "guest"),

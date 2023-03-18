@@ -1,7 +1,9 @@
 import 'dart:math';
+import 'package:healthsim/questionnaire/ModelAnswer.dart';
+
 import '../questionnaire/questionnaire.dart';
 
-double riskAVC() {
+double riskAVC(ModelAnswer resultQuestionnaire) {
   //standard score
   var alimH = 0.99,
       alimF = 1.35,
@@ -11,31 +13,32 @@ double riskAVC() {
       sportFH = 1.84;
 
 // syst, chol, hdl
-  List<double> difIfHigh = [ 40, 2.9, -1.1],
-      nbStandard = [ 110, 3.0, 2.0];
+  List<double> difIfHigh = [40, 2.9, -1.1], nbStandard = [110, 3.0, 2.0];
 
   var syst, chol, hdl;
 //put value in syst, chol and hdl if don't have it
   if (resultQuestionnaire.syst == -1) {
-    syst = nbStandard.elementAt(0) + difIfHigh.elementAt(0) * resultQuestionnaire.highSyst;
-  } else{
+    syst = nbStandard.elementAt(0) +
+        difIfHigh.elementAt(0) * resultQuestionnaire.highSyst;
+  } else {
     syst = resultQuestionnaire.syst;
   }
   if (resultQuestionnaire.chol == -1) {
-    chol = nbStandard.elementAt(1) + difIfHigh.elementAt(1) * resultQuestionnaire.highChol;
-  } else{
+    chol = nbStandard.elementAt(1) +
+        difIfHigh.elementAt(1) * resultQuestionnaire.highChol;
+  } else {
     chol = resultQuestionnaire.chol;
   }
   if (resultQuestionnaire.hdl == -1) {
-    hdl = nbStandard.elementAt(2) + difIfHigh.elementAt(2) * resultQuestionnaire.highChol;
-  } else{
+    hdl = nbStandard.elementAt(2) +
+        difIfHigh.elementAt(2) * resultQuestionnaire.highChol;
+  } else {
     hdl = resultQuestionnaire.hdl;
   }
 
   var resultAVC = 0.0;
   //reduction risk
-  var alimP = 0.65,
-      sportP = 0.45;
+  var alimP = 0.65, sportP = 0.45;
 
   //if never had heart attack/avc
   if (resultQuestionnaire.inf == 0 && resultQuestionnaire.avc == 0) {
@@ -76,8 +79,7 @@ double riskAVC() {
       coeffSystAge = -0.0255;
       coeffCholAge = -0.0281;
       coeffHdlAge = 0.0426;
-    }
-    else {
+    } else {
       baseAlim = (resultQuestionnaire.alim - alimF) / 3;
       baseSport = (resultQuestionnaire.sport - sportF) / 3;
       //coefficients
@@ -92,10 +94,15 @@ double riskAVC() {
       coeffHdlAge = 0.0613;
     }
 
-    var sumAVC = baseAge * coeffAge + baseSmoke * coeffSmoke +
-        baseSyst * coeffSyst + baseChol * coeffChol + baseHdl * coeffHdl +
-        baseSmokeAge * coeffSmokeAge + baseSystAge * coeffSystAge +
-        baseCholAge * coeffCholAge + baseHdlAge * coeffHdlAge;
+    var sumAVC = baseAge * coeffAge +
+        baseSmoke * coeffSmoke +
+        baseSyst * coeffSyst +
+        baseChol * coeffChol +
+        baseHdl * coeffHdl +
+        baseSmokeAge * coeffSmokeAge +
+        baseSystAge * coeffSystAge +
+        baseCholAge * coeffCholAge +
+        baseHdlAge * coeffHdlAge;
     resultAVC = 1.0 - pow(0.9605, exp(sumAVC));
     resultAVC = 1.0 - exp(-exp(-0.5699 + 0.7476 * log(-log(1 - resultAVC))));
     resultAVC = resultAVC * baseAfinf;
@@ -120,11 +127,16 @@ double riskAVC() {
         coeffHdl = -0.2989;
     var corr = -2.2094;
 
-    double sumAVC = resultQuestionnaire.age * coeffAge + resultQuestionnaire.gender
-        * coeffGender + resultQuestionnaire.smoke * coeffSmoke + syst * coeffSyst
-        + resultQuestionnaire.diab * coeffDiab + resultQuestionnaire.inf * coeffInf
-        + resultQuestionnaire.avc * coeffAvc + chol * coeffChol + hdl * coeffHdl
-        + corr;
+    double sumAVC = resultQuestionnaire.age * coeffAge +
+        resultQuestionnaire.gender * coeffGender +
+        resultQuestionnaire.smoke * coeffSmoke +
+        syst * coeffSyst +
+        resultQuestionnaire.diab * coeffDiab +
+        resultQuestionnaire.inf * coeffInf +
+        resultQuestionnaire.avc * coeffAvc +
+        chol * coeffChol +
+        hdl * coeffHdl +
+        corr;
     sumAVC = 1.0 - pow(0.61789, exp(sumAVC - 2.0869));
     var riskAlim = sumAVC - (sumAVC * alimP * baseAlim);
     var riskSport = sumAVC - (sumAVC * sportP * baseSport);
@@ -134,22 +146,101 @@ double riskAVC() {
   return resultAVC.roundToDouble();
 }
 
-double riskDiabete() {
+double riskDiabete(ModelAnswer resultQuestionnaire) {
   //diabete algo
   var resultDiab = 0;
   //score table
-  var scoreTable = [2, 1.9333, 1.8667, 1.8, 1.7333, 1.6667, 1.6, 1.5333, 1.4667,
-    1.4, 1.3333, 1.2667, 1.2, 1.1333, 1.2667, 1.2, 1.1333, 1.0667, 1, 0.9333,
-    0.8667, 0.8, 0.7333, 0.6667, 0.6, 0.5333, 0.4667, 0.4, 0.3333, 0.2667, 0.2,
-    0.1333, 0.0667, 0];
+  var scoreTable = [
+    2,
+    1.9333,
+    1.8667,
+    1.8,
+    1.7333,
+    1.6667,
+    1.6,
+    1.5333,
+    1.4667,
+    1.4,
+    1.3333,
+    1.2667,
+    1.2,
+    1.1333,
+    1.2667,
+    1.2,
+    1.1333,
+    1.0667,
+    1,
+    0.9333,
+    0.8667,
+    0.8,
+    0.7333,
+    0.6667,
+    0.6,
+    0.5333,
+    0.4667,
+    0.4,
+    0.3333,
+    0.2667,
+    0.2,
+    0.1333,
+    0.0667,
+    0
+  ];
 
   //risk table
-  var riskTableF = [0, 1, 1, 1, 1, 1, 1, 2, 3, 5, 7, 11, 15, 21, 28, 36, 46, 58,
-        71, 86, 100, 100, 100],
-      riskTableH = [0, 0, 0, 0, 0, 0, 1, 2, 4, 7, 11, 15, 21, 28, 36, 46, 58,71,
-        86, 100, 100, 100, 100];
+  var riskTableF = [
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        5,
+        7,
+        11,
+        15,
+        21,
+        28,
+        36,
+        46,
+        58,
+        71,
+        86,
+        100,
+        100,
+        100
+      ],
+      riskTableH = [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        4,
+        7,
+        11,
+        15,
+        21,
+        28,
+        36,
+        46,
+        58,
+        71,
+        86,
+        100,
+        100,
+        100,
+        100
+      ];
 
-  var bmi = resultQuestionnaire.weight / (resultQuestionnaire.height / 100 * resultQuestionnaire.height / 100);
+  var bmi = resultQuestionnaire.weight /
+      (resultQuestionnaire.height / 100 * resultQuestionnaire.height / 100);
 
   //points
   var points = 3.0;
@@ -177,8 +268,8 @@ double riskDiabete() {
     points += 5;
   }
 
-  points += scoreTable.elementAt(resultQuestionnaire.sport * 10) + scoreTable.elementAt(resultQuestionnaire.alim * 10);
-
+  points += scoreTable.elementAt(resultQuestionnaire.sport * 10) +
+      scoreTable.elementAt(resultQuestionnaire.alim * 10);
 
   if (points - points.round() != 0) {
     points += 1;
@@ -189,24 +280,24 @@ double riskDiabete() {
     resultDiab = riskTableF.elementAt(points.round());
   }
 
-  return resultDiab*1.0;
+  return resultDiab * 1.0;
 }
 
-double riskCancer() {
-
+double riskCancer(ModelAnswer resultQuestionnaire) {
   //cancer algo
   //points calcul
-  var sumCancer= resultQuestionnaire.afcancer + resultQuestionnaire.smoke + 0.0;
+  var sumCancer =
+      resultQuestionnaire.afcancer + resultQuestionnaire.smoke + 0.0;
 
-  var bmi = resultQuestionnaire.weight / (resultQuestionnaire.height / 100 * resultQuestionnaire.height / 100);
+  var bmi = resultQuestionnaire.weight /
+      (resultQuestionnaire.height / 100 * resultQuestionnaire.height / 100);
 
-  sumCancer += ((bmi-25)/10)*0.5;
-  sumCancer += (3-resultQuestionnaire.sport)/3*0.5;
-  sumCancer += (4-resultQuestionnaire.alcool)/4*0.5;
-  sumCancer += (3-resultQuestionnaire.alim)/3*0.5;
+  sumCancer += ((bmi - 25) / 10) * 0.5;
+  sumCancer += (3 - resultQuestionnaire.sport) / 3 * 0.5;
+  sumCancer += (4 - resultQuestionnaire.alcool) / 4 * 0.5;
+  sumCancer += (3 - resultQuestionnaire.alim) / 3 * 0.5;
 
-  var resultCancer = sumCancer/4.0*100 +9;
+  var resultCancer = sumCancer / 4.0 * 100 + 9;
 
   return resultCancer.roundToDouble();
-
 }

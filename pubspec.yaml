@@ -44,6 +44,7 @@ dependencies:
   tuple: ^2.0.1
   provider: ^6.0.5
   percent_indicator: ^4.2.3
+  survey_kit: ^0.1.1
 
 dev_dependencies:
   flutter_test:

@@ -1,24 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthsim/questionnaire/ModelAnswer.dart';
+import 'package:healthsim/questionnaire/questionnaire.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../algorithm/algo.dart';
 
 class ResultPage extends StatefulWidget {
   bool _showSimulationSection = false;
+  ModelAnswer resultQuestionnaire;
 
-  ResultPage({super.key});
+  ResultPage({super.key, required this.resultQuestionnaire});
 
   @override
   _ResultPageState createState() => _ResultPageState();
 }
 
 class _ResultPageState extends State<ResultPage> {
-  bool _isSmoking = false;
-  bool _isDrinking = false;
-  double _eatingValue = 2;
+  late bool _isSmoking;
+  late bool _isDrinking;
+  late double _eatingValue;
   double _exerciseValue = 2;
+  late ModelAnswer simulationQuestionnaire;
+
+  @override
+  void initState() {
+    simulationQuestionnaire = widget.resultQuestionnaire.copy();
+    _isSmoking = simulationQuestionnaire.smoke == 1;
+    _isDrinking = simulationQuestionnaire.alcool == 1;
+    _eatingValue = simulationQuestionnaire.alim.toDouble();
+    _exerciseValue = simulationQuestionnaire.sport.toDouble();
+
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,23 +62,47 @@ class _ResultPageState extends State<ResultPage> {
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _buildResultsCard(context, 'Cancer Risk', 'Medium',
-                            'Higher than Normal', riskCancer()),
-                        _buildResultsCard(context, 'Heart Disease Risk', 'High',
-                            'Higher than Normal', riskAVC()),
-                        _buildResultsCard(context, 'Diabetes Risk', 'Low',
-                            'Lower than Normal', riskDiabete()),
+                        _buildResultsCard(
+                            context,
+                            'Cancer Risk',
+                            'Medium',
+                            'Higher than Normal',
+                            riskCancer(widget.resultQuestionnaire)),
+                        _buildResultsCard(
+                            context,
+                            'Heart Disease Risk',
+                            'High',
+                            'Higher than Normal',
+                            riskAVC(widget.resultQuestionnaire)),
+                        _buildResultsCard(
+                            context,
+                            'Diabetes Risk',
+                            'Low',
+                            'Lower than Normal',
+                            riskDiabete(widget.resultQuestionnaire)),
                       ],
                     )
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _buildResultsCard(context, 'Cancer Risk', 'Medium',
-                            'Higher than Normal', riskCancer()),
-                        _buildResultsCard(context, 'Heart Disease Risk', 'High',
-                            'Higher than Normal', riskAVC()),
-                        _buildResultsCard(context, 'Diabetes Risk', 'Low',
-                            'Lower than Normal', riskDiabete()),
+                        _buildResultsCard(
+                            context,
+                            'Cancer Risk',
+                            'Medium',
+                            'Higher than Normal',
+                            riskCancer(widget.resultQuestionnaire)),
+                        _buildResultsCard(
+                            context,
+                            'Heart Disease Risk',
+                            'High',
+                            'Higher than Normal',
+                            riskAVC(widget.resultQuestionnaire)),
+                        _buildResultsCard(
+                            context,
+                            'Diabetes Risk',
+                            'Low',
+                            'Lower than Normal',
+                            riskDiabete(widget.resultQuestionnaire)),
                       ],
                     ),
               const SizedBox(height: 20),
@@ -81,114 +121,252 @@ class _ResultPageState extends State<ResultPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    SwitchListTile(
-                      title: const Text('Stop Smoking'),
-                      value: _isSmoking,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _isSmoking = newValue;
-                        });
-                      },
-                    ),
-                    SwitchListTile(
-                      title: const Text('Stop Drinking Alcohol'),
-                      value: _isDrinking,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _isDrinking = newValue;
-                        });
-                      },
-                    ),
+                    Row(children: [
+                      Expanded(
+                        child: SwitchListTile(
+                          title: const Text('Smoking'),
+                          value: _isSmoking,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _isSmoking = newValue;
+                              simulationQuestionnaire.smoke = newValue ? 1 : 0;
+                            });
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: SwitchListTile(
+                          title: const Text('Drinking Alcohol'),
+                          value: _isDrinking,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _isDrinking = newValue;
+                              simulationQuestionnaire.alcool = newValue ? 1 : 0;
+                            });
+                          },
+                        ),
+                      )
+                    ]),
                     const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Eating Healthier:',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue[900],
+                    MediaQuery.of(context).size.width < 600
+                        ? Column(
+                            children: [
+                              Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Eating habits:',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue[900],
+                                        ),
+                                      ),
+                                      Text(
+                                        '$_eatingValue',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue[900],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Slider(
+                                    value: _eatingValue,
+                                    min: 0,
+                                    max: 3,
+                                    divisions: 3,
+                                    label: _eatingValue.round().toString(),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _eatingValue = value;
+                                        simulationQuestionnaire.alim =
+                                            value.toInt();
+                                      });
+                                    },
+                                  )
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                              Column(children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Exercising Regularly:',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue[900],
+                                      ),
+                                    ),
+                                    Text(
+                                      '$_exerciseValue',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue[900],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Slider(
+                                  value: _exerciseValue,
+                                  min: 0,
+                                  max: 3,
+                                  divisions: 3,
+                                  label: _exerciseValue.round().toString(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _exerciseValue = value;
+                                      simulationQuestionnaire.sport =
+                                          value.toInt();
+                                    });
+                                  },
+                                ),
+                              ]),
+                            ],
+                          )
+                        : Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Eating habits:',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue[900],
+                                          ),
+                                        ),
+                                        Text(
+                                          '$_eatingValue',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue[900],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Slider(
+                                      value: _eatingValue,
+                                      min: 0,
+                                      max: 3,
+                                      divisions: 3,
+                                      label: _eatingValue.round().toString(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _eatingValue = value;
+                                          simulationQuestionnaire.alim =
+                                              value.toInt();
+                                        });
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 50,
+                              ),
+                              Expanded(
+                                child: Column(children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Exercising Regularly:',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue[900],
+                                        ),
+                                      ),
+                                      Text(
+                                        '$_exerciseValue',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue[900],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Slider(
+                                    value: _exerciseValue,
+                                    min: 0,
+                                    max: 3,
+                                    divisions: 3,
+                                    label: _exerciseValue.round().toString(),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _exerciseValue = value;
+                                        simulationQuestionnaire.sport =
+                                            value.toInt();
+                                      });
+                                    },
+                                  ),
+                                ]),
+                              ),
+                            ],
                           ),
-                        ),
-                        Text(
-                          '$_eatingValue',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue[900],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Slider(
-                      value: _eatingValue,
-                      min: 0,
-                      max: 4,
-                      divisions: 4,
-                      label: _eatingValue.round().toString(),
-                      onChanged: (value) {
-                        setState(() {
-                          _eatingValue = value;
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Exercising Regularly:',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue[900],
-                          ),
-                        ),
-                        Text(
-                          '$_exerciseValue',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue[900],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Slider(
-                      value: _exerciseValue,
-                      min: 0,
-                      max: 4,
-                      divisions: 4,
-                      label: _exerciseValue.round().toString(),
-                      onChanged: (value) {
-                        setState(() {
-                          _exerciseValue = value;
-                        });
-                      },
-                    ),
                     const SizedBox(height: 20),
                     MediaQuery.of(context).size.width < 600
                         ? Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              _buildResultsCard(context, 'Cancer Risk',
-                                  'Medium', 'Higher than Normal', riskCancer()),
-                              _buildResultsCard(context, 'Heart Disease Risk',
-                                  'High', 'Higher than Normal', riskAVC()),
-                              _buildResultsCard(context, 'Diabetes Risk', 'Low',
-                                  'Lower than Normal', riskDiabete()),
+                              _buildResultsCard(
+                                  context,
+                                  'Cancer Risk',
+                                  'Medium',
+                                  'Higher than Normal',
+                                  riskCancer(simulationQuestionnaire)),
+                              _buildResultsCard(
+                                  context,
+                                  'Heart Disease Risk',
+                                  'High',
+                                  'Higher than Normal',
+                                  riskAVC(simulationQuestionnaire)),
+                              _buildResultsCard(
+                                  context,
+                                  'Diabetes Risk',
+                                  'Low',
+                                  'Lower than Normal',
+                                  riskDiabete(simulationQuestionnaire)),
                             ],
                           )
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              _buildResultsCard(context, 'Cancer Risk',
-                                  'Medium', 'Higher than Normal', riskCancer()),
-                              _buildResultsCard(context, 'Heart Disease Risk',
-                                  'High', 'Higher than Normal', riskAVC()),
-                              _buildResultsCard(context, 'Diabetes Risk', 'Low',
-                                  'Lower than Normal', riskDiabete()),
+                              _buildResultsCard(
+                                  context,
+                                  'Cancer Risk',
+                                  'Medium',
+                                  'Higher than Normal',
+                                  riskCancer(simulationQuestionnaire)),
+                              _buildResultsCard(
+                                  context,
+                                  'Heart Disease Risk',
+                                  'High',
+                                  'Higher than Normal',
+                                  riskAVC(simulationQuestionnaire)),
+                              _buildResultsCard(
+                                  context,
+                                  'Diabetes Risk',
+                                  'Low',
+                                  'Lower than Normal',
+                                  riskDiabete(simulationQuestionnaire)),
                             ],
                           ),
                     const SizedBox(height: 20),
@@ -283,7 +461,8 @@ class _ResultPageState extends State<ResultPage> {
                     progressColor: _getRiskColor(risk),
                     backgroundColor: Colors.grey.shade200,
                     animation: true,
-                    animationDuration: 2000,
+                    animationDuration: 600,
+                    animateFromLastPercent: true,
                   ),
                 ],
               ),
@@ -324,7 +503,8 @@ class _ResultPageState extends State<ResultPage> {
                     progressColor: _getRiskColor(risk),
                     backgroundColor: Colors.grey.shade200,
                     animation: true,
-                    animationDuration: 2000,
+                    animationDuration: 600,
+                    animateFromLastPercent: true,
                   ),
                   const SizedBox(height: 10),
                   Text(

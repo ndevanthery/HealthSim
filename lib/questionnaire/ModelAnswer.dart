@@ -1,8 +1,24 @@
-
 //Model where to put the answers
 class ModelAnswer {
-  int gender, age, height, weight, glyc, highSyst, syst, highChol, chol, hdl,
-      diab, inf, avc, afinf, afcancer, smoke, alim, sport, alcool;
+  int gender,
+      age,
+      height,
+      weight,
+      glyc,
+      highSyst,
+      syst,
+      highChol,
+      chol,
+      hdl,
+      diab,
+      inf,
+      avc,
+      afinf,
+      afcancer,
+      smoke,
+      alim,
+      sport,
+      alcool;
 
   //the constructor
   ModelAnswer(
@@ -26,10 +42,9 @@ class ModelAnswer {
       this.sport,
       this.alcool);
 
-
 //Map to put the answers in the database
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String,dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["gender"] = gender;
     data["age"] = age;
     data["height"] = height;
@@ -41,7 +56,7 @@ class ModelAnswer {
     data["syst"] = syst;
     data["hdl"] = hdl;
     data["diab"] = diab;
-    data["inf"] =inf;
+    data["inf"] = inf;
     data["avc"] = avc;
     data["afinf"] = afinf;
     data["afcancer"] = afcancer;
@@ -53,4 +68,26 @@ class ModelAnswer {
     return data;
   }
 
+  ModelAnswer copy() {
+    return ModelAnswer(
+        gender,
+        age,
+        height,
+        weight,
+        glyc,
+        highSyst,
+        syst,
+        highChol,
+        chol,
+        hdl,
+        diab,
+        inf,
+        avc,
+        afinf,
+        afcancer,
+        smoke,
+        alim,
+        sport,
+        alcool);
+  }
 }
