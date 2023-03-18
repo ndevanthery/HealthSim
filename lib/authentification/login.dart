@@ -159,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
       password,
     );
     if (registerId != null) {
-      var user = User(email, password);
+      var user = User(email, password, registerId);
       userProvider.setUser(user);
 
       Navigator.pop(context);
