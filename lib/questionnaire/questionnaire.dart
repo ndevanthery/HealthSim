@@ -43,130 +43,229 @@ class _QuestionnaireState extends State<QuestionnairePage> {
             alignment: Alignment.center,
             child: SurveyKit(
                     onResult: (SurveyResult result) {
-                      //See id the user is connected
-                      var userFinal;
-                      if(user == null){
-                        userFinal="Guest";
-                      }
-                      else{
-                        userFinal=user;
-                      }
+                      if(result.finishReason == FinishReason.COMPLETED) {
+                        //See id the user is connected
+                        String userFinal;
+                        if (user == null) {
+                          userFinal = "Guest";
+                        }
+                        else {
+                          userFinal = user;
+                        }
 
-                      //Pick the results and put it in variables
-                      var gender = result.results.elementAt(1).results.first.result,
-                          age = result.results.elementAt(2).results.first.result,
-                          height = result.results.elementAt(3).results.first.result,
-                          weight = result.results.elementAt(4).results.first.result,
-                          glyc = result.results.elementAt(5).results.first.result,
-                          highSyst = result.results.elementAt(6).results.first.result,
-                          syst = result.results.elementAt(7).results.first.result,
-                          highChol = result.results.elementAt(8).results.first.result,
-                          chol = result.results.elementAt(9).results.first.result,
-                          hdl = result.results.elementAt(10).results.first.result,
-                          diab = result.results.elementAt(11).results.first.result,
-                          inf = result.results.elementAt(12).results.first.result,
-                          avc = result.results.elementAt(13).results.first.result,
-                          afinf = result.results.elementAt(15).results.first.result,
-                          afcancer = result.results.elementAt(16).results.first.result,
-                          smoke = result.results.elementAt(18).results.first.result,
-                          alim = result.results.elementAt(19).results.first.result,
-                          sport = result.results.elementAt(20).results.first.result,
-                          alcool = result.results.elementAt(21).results.first.result;
+                        //Pick the results and put it in variables
+                        var gender = result.results
+                            .elementAt(1)
+                            .results
+                            .first
+                            .result,
+                            age = result.results
+                                .elementAt(2)
+                                .results
+                                .first
+                                .result,
+                            height = result.results
+                                .elementAt(3)
+                                .results
+                                .first
+                                .result,
+                            weight = result.results
+                                .elementAt(4)
+                                .results
+                                .first
+                                .result,
+                            glyc = result.results
+                                .elementAt(5)
+                                .results
+                                .first
+                                .result,
+                            highSyst = result.results
+                                .elementAt(6)
+                                .results
+                                .first
+                                .result,
+                            syst = result.results
+                                .elementAt(7)
+                                .results
+                                .first
+                                .result,
+                            highChol = result.results
+                                .elementAt(8)
+                                .results
+                                .first
+                                .result,
+                            chol = result.results
+                                .elementAt(9)
+                                .results
+                                .first
+                                .result,
+                            hdl = result.results
+                                .elementAt(10)
+                                .results
+                                .first
+                                .result,
+                            diab = result.results
+                                .elementAt(11)
+                                .results
+                                .first
+                                .result,
+                            inf = result.results
+                                .elementAt(12)
+                                .results
+                                .first
+                                .result,
+                            avc = result.results
+                                .elementAt(13)
+                                .results
+                                .first
+                                .result,
+                            afinf = result.results
+                                .elementAt(15)
+                                .results
+                                .first
+                                .result,
+                            afcancer = result.results
+                                .elementAt(16)
+                                .results
+                                .first
+                                .result,
+                            smoke = result.results
+                                .elementAt(18)
+                                .results
+                                .first
+                                .result,
+                            alim = result.results
+                                .elementAt(19)
+                                .results
+                                .first
+                                .result,
+                            sport = result.results
+                                .elementAt(20)
+                                .results
+                                .first
+                                .result,
+                            alcool = result.results
+                                .elementAt(21)
+                                .results
+                                .first
+                                .result;
 
-                      //create new variable that be in the database
-                      int genderFinal,glycFinal,highSystFinal,highCholFinal,diabFinal,
-                          infFinal,avcFinal,afinfFinal,afcancerFinal,smokeFinal;
+                        //create new variable that be in the database
+                        int genderFinal, glycFinal, highSystFinal,
+                            highCholFinal, diabFinal,
+                            infFinal, avcFinal, afinfFinal, afcancerFinal,
+                            smokeFinal;
 
-                      //change the boolean results in int
-                      if(gender == BooleanResult.POSITIVE){
-                        genderFinal=1;
-                      }
-                      else{
-                        genderFinal=0;
-                      }
-                      if(glyc == BooleanResult.POSITIVE){
-                        glycFinal=1;
-                      }
-                      else{
-                        glycFinal=0;
-                      }
-                      if(highSyst == BooleanResult.POSITIVE){
-                        highSystFinal=1;
-                      }
-                      else{
-                        highSystFinal=0;
-                      }
+                        //change the boolean results in int
+                        if (gender == BooleanResult.POSITIVE) {
+                          genderFinal = 1;
+                        }
+                        else {
+                          genderFinal = 0;
+                        }
+                        if (glyc == BooleanResult.POSITIVE) {
+                          glycFinal = 1;
+                        }
+                        else {
+                          glycFinal = 0;
+                        }
+                        if (highSyst == BooleanResult.POSITIVE) {
+                          highSystFinal = 1;
+                        }
+                        else {
+                          highSystFinal = 0;
+                        }
 
-                      if(highChol == BooleanResult.POSITIVE){
-                        highCholFinal=1;
-                      }
-                      else{
-                        highCholFinal=0;
-                      }
-                      if(diab == BooleanResult.POSITIVE){
-                        diabFinal=1;
-                      }
-                      else{
-                        diabFinal=0;
-                      }
-                      if(inf == BooleanResult.POSITIVE){
-                        infFinal=1;
-                      }
-                      else{
-                        infFinal=0;
-                      }
-                      if(avc == BooleanResult.POSITIVE){
-                        avcFinal=1;
-                      }
-                      else{
-                        avcFinal=0;
-                      }
-                      if(afinf == BooleanResult.POSITIVE){
-                        afinfFinal=1;
-                      }
-                      else{
-                        afinfFinal=0;
-                      }
-                      if(afcancer == BooleanResult.POSITIVE){
-                        afcancerFinal=1;
-                      }
-                      else{
-                        afcancerFinal=0;
-                      }
-                      if(smoke == BooleanResult.POSITIVE){
-                        smokeFinal=1;
-                      }
-                      else{
-                        smokeFinal=0;
-                      }
+                        if (highChol == BooleanResult.POSITIVE) {
+                          highCholFinal = 1;
+                        }
+                        else {
+                          highCholFinal = 0;
+                        }
+                        if (diab == BooleanResult.POSITIVE) {
+                          diabFinal = 1;
+                        }
+                        else {
+                          diabFinal = 0;
+                        }
+                        if (inf == BooleanResult.POSITIVE) {
+                          infFinal = 1;
+                        }
+                        else {
+                          infFinal = 0;
+                        }
+                        if (avc == BooleanResult.POSITIVE) {
+                          avcFinal = 1;
+                        }
+                        else {
+                          avcFinal = 0;
+                        }
+                        if (afinf == BooleanResult.POSITIVE) {
+                          afinfFinal = 1;
+                        }
+                        else {
+                          afinfFinal = 0;
+                        }
+                        if (afcancer == BooleanResult.POSITIVE) {
+                          afcancerFinal = 1;
+                        }
+                        else {
+                          afcancerFinal = 0;
+                        }
+                        if (smoke == BooleanResult.POSITIVE) {
+                          smokeFinal = 1;
+                        }
+                        else {
+                          smokeFinal = 0;
+                        }
 
-                      //put a value in the null values
-                      syst ??= -1;
-                      chol ??= -1;
-                      hdl ??= -1;
+                        //put a value in the null values
+                        syst ??= -1;
+                        chol ??= -1;
+                        hdl ??= -1;
 
-                      //Put all the answers in the Model
-                      final answers = ModelAnswer(genderFinal, age, height, weight, glycFinal, highSystFinal,
-                          syst, highCholFinal, chol, hdl, diabFinal, infFinal, avcFinal, afinfFinal, afcancerFinal,
-                          smokeFinal, alim, sport, alcool);
+                        //Put all the answers in the Model
+                        final answers = ModelAnswer(
+                            genderFinal,
+                            age,
+                            height,
+                            weight,
+                            glycFinal,
+                            highSystFinal,
+                            syst,
+                            highCholFinal,
+                            chol,
+                            hdl,
+                            diabFinal,
+                            infFinal,
+                            avcFinal,
+                            afinfFinal,
+                            afcancerFinal,
+                            smokeFinal,
+                            alim,
+                            sport,
+                            alcool);
 
-                      //Put the model in a global value
-                      resultQuestionnaire = answers;
+                        //Put the model in a global value
+                        resultQuestionnaire = answers;
 
-                      //Put the answers in the database
-                      db
-                          .collection("users")
-                          .doc(userFinal)
-                          .collection("questionnaires")
-                          .add(answers.toJson());
+                        //Put the answers in the database
+                        db
+                            .collection("users")
+                            .doc(userFinal)
+                            .collection("questionnaires")
+                            .add(answers.toJson());
 
 
-                      //go to the result page
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ResultPage(),
-                          ));
+                        //go to the result page
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultPage(),
+                            ));
+                      }else{
+                        Navigator.pop(context);
+                      }
                       },
                     task: getSampleTask(),
                     showProgress: true,
@@ -174,6 +273,113 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                       'cancel': 'Cancel',
                       'next': 'Next',
                     },
+    themeData: Theme.of(context).copyWith(
+    primaryColor: Colors.cyan,
+    appBarTheme: const AppBarTheme(
+    color: Colors.white,
+    iconTheme: IconThemeData(
+    color: Colors.cyan,
+    ),
+    titleTextStyle: TextStyle(
+    color: Colors.cyan,
+    ),
+    ),
+    iconTheme: const IconThemeData(
+    color: Colors.cyan,
+    ),
+    textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: Colors.cyan,
+    selectionColor: Colors.cyan,
+    selectionHandleColor: Colors.cyan,
+    ),
+    cupertinoOverrideTheme: const CupertinoThemeData(
+    primaryColor: Colors.cyan,
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+    style: ButtonStyle(
+    minimumSize: MaterialStateProperty.all(
+    const Size(150.0, 60.0),
+    ),
+    side: MaterialStateProperty.resolveWith(
+    (Set<MaterialState> state) {
+    if (state.contains(MaterialState.disabled)) {
+    return const BorderSide(
+    color: Colors.grey,
+    );
+    }
+    return const BorderSide(
+    color: Colors.cyan,
+    );
+    },
+    ),
+    shape: MaterialStateProperty.all(
+    RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(8.0),
+    ),
+    ),
+    textStyle: MaterialStateProperty.resolveWith(
+    (Set<MaterialState> state) {
+    if (state.contains(MaterialState.disabled)) {
+    return Theme.of(context)
+        .textTheme
+        .labelLarge
+        ?.copyWith(
+    color: Colors.grey,
+    );
+    }
+    return Theme.of(context)
+        .textTheme
+        .labelLarge
+        ?.copyWith(
+    color: Colors.cyan,
+    );
+    },
+    ),
+    ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+    textStyle: MaterialStateProperty.all(
+    Theme.of(context).textTheme.labelLarge?.copyWith(
+    color: Colors.cyan,
+    ),
+    ),
+    ),
+    ),
+    textTheme: const TextTheme(
+    displayMedium: TextStyle(
+    fontSize: 28.0,
+    color: Colors.black,
+    ),
+    headlineSmall: TextStyle(
+    fontSize: 24.0,
+    color: Colors.black,
+    ),
+    bodyMedium: TextStyle(
+    fontSize: 18.0,
+    color: Colors.black,
+    ),
+    titleMedium: TextStyle(
+    fontSize: 18.0,
+    color: Colors.black,
+    ),
+    ),
+    inputDecorationTheme: const InputDecorationTheme(
+    labelStyle: TextStyle(
+    color: Colors.black,
+    ),
+    ),
+    colorScheme: ColorScheme.fromSwatch(
+    primarySwatch: Colors.cyan,
+    )
+        .copyWith(
+    onPrimary: Colors.white,
+    )
+        .copyWith(background: Colors.white),
+    ),
+    surveyProgressbarConfiguration: SurveyProgressConfiguration(
+    backgroundColor: Colors.white,
+    ),
             )
           ),
         ),
