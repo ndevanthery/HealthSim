@@ -1,4 +1,7 @@
+import 'dart:async';
 import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void algo() {
   //results
@@ -58,7 +61,7 @@ void algo() {
   }
   resultAVC = riskAVC(inf, avc, afinf, age, smoke, syst, chol, hdl, gender, alim, alimH, alimF, alimFH, sport, sportH, sportF, sportFH, diab);
   resultDiab = riskDiabete(age, bmi, highSyst, highGlyc, sport, alim, gender);
-  resultCancer = riskCancer(afcancer, smoke, bmi, sport, alcool, alim);
+  resultCancer = riskCancer(afcancer, smoke, bmi, sport, alcool, alim) as int;
   print("The risk of AVC is $resultAVC%.\n The risk of diabete is $resultDiab%.\n The risk of cancer is $resultCancer%");
 }
 
@@ -223,7 +226,11 @@ int riskDiabete(int age, double bmi, int highSyst, int highGlyc, int sport,
   return resultDiab;
 }
 
-int riskCancer(int afcancer, int smoke, double bmi, int sport, int alcool, int alim){
+Future<double> riskCancer(int afcancer, int smoke, double bmi, int sport, int alcool, int alim) async {
+  print("in the riskCancer");
+  int afinf = -6;
+  afinf = await getAnswers();
+  print("afinf : ${afinf.toString()}");
   //cancer algo
   //points calcul
   var sumCancer= afcancer + smoke + 0.0;
@@ -235,6 +242,25 @@ int riskCancer(int afcancer, int smoke, double bmi, int sport, int alcool, int a
 
   var resultCancer = sumCancer/4.0*100 +9;
 
-  return resultCancer.round();
+  return resultCancer.roundToDouble();
 
+}
+Future<int> getAnswers() async {
+  var db = FirebaseFirestore.instance;
+  int age = -9;
+  await db.collection("users").doc("Guest").collection("questionnaires").where("date", isEqualTo: "${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}").get().then(
+        (querySnapshot) {
+      print("Successfully completed");
+      for (var docSnapshot in querySnapshot.docs) {
+        age = docSnapshot.data().values.first;
+        print(" dans for age: $age");
+        print('${docSnapshot.id} => ${docSnapshot.data()}');
+        break;
+      }
+    },
+    onError: (e) => print("Error completing: $e"),
+  );
+  print("age: $age");
+  FutureOr<int> fAge =  Future(() => age);
+  return fAge;
 }

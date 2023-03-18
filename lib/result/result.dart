@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+
+import '../algorithm/algo.dart';
 
 class ResultPage extends StatefulWidget {
   bool _showSimulationSection = false;
@@ -43,7 +47,7 @@ class _ResultPageState extends State<ResultPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         _buildResultsCard(context, 'Cancer Risk', 'Medium',
-                            'Higher than Normal', 12),
+                            'Higher than Normal', riskCancer(0, 0, 30, 1, 0, 1) as double),
                         _buildResultsCard(context, 'Heart Disease Risk', 'High',
                             'Higher than Normal', 56),
                         _buildResultsCard(context, 'Diabetes Risk', 'Low',
@@ -54,7 +58,7 @@ class _ResultPageState extends State<ResultPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         _buildResultsCard(context, 'Cancer Risk', 'Medium',
-                            'Higher than Normal', 12),
+                            'Higher than Normal', riskCancer(0, 0, 30, 1, 0, 1) as double),
                         _buildResultsCard(context, 'Heart Disease Risk', 'High',
                             'Higher than Normal', 56),
                         _buildResultsCard(context, 'Diabetes Risk', 'Low',
@@ -169,7 +173,7 @@ class _ResultPageState extends State<ResultPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               _buildResultsCard(context, 'Cancer Risk',
-                                  'Medium', 'Higher than Normal', 12),
+                                  'Medium', 'Higher than Normal', riskCancer(0, 0, 30, 1, 0, 1) as double),
                               _buildResultsCard(context, 'Heart Disease Risk',
                                   'High', 'Higher than Normal', 56),
                               _buildResultsCard(context, 'Diabetes Risk', 'Low',
@@ -180,7 +184,7 @@ class _ResultPageState extends State<ResultPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               _buildResultsCard(context, 'Cancer Risk',
-                                  'Medium', 'Higher than Normal', 12),
+                                  'Medium', 'Higher than Normal', riskCancer(0, 0, 30, 1, 0, 1) as double),
                               _buildResultsCard(context, 'Heart Disease Risk',
                                   'High', 'Higher than Normal', 56),
                               _buildResultsCard(context, 'Diabetes Risk', 'Low',
@@ -358,5 +362,10 @@ class _ResultPageState extends State<ResultPage> {
     } else {
       return "Very High";
     }
+  }
+  double getRiskCancer(){
+    var risk;
+    riskCancer(0, 0, 30, 1, 0, 1).then((value) => risk = value);
+    return  risk;
   }
 }

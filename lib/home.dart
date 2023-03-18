@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthsim/questionnaire/questionnaire.dart';
 import 'package:healthsim/result/result.dart';
 import 'package:provider/provider.dart';
 
@@ -17,10 +18,11 @@ class HomePage extends StatelessWidget {
           ElevatedButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ResultPage(),
-                    ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultPage(),
+                  ));
+
               },
               child: const Text("RESULT ")),
           Text(Provider.of<UserProvider>(context).user != null
