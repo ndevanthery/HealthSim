@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:healthsim/authentification/login.dart';
-import 'package:healthsim/authentification/register.dart';
 import 'package:healthsim/Navbar/navBar.dart';
+import 'package:healthsim/bottomLandingPage.dart';
 import 'package:healthsim/landingPage.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -18,7 +16,7 @@ class WelcomePage extends StatelessWidget {
                 end: Alignment.centerRight,
                 colors: [
               Color.fromRGBO(4, 66, 108, 1),
-              Color.fromRGBO(0, 137, 207, 1.0)
+              Color.fromRGBO(0, 137, 207, 1)
             ])),
         child: SingleChildScrollView(
           child: Column(
@@ -29,7 +27,22 @@ class WelcomePage extends StatelessWidget {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                  child: LandingPage(),
+                  child: Column(
+                    children: <Widget>[
+                      LandingPage(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      const Divider(
+                        height: 20,
+                        thickness: 2,
+                        indent: 20,
+                        endIndent: 0,
+                        color: Colors.white,
+                      ),
+                      BottomColumns(),
+                    ],
+                  ),
                 ),
               ),
             ],

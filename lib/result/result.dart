@@ -164,17 +164,29 @@ class _ResultPageState extends State<ResultPage> {
                       },
                     ),
                     const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _buildResultsCard(context, 'Cancer Risk', 'Medium',
-                            'Higher than Normal', 12),
-                        _buildResultsCard(context, 'Heart Disease Risk', 'High',
-                            'Higher than Normal', 56),
-                        _buildResultsCard(context, 'Diabetes Risk', 'Low',
-                            'Lower than Normal', 76),
-                      ],
-                    ),
+                    MediaQuery.of(context).size.width < 600
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              _buildResultsCard(context, 'Cancer Risk',
+                                  'Medium', 'Higher than Normal', 12),
+                              _buildResultsCard(context, 'Heart Disease Risk',
+                                  'High', 'Higher than Normal', 56),
+                              _buildResultsCard(context, 'Diabetes Risk', 'Low',
+                                  'Lower than Normal', 76),
+                            ],
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              _buildResultsCard(context, 'Cancer Risk',
+                                  'Medium', 'Higher than Normal', 12),
+                              _buildResultsCard(context, 'Heart Disease Risk',
+                                  'High', 'Higher than Normal', 56),
+                              _buildResultsCard(context, 'Diabetes Risk', 'Low',
+                                  'Lower than Normal', 76),
+                            ],
+                          ),
                     const SizedBox(height: 20),
                   ],
                 ),

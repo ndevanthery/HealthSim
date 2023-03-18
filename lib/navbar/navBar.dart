@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:healthsim/about.dart';
+import 'package:healthsim/authentification/welcome.dart';
 
 import '../authentification/login.dart';
 import '../authentification/register.dart';
@@ -44,23 +46,62 @@ class DesktopNavBar extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                Text(
-                  "Home",
-                  style: TextStyle(color: Colors.white),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    textStyle: const TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                        fontFamily: "Montserrat"),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const WelcomePage(),
+                        ));
+                  },
+                  child: const Text('Home'),
                 ),
                 SizedBox(
                   width: 30,
                 ),
-                Text(
-                  "About",
-                  style: TextStyle(color: Colors.white),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    textStyle: const TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                        fontFamily: "Montserrat"),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AboutPage(),
+                        ));
+                  },
+                  child: const Text('About'),
                 ),
                 SizedBox(
                   width: 30,
                 ),
-                Text(
-                  "Contact",
-                  style: TextStyle(color: Colors.white),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    textStyle: const TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                        fontFamily: "Montserrat"),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const WelcomePage(),
+                        ));
+                  },
+                  child: const Text('Contact'),
                 ),
                 SizedBox(
                   width: 30,
@@ -129,23 +170,62 @@ class MobileNavBar extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    "Home",
-                    style: TextStyle(color: Colors.white),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      textStyle: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                          fontFamily: "Montserrat"),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const WelcomePage(),
+                          ));
+                    },
+                    child: const Text('Home'),
                   ),
                   SizedBox(
                     width: 30,
                   ),
-                  Text(
-                    "About",
-                    style: TextStyle(color: Colors.white),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      textStyle: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                          fontFamily: "Montserrat"),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AboutPage(),
+                          ));
+                    },
+                    child: const Text('About'),
                   ),
                   SizedBox(
                     width: 30,
                   ),
-                  Text(
-                    "Contact",
-                    style: TextStyle(color: Colors.white),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      textStyle: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                          fontFamily: "Montserrat"),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const WelcomePage(),
+                          ));
+                    },
+                    child: const Text('Contact'),
                   ),
                 ],
               ),

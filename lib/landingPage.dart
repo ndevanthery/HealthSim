@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:healthsim/result/result.dart';
 
 const maxWidthScreen = 2500.0;
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
 
+  @override
+  State<LandingPage> createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
   List<Widget> pageChildren(double width) {
     return <Widget>[
       Container(
@@ -30,7 +36,13 @@ class LandingPage extends StatelessWidget {
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ResultPage(),
+                        ));
+                  },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 25.0),
