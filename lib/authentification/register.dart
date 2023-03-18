@@ -75,28 +75,29 @@ class _RegisterPageState extends State<RegisterPage> {
                   TextField(
                     controller: emailController,
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 10),
                       alignLabelWithHint: true,
-                      label: Text("E-Mail"),
+                      label: const Text("E-Mail"),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: emailError
-                                  ? Color(0xFFFF00000)
-                                  : Color(0xFF000000)),
+                                  ? const Color(0xFFFF0000)
+                                  : const Color(0xFF000000)),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(50))),
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: emailError
-                                  ? Color(0xFFFF00000)
-                                  : Color(0xFF000000)),
+                                  ? const Color(0xFFFF0000)
+                                  : const Color(0xFF000000)),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(50))),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: emailError
-                                  ? Color(0xFFFF00000)
-                                  : Color(0xFF000000)),
+                                  ? const Color(0xFFFF0000)
+                                  : const Color(0xFF000000)),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(50))),
                     ),
@@ -125,21 +126,24 @@ class _RegisterPageState extends State<RegisterPage> {
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: passwordError || passwordConditionError
-                                  ? Color(0xFFFF00000)
-                                  : Color(0xFF000000)),
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                                  ? const Color(0xFFFF0000)
+                                  : const Color(0xFF000000)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50))),
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: passwordError || passwordConditionError
-                                  ? Color(0xFFFF00000)
-                                  : Color(0xFF000000)),
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                                  ? const Color(0xFFFF0000)
+                                  : const Color(0xFF000000)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50))),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: passwordError || passwordConditionError
-                                  ? Color(0xFFFF00000)
-                                  : Color(0xFF000000)),
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                                  ? const Color(0xFFFF0000)
+                                  : const Color(0xFF000000)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50))),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -166,21 +170,24 @@ class _RegisterPageState extends State<RegisterPage> {
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: passwordError || passwordConditionError
-                                  ? Color(0xFFFF00000)
-                                  : Color(0xFF000000)),
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                                  ? const Color(0xFFFF0000)
+                                  : const Color(0xFF000000)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50))),
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: passwordError || passwordConditionError
-                                  ? Color(0xFFFF00000)
-                                  : Color(0xFF000000)),
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                                  ? const Color(0xFFFF0000)
+                                  : const Color(0xFF000000)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50))),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: passwordError || passwordConditionError
-                                  ? Color(0xFFFF00000)
-                                  : Color(0xFF000000)),
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                                  ? const Color(0xFFFF0000)
+                                  : const Color(0xFF000000)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50))),
                     ),
                   ),
                   const SizedBox(height: 60),
@@ -210,7 +217,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   fullName: fullnameController.text));
                           if (!result) {
                             var snackBar = SnackBar(
-                              content: Text(
+                              content: const Text(
                                   'An error occured. Your email is already linked to an account.'),
                               action: SnackBarAction(
                                 label: 'OK',
@@ -226,15 +233,15 @@ class _RegisterPageState extends State<RegisterPage> {
                         });
                       },
                       child: const Text("Create Account ")),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Text(
                     errorMessage,
-                    style: TextStyle(color: Colors.red, height: 1.5),
+                    style: const TextStyle(color: Colors.red, height: 1.5),
                   ),
                   if (loading)
-                    SizedBox(
+                    const SizedBox(
                       height: 100,
                       width: 100,
                       child: LoadingIndicator(
@@ -254,8 +261,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
     // Create a RegExp object to use for matching
     final regExp = RegExp(pattern);
-    print(regExp.hasMatch(password));
-    // Return true if the password matches the pattern, false otherwise
+/*     print(regExp.hasMatch(password));
+ */ // Return true if the password matches the pattern, false otherwise
     return regExp.hasMatch(password);
   }
 
@@ -276,7 +283,7 @@ class _RegisterPageState extends State<RegisterPage> {
       Navigator.pop(context);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
       return true;
     }
