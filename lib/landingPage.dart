@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthsim/questionnaire/questionnaire.dart';
 import 'package:healthsim/result/result.dart';
 
 const maxWidthScreen = 2500.0;
@@ -40,7 +41,7 @@ class _LandingPageState extends State<LandingPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ResultPage(),
+                          builder: (context) => QuestionnairePage(),
                         ));
                   },
                   child: Padding(
