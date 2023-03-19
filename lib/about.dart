@@ -29,16 +29,14 @@ class AboutPage extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                   child: Column(
                     children: <Widget>[
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "About us",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 40.0,
-                            color: Colors.white),
-                      ),
+                      Image.asset("assets/images/about.png"),
+                      // Text(
+                      //   "",
+                      //   style: TextStyle(
+                      //       fontWeight: FontWeight.bold,
+                      //       fontSize: 40.0,
+                      //       color: Colors.white),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20.0),
                         child: Text(

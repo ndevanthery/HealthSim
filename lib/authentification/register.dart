@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthsim/Models/user_model.dart';
+import 'package:healthsim/navbar/navBar.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:tuple/tuple.dart';
 
@@ -43,7 +44,21 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Register"),
+          title: NavBar(),
+          toolbarHeight: 100,
+          backgroundColor: Colors.blue,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromRGBO(4, 66, 108, 1),
+                  Color.fromRGBO(0, 137, 207, 1)
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: Center(
@@ -57,6 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
+                  Image.asset("assets/images/register.png"),
                   TextField(
                     controller: fullnameController,
                     decoration: const InputDecoration(
