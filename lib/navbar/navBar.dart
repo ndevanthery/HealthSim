@@ -163,7 +163,7 @@ class MobileNavBar extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  fontSize: 30),
+                  fontSize: 20),
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
@@ -174,7 +174,7 @@ class MobileNavBar extends StatelessWidget {
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
                       textStyle: const TextStyle(
-                          fontSize: 15,
+                          fontSize: 10,
                           color: Colors.white,
                           fontFamily: "Montserrat"),
                     ),
@@ -191,7 +191,7 @@ class MobileNavBar extends StatelessWidget {
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
                       textStyle: const TextStyle(
-                          fontSize: 15,
+                          fontSize: 10,
                           color: Colors.white,
                           fontFamily: "Montserrat"),
                     ),
@@ -208,7 +208,7 @@ class MobileNavBar extends StatelessWidget {
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
                       textStyle: const TextStyle(
-                          fontSize: 15,
+                          fontSize: 10,
                           color: Colors.white,
                           fontFamily: "Montserrat"),
                     ),
@@ -234,7 +234,7 @@ class MobileNavBar extends StatelessWidget {
                     },
                     child: Text(
                       "Sign Up",
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(color: Colors.blue, fontSize: 10),
                     ),
                   ),
                   SizedBox(
@@ -253,7 +253,7 @@ class MobileNavBar extends StatelessWidget {
                     },
                     child: Text(
                       "Log In",
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(color: Colors.blue, fontSize: 10),
                     ),
                   )
                 ],
