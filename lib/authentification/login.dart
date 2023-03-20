@@ -27,10 +27,12 @@ class _LoginPageState extends State<LoginPage> {
   bool loading = false;
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
           title: NavBar(),
-          toolbarHeight: 100,
+          toolbarHeight:
+              screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
           backgroundColor: Colors.blue,
           flexibleSpace: Container(
             decoration: BoxDecoration(
@@ -170,7 +172,6 @@ class _LoginPageState extends State<LoginPage> {
 
       Navigator.pushReplacement(
         context,
-
         MaterialPageRoute(builder: (context) => const WelcomePage()),
       );
       return false;
