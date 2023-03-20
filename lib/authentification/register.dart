@@ -32,6 +32,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     errorMessage = (emailError
         ? "your email not valid !"
         : (passwordConditionError
@@ -45,7 +47,8 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
         appBar: AppBar(
           title: NavBar(),
-          toolbarHeight: 100,
+          toolbarHeight:
+              screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
           backgroundColor: Colors.blue,
           flexibleSpace: Container(
             decoration: BoxDecoration(
