@@ -187,9 +187,6 @@ class MobileNavBar extends StatelessWidget {
                     },
                     child: const Text('Home'),
                   ),
-                  SizedBox(
-                    width: 30,
-                  ),
                   TextButton(
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -206,9 +203,6 @@ class MobileNavBar extends StatelessWidget {
                           ));
                     },
                     child: const Text('About'),
-                  ),
-                  SizedBox(
-                    width: 30,
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
@@ -227,6 +221,41 @@ class MobileNavBar extends StatelessWidget {
                     },
                     child: const Text('Contact'),
                   ),
+                  MaterialButton(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RegisterPage(),
+                          ));
+                    },
+                    child: Text(
+                      "Sign Up",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  MaterialButton(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ));
+                    },
+                    child: Text(
+                      "Log In",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  )
                 ],
               ),
             )
