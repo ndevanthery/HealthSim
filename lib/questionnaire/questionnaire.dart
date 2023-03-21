@@ -169,7 +169,8 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                       smokeFinal,
                       alim.toInt(),
                       sport.toInt(),
-                      alcool.toInt());
+                      alcool.toInt(),
+                      DateTime.now());
 
                   //Put the model in a global value
                   answers;
