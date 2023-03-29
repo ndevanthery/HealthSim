@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthsim/questionnaire/questionnaire.dart';
-import 'package:healthsim/result/result.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 const maxWidthScreen = 2500.0;
 
@@ -20,8 +20,8 @@ class _LandingPageState extends State<LandingPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                "Your Health \nis your Wealth",
-                style: TextStyle(
+                AppLocalizations.of(context)!.votresantetitre,
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 40.0,
                     color: Colors.white),
@@ -29,13 +29,13 @@ class _LandingPageState extends State<LandingPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
-                  "Answer the questionnaire about your health history, lifestyle, habits and discover your position compared to the population !",
-                  style: TextStyle(fontSize: 16.0, color: Colors.white),
+                  AppLocalizations.of(context)!.completequetionnairedescription,
+                  style: const TextStyle(fontSize: 16.0, color: Colors.white),
                 ),
               ),
               MaterialButton(
                   color: Colors.white,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   onPressed: () {
                     Navigator.push(
@@ -50,7 +50,7 @@ class _LandingPageState extends State<LandingPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Start questionnaire",
+                        AppLocalizations.of(context)!.lancerquestionnaire,
                         style: TextStyle(color: Colors.blue),
                       ),
                     ),

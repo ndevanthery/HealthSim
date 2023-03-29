@@ -11,7 +11,7 @@ class WelcomePage extends StatelessWidget {
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
@@ -29,12 +29,12 @@ class WelcomePage extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                   child: Column(
-                    children: <Widget>[
+                    children: const <Widget>[
                       LandingPage(),
                       SizedBox(
                         height: 20,
                       ),
-                      const Divider(
+                      Divider(
                         height: 20,
                         thickness: 2,
                         indent: 20,

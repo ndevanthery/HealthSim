@@ -3,9 +3,9 @@ import 'package:healthsim/Models/user_model.dart';
 import 'package:healthsim/navbar/navBar.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:tuple/tuple.dart';
-
 import '../database/auth.dart';
 import '../home.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -78,10 +78,11 @@ class _RegisterPageState extends State<RegisterPage> {
                   Image.asset("assets/images/register.png"),
                   TextField(
                     controller: fullnameController,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    decoration: InputDecoration(
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 10),
                       alignLabelWithHint: true,
-                      label: Text("Full name"),
+                      label: Text(AppLocalizations.of(context)!.nomcomplet),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(50))),
                       focusedBorder: OutlineInputBorder(
@@ -97,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 10),
                       alignLabelWithHint: true,
-                      label: const Text("E-Mail"),
+                      label: Text(AppLocalizations.of(context)!.email),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: emailError
@@ -131,7 +132,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 10),
                       alignLabelWithHint: true,
-                      label: const Text("Password"),
+                      label: Text(AppLocalizations.of(context)!.motdepasse),
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -175,7 +176,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 10),
                       alignLabelWithHint: true,
-                      label: const Text("Confirm Password"),
+                      label: Text(AppLocalizations.of(context)!.confirmemdp),
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -251,7 +252,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           loading = false;
                         });
                       },
-                      child: const Text("Create Account ")),
+                      child: Text(AppLocalizations.of(context)!.creercompte)),
                   const SizedBox(
                     height: 20,
                   ),

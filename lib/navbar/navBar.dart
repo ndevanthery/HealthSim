@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:healthsim/about.dart';
 import 'package:healthsim/authentification/welcome.dart';
-
 import '../authentification/login.dart';
 import '../authentification/register.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../language_picker_widget.dart';
 
 const maxWidthScreen = 2500.0;
 
@@ -33,17 +34,21 @@ class DesktopNavBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
       child: Container(
-        constraints: BoxConstraints(maxWidth: maxWidthScreen),
+        constraints: const BoxConstraints(maxWidth: maxWidthScreen),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text(
+            const Text(
               "HealthSim",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   fontSize: 30),
             ),
+            const SizedBox(
+              width: 30,
+            ),
+            const LanguagePickerWidget(),
             Row(
               children: <Widget>[
                 TextButton(
@@ -61,9 +66,9 @@ class DesktopNavBar extends StatelessWidget {
                           builder: (context) => const WelcomePage(),
                         ));
                   },
-                  child: const Text('Home'),
+                  child: Text(AppLocalizations.of(context)!.accueil),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
                 TextButton(
@@ -81,9 +86,9 @@ class DesktopNavBar extends StatelessWidget {
                           builder: (context) => const AboutPage(),
                         ));
                   },
-                  child: const Text('About'),
+                  child: Text(AppLocalizations.of(context)!.apropos),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
                 TextButton(
@@ -101,14 +106,14 @@ class DesktopNavBar extends StatelessWidget {
                           builder: (context) => const WelcomePage(),
                         ));
                   },
-                  child: const Text('Contact'),
+                  child: Text(AppLocalizations.of(context)!.contact),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
                 MaterialButton(
                   color: Colors.white,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(30.0))),
                   onPressed: () {
                     Navigator.push(
@@ -118,16 +123,16 @@ class DesktopNavBar extends StatelessWidget {
                         ));
                   },
                   child: Text(
-                    "Sign Up",
-                    style: TextStyle(color: Colors.blue),
+                    AppLocalizations.of(context)!.creercompte,
+                    style: const TextStyle(color: Colors.blue),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 MaterialButton(
                   color: Colors.white,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(30.0))),
                   onPressed: () {
                     Navigator.push(
@@ -137,8 +142,8 @@ class DesktopNavBar extends StatelessWidget {
                         ));
                   },
                   child: Text(
-                    "Log In",
-                    style: TextStyle(color: Colors.blue),
+                    AppLocalizations.of(context)!.senregistrer,
+                    style: const TextStyle(color: Colors.blue),
                   ),
                 )
               ],
@@ -160,7 +165,8 @@ class MobileNavBar extends StatelessWidget {
           Container(
             child: Column(
               children: <Widget>[
-                Text(
+                const LanguagePickerWidget(),
+                const Text(
                   "HealthSim",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -187,7 +193,7 @@ class MobileNavBar extends StatelessWidget {
                                 builder: (context) => const WelcomePage(),
                               ));
                         },
-                        child: const Text('Home'),
+                        child: Text(AppLocalizations.of(context)!.accueil),
                       ),
                       TextButton(
                         style: TextButton.styleFrom(
@@ -204,7 +210,7 @@ class MobileNavBar extends StatelessWidget {
                                 builder: (context) => const AboutPage(),
                               ));
                         },
-                        child: const Text('About'),
+                        child: Text(AppLocalizations.of(context)!.apropos),
                       ),
                       TextButton(
                         style: TextButton.styleFrom(
@@ -221,7 +227,7 @@ class MobileNavBar extends StatelessWidget {
                                 builder: (context) => const WelcomePage(),
                               ));
                         },
-                        child: const Text('Contact'),
+                        child: Text(AppLocalizations.of(context)!.contact),
                       ),
                     ],
                   ),
@@ -237,7 +243,7 @@ class MobileNavBar extends StatelessWidget {
                 children: <Widget>[
                   MaterialButton(
                     color: Colors.white,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30.0))),
                     onPressed: () {
                       Navigator.push(
@@ -247,16 +253,16 @@ class MobileNavBar extends StatelessWidget {
                           ));
                     },
                     child: Text(
-                      "Sign Up",
-                      style: TextStyle(color: Colors.blue),
+                      AppLocalizations.of(context)!.creercompte,
+                      style: const TextStyle(color: Colors.blue),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   MaterialButton(
                     color: Colors.white,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30.0))),
                     onPressed: () {
                       Navigator.push(
@@ -265,9 +271,9 @@ class MobileNavBar extends StatelessWidget {
                             builder: (context) => const LoginPage(),
                           ));
                     },
-                    child: const Text(
-                      "Log In",
-                      style: TextStyle(color: Colors.blue),
+                    child: Text(
+                      AppLocalizations.of(context)!.senregistrer,
+                      style: const TextStyle(color: Colors.blue),
                     ),
                   )
                 ],
