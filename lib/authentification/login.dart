@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'package:healthsim/authentification/user_provider.dart';
 import 'package:healthsim/authentification/welcome.dart';
-
-import 'package:healthsim/home.dart';
 import 'package:healthsim/navbar/navBar.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-
 import '../database/auth.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -33,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
               screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
           backgroundColor: Colors.blue,
           flexibleSpace: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Color.fromRGBO(4, 66, 108, 1),
@@ -63,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),
                     alignLabelWithHint: true,
-                    label: Text("E-Mail"),
+                    label: Text(AppLocalizations.of(context)!.email),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(
                             color:
@@ -90,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                     alignLabelWithHint: true,
-                    label: const Text("Password"),
+                    label: Text(AppLocalizations.of(context)!.motdepasse),
                     suffixIcon: IconButton(
                       onPressed: () {
                         setState(() {
@@ -143,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                         error = isError;
                       });
                     },
-                    child: const Text("Log in ")),
+                    child: Text(AppLocalizations.of(context)!.senregistrer)),
                 SizedBox(
                   height: 20,
                 ),

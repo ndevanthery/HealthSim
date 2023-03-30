@@ -1,0 +1,52 @@
+{
+    "accueil": "Accueil",
+    "@accueil":{
+    },
+    "apropos": "A propos",
+    "@apropos":{
+    },
+    "contact": "Contact",
+    "@contact":{
+    },
+    "creercompte": "Créer un compte",
+    "@creercompte":{
+    },
+    "senregistrer": "Se connecter",
+    "@senregistrer":{
+    },
+    "votresantetitre": "Votre santé \nc'est votre avenir",
+    "@votresantetitre":{
+    },
+    "completequetionnairedescription": "Répondez au questionnaire sur votre historique de santé, votre style de vie, vos habitudes et découvrez votre position par rapport à la population !",
+    "@completequetionnairedescription":{
+    },
+    "lancerquestionnaire": "Lancer le questionnaire",
+    "@lancerquestionnaire":{
+    },
+    "colonneun": "Rempli le questionnaire",
+    "@colonneun":{
+    },
+    "colonnedeux": "Compare toi",
+    "@colonnedeux":{
+    },
+    "colonnetrois": "Simule les résultats",
+    "@colonnetrois":{
+    },
+    "apropostexte": "Cette application a été créée par quatre étudiants dévoués qui ont travaillé en collaboration avec deux institutions éducatives prestigieuses - la HES-SO Valais Wallis et la Haaga-Helia University of Applied Sciences en Finlande, faisant de ce projet un effort international. Nous avons mis tout notre cœur et notre âme dans le développement d'une application innovante et de pointe qui vise à aider l'industrie de la santé en offrant aux utilisateurs l'accès aux dernières avancées en matière d'algorithmes médicaux. Axée sur l'expérience utilisateur, cette application a été conçue pour être intuitive et conviviale, avec des fonctionnalités adaptées aux besoins des prestataires de soins de santé et des patients. Nous sommes fiers d'avoir fait partie de ce projet incroyable et sommes ravis de voir l'impact qu'il aura sur l'industrie de la santé dans les années à venir.",
+    "@apropostexte":{
+    },    
+    "email": "E-Mail",
+    "@email":{
+    },
+    "motdepasse": "Mot de passe",
+    "@motdepasse":{
+    },
+    "nomcomplet": "Nom complet",
+    "@nomcomplet":{
+    },
+    "confirmemdp": "Confirmer Mot de passe",
+    "@confirmemdp":{
+    }
+    
+
+}
