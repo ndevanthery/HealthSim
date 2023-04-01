@@ -66,7 +66,7 @@ double riskAVC(ModelAnswer resultQuestionnaire) {
         coeffCholAge = -0,
         coeffHdlAge = 0;
 
-    if (resultQuestionnaire.gender == 0) {
+    if (resultQuestionnaire.gender == 1) {
       baseAlim = (resultQuestionnaire.alim - alimH) / 3;
       baseSport = (resultQuestionnaire.sport - sportH) / 3;
       //coefficients
@@ -141,6 +141,9 @@ double riskAVC(ModelAnswer resultQuestionnaire) {
     var riskAlim = sumAVC - (sumAVC * alimP * baseAlim);
     var riskSport = sumAVC - (sumAVC * sportP * baseSport);
     resultAVC = (riskAlim + riskSport) / 2 * 100;
+  }
+  if(resultAVC>100) {
+    resultAVC=100;
   }
 
   return resultAVC.roundToDouble();
@@ -274,10 +277,14 @@ double riskDiabete(ModelAnswer resultQuestionnaire) {
   if (points - points.round() != 0) {
     points += 1;
   }
-  if (resultQuestionnaire.gender == 0) {
+  if (resultQuestionnaire.gender == 1) {
     resultDiab = riskTableH.elementAt(points.round());
   } else {
     resultDiab = riskTableF.elementAt(points.round());
+  }
+
+  if(resultDiab>100) {
+    resultDiab=100;
   }
 
   return resultDiab * 1.0;
@@ -298,6 +305,10 @@ double riskCancer(ModelAnswer resultQuestionnaire) {
   sumCancer += (3 - resultQuestionnaire.alim) / 3 * 0.5;
 
   var resultCancer = sumCancer / 4.0 * 100 + 9;
+
+  if(resultCancer>100) {
+    resultCancer=100;
+  }
 
   return resultCancer.roundToDouble();
 }

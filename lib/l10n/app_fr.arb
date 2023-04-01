@@ -46,7 +46,74 @@
     },
     "confirmemdp": "Confirmer Mot de passe",
     "@confirmemdp":{
+    },
+    "questionnairetitle": "Questionnaire",
+    "@questionnairetitle":{
+    },
+    "questionnairecancel": "Annuler",
+    "@questionnairecancel":{
+    },
+    "questionnairenext": "Prochain",
+    "@questionnairenext":{
+    },
+    "questionnairecancel": "Annuler",
+    "@questionnairecancel":{
+    },
+    "questionnaireintrotitle": "Ce questionnaire est divisée en 3 partie et en voici la première",
+    "@questionnaireintrotitle":{
+    },
+    "questionnaireintrotext": "Toi-même\nSi vous n avez pas de réponse pour certaines questions passer directement à la prochaine",
+    "@questionnaireintrotext":{
+    },
+    "questionnaireintrotextbutton": "C est partie !",
+    "@questionnaireintrotextbutton":{
+    },
+    "questionnairegendertitle": "Quel est votre genre ?",
+    "@questionnairegendertitle":{
+    },
+    "questionnairegenderanswerpositive": "Femme",
+    "@questionnairegenderanswerpositive":{
+    },
+    "questionnairegenderanswernegative": "Homme",
+    "@questionnairegenderanswernegative":{
+    },
+    "questionnaireagetitle": "Quel âge avez-vous ?",
+    "@questionnaireagetitle":{
+    },
+    "questionnaireagehint": "Entrez votre âge",
+    "@questionnaireagehint":{
+    },
+    "questionnaireheighttitle": "Quel est votre taille en cm ?",
+    "@questionnaireheighttitle":{
+    },
+    "questionnaireheighthint": "Entrez votre taille",
+    "@questionnaireheighthint":{
+    },
+    "questionnaireweighttitle": "Quel est votre poids en kg ?",
+    "@questionnaireweighttitle":{
+    },
+    "questionnaireheighthint": "Entrez votre poids",
+    "@questionnaireheighthint":{
+    },
+    "questionnaireglyctitle": "Etes-vous connus pour un sucre sanguin élevé ?",
+    "@questionnaireglyctitle":{
+    },
+    "answerpositive": "Oui",
+    "@answerpositive":{
+    },
+    "answernegative": "Non",
+    "@answernegative":{
+    },
+    "questionnairehighsysttitle": "Etes-vous connus pour une tension élevée ?",
+    "@questionnairehighsysttitle":{
+    },
+    "questionnairesysttitle": "Quel est votre tension en mmHg ?",
+    "@questionnairesysttitle":{
+    },
+    "questionnairesysthint": "Quel est votre tension en mmHg ?",
+    "@questionnairesysthint":{
     }
-    
+
+
 
 }

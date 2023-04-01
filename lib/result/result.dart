@@ -24,7 +24,8 @@ class _ResultPageState extends State<ResultPage> {
   late double _eatingValue;
   double _exerciseValue = 2;
   late ModelAnswer simulationQuestionnaire;
-
+  late ModelAnswer normalValue;
+  
   @override
   void initState() {
     initSimulation();
@@ -37,6 +38,14 @@ class _ResultPageState extends State<ResultPage> {
     _isDrinking = simulationQuestionnaire.alcool == 1;
     _eatingValue = simulationQuestionnaire.alim.toDouble();
     _exerciseValue = simulationQuestionnaire.sport.toDouble();
+    if(simulationQuestionnaire.gender==0){
+      normalValue = ModelAnswer(simulationQuestionnaire.gender, simulationQuestionnaire.age, 173, 79, -1, 0, -1, 0, -1, -1, 0, simulationQuestionnaire.inf, simulationQuestionnaire.avc, 0, 0.03, 0.5, 2, 1, 3, DateTime.now());
+    } else{
+      normalValue = ModelAnswer(simulationQuestionnaire.gender, simulationQuestionnaire.age, 178, 83, -1, 0, -1, 0, -1, -1, 0, simulationQuestionnaire.inf, simulationQuestionnaire.avc, 0, 0.08, 0.5, 2, 1, 3, DateTime.now());
+    }
+    print( "riskCancer ${riskCancer(widget.resultQuestionnaire)}");
+    print( "riskDiab ${riskDiabete(widget.resultQuestionnaire)}");
+    print( "riskAVC ${riskAVC(widget.resultQuestionnaire)}");
   }
 
   @override
@@ -70,19 +79,22 @@ class _ResultPageState extends State<ResultPage> {
                             'Cancer Risk',
                             'Medium',
                             'Higher than Normal',
-                            riskCancer(widget.resultQuestionnaire)),
+                            riskCancer(widget.resultQuestionnaire),
+                            riskCancer(normalValue)),
                         _buildResultsCard(
                             context,
                             'Heart Disease Risk',
                             'High',
                             'Higher than Normal',
-                            riskAVC(widget.resultQuestionnaire)),
+                            riskAVC(widget.resultQuestionnaire),
+                            riskAVC(normalValue)),
                         _buildResultsCard(
                             context,
                             'Diabetes Risk',
                             'Low',
                             'Lower than Normal',
-                            riskDiabete(widget.resultQuestionnaire)),
+                            riskDiabete(widget.resultQuestionnaire),
+                            riskDiabete(normalValue)),
                       ],
                     )
                   : Row(
@@ -93,21 +105,90 @@ class _ResultPageState extends State<ResultPage> {
                             'Cancer Risk',
                             'Medium',
                             'Higher than Normal',
-                            riskCancer(widget.resultQuestionnaire)),
+                            riskCancer(widget.resultQuestionnaire),
+                            riskCancer(normalValue)),
                         _buildResultsCard(
                             context,
                             'Heart Disease Risk',
                             'High',
                             'Higher than Normal',
-                            riskAVC(widget.resultQuestionnaire)),
+                            riskAVC(widget.resultQuestionnaire),
+                            riskAVC(normalValue)),
                         _buildResultsCard(
                             context,
                             'Diabetes Risk',
                             'Low',
                             'Lower than Normal',
-                            riskDiabete(widget.resultQuestionnaire)),
+                            riskDiabete(widget.resultQuestionnaire),
+                            riskDiabete(normalValue)),
                       ],
                     ),
+              const SizedBox(height: 20),
+              //Comparative
+              Table(
+                columnWidths: const <int, TableColumnWidth>{
+                  0: FlexColumnWidth(),
+                  1: FlexColumnWidth(),
+                  2: FlexColumnWidth()
+                },
+                defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                children:  [
+                  TableRow(
+                      children: [
+                        const Text(""),
+                        Text("Your answers",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.blue[900]),),
+                        Text("The answers from average person",
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.blue[900])),
+                      ]
+                  ),
+                  TableRow(
+                      children: [
+                        Text("Sport",
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.blue[900])),
+                        Text("${widget.resultQuestionnaire.sport}",
+                          style : const TextStyle(fontSize: 16)),
+                        Text("${normalValue.sport}",
+                            style : const TextStyle(fontSize: 16)),
+                      ]
+                  ),
+                  TableRow(
+                      children: [
+                        Text("Alimentation",
+                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20, color: Colors.blue[900])),
+                        Text("${widget.resultQuestionnaire.alim}",
+                            style : const TextStyle(fontSize: 16)),
+                        Text("${normalValue.alim}",
+                            style : const TextStyle(fontSize: 16)),
+                      ]
+                  ),
+                  TableRow(
+                      children: [
+                        Text("Alcool",
+                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20, color: Colors.blue[900])),
+                        Text("${widget.resultQuestionnaire.alcool}",
+                            style : const TextStyle(fontSize: 16)),
+                        Text("${normalValue.alcool}",
+                            style : const TextStyle(fontSize: 16)),
+                      ]
+                  ),
+                  TableRow(
+                      children: [
+                        Text("Smoke ?",
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.blue[900])),
+                        Container(
+                          child: widget.resultQuestionnaire.smoke==1?
+                          const Text("yes",
+                              style : TextStyle(fontSize: 16)):
+                          const Text("no",
+                              style : TextStyle(fontSize: 16))
+                        ),
+                        const Text("half",
+                            style : TextStyle(fontSize: 16))
+                      ]
+                  ),
+                ],
+              ),
               const SizedBox(height: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -342,19 +423,22 @@ class _ResultPageState extends State<ResultPage> {
                                 'Cancer Risk',
                                 'Medium',
                                 'Higher than Normal',
-                                riskCancer(simulationQuestionnaire)),
+                                riskCancer(simulationQuestionnaire),
+                                riskCancer(normalValue)),
                             _buildResultsCard(
                                 context,
                                 'Heart Disease Risk',
                                 'High',
                                 'Higher than Normal',
-                                riskAVC(simulationQuestionnaire)),
+                                riskAVC(simulationQuestionnaire),
+                                riskAVC(normalValue)),
                             _buildResultsCard(
                                 context,
                                 'Diabetes Risk',
                                 'Low',
                                 'Lower than Normal',
-                                riskDiabete(simulationQuestionnaire)),
+                                riskDiabete(simulationQuestionnaire),
+                                riskDiabete(normalValue)),
                           ],
                         )
                       : Row(
@@ -365,19 +449,22 @@ class _ResultPageState extends State<ResultPage> {
                                 'Cancer Risk',
                                 'Medium',
                                 'Higher than Normal',
-                                riskCancer(simulationQuestionnaire)),
+                                riskCancer(simulationQuestionnaire),
+                                riskCancer(normalValue)),
                             _buildResultsCard(
                                 context,
                                 'Heart Disease Risk',
                                 'High',
                                 'Higher than Normal',
-                                riskAVC(simulationQuestionnaire)),
+                                riskAVC(simulationQuestionnaire),
+                                riskAVC(normalValue)),
                             _buildResultsCard(
                                 context,
                                 'Diabetes Risk',
                                 'Low',
                                 'Lower than Normal',
-                                riskDiabete(simulationQuestionnaire)),
+                                riskDiabete(simulationQuestionnaire),
+                                riskDiabete(normalValue)),
                           ],
                         ),
                   const SizedBox(height: 20),
@@ -391,7 +478,7 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   Widget _buildResultsCard(BuildContext context, String title, String subtitle,
-      String rank, double risk) {
+      String rank, double risk, double normalRisk) {
     return Card(
       elevation: 10,
       shape: RoundedRectangleBorder(
@@ -449,7 +536,7 @@ class _ResultPageState extends State<ResultPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
-                              child: Text("you",
+                              child: Text("Average people",
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0)),
@@ -461,8 +548,8 @@ class _ResultPageState extends State<ResultPage> {
                               animation: true,
                               animationDuration: 600,
                               animateFromLastPercent: true,
-                              percent: risk / 100,
-                              progressColor: _getRiskColor(risk),
+                              percent: normalRisk / 100,
+                              progressColor: _getRiskColor(normalRisk),
                               backgroundColor: Colors.grey.shade200,
                             ))
                           ],
@@ -518,7 +605,7 @@ class _ResultPageState extends State<ResultPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: Text("you",
+                        child: Text("Average people",
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18.0)),
                       ),
@@ -529,8 +616,8 @@ class _ResultPageState extends State<ResultPage> {
                         animation: true,
                         animationDuration: 600,
                         animateFromLastPercent: true,
-                        percent: risk / 100,
-                        progressColor: _getRiskColor(risk),
+                        percent: normalRisk / 100,
+                        progressColor: _getRiskColor(normalRisk),
                         backgroundColor: Colors.grey.shade200,
                       ))
                     ],

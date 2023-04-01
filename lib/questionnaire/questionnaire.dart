@@ -87,9 +87,11 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                       diabFinal,
                       infFinal,
                       avcFinal,
-                      afinfFinal,
-                      afcancerFinal,
-                      smokeFinal;
+                      afinfFinal;
+
+                  double afcancerFinal,
+                         smokeFinal;
+
 
                   //change the boolean results in int
                   if (gender == BooleanResult.POSITIVE) {
@@ -134,14 +136,14 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                     afinfFinal = 0;
                   }
                   if (afcancer == BooleanResult.POSITIVE) {
-                    afcancerFinal = 1;
+                    afcancerFinal = 1.0;
                   } else {
-                    afcancerFinal = 0;
+                    afcancerFinal = 0.0;
                   }
                   if (smoke == BooleanResult.POSITIVE) {
-                    smokeFinal = 1;
+                    smokeFinal = 1.0;
                   } else {
-                    smokeFinal = 0;
+                    smokeFinal = 0.0;
                   }
 
                   //put a value in the null values
@@ -197,8 +199,8 @@ class _QuestionnaireState extends State<QuestionnairePage> {
               task: getSampleTask(),
               showProgress: true,
               localizations: const {
-                'cancel': 'Cancel',
-                'next': 'Next',
+                'cancel': 'Annuler',
+                'next': 'Prochain',
               },
               themeData: Theme.of(context).copyWith(
                 backgroundColor: Colors.white,
@@ -325,10 +327,10 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           buttonText: 'C\'est partie !',
         ),
         QuestionStep(
-          title: 'Quel est votre genre?',
+          title: 'Quel est votre genre ?',
           answerFormat: const BooleanAnswerFormat(
-            positiveAnswer: 'Femme',
-            negativeAnswer: 'Homme',
+            positiveAnswer: 'Homme',
+            negativeAnswer: 'Femme',
             result: BooleanResult.POSITIVE,
           ),
         ),
@@ -371,9 +373,9 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           ),
         ),
         QuestionStep(
-          title: 'Quel est votre tension en mmHg?',
+          title: 'Quel est votre tension en mmHg ?',
           answerFormat: const IntegerAnswerFormat(
-            hint: 'Entrez votre tension',
+            hint: 'Entrez votre tension entre 80 et 200 mmHg',
           ),
           isOptional: true,
         ),
@@ -388,14 +390,14 @@ class _QuestionnaireState extends State<QuestionnairePage> {
         QuestionStep(
           title: 'Quel est votre taux de cholestérol en mmol/l ?',
           answerFormat: const IntegerAnswerFormat(
-            hint: 'Entrez votre taux de cholestérol',
+            hint: 'Entrez votre taux de cholestérol entre 2.5 et 8 mmol/l',
           ),
           isOptional: true,
         ),
         QuestionStep(
           title: 'Quel est votre taux de HDL en mmol/l ?',
           answerFormat: const IntegerAnswerFormat(
-            hint: 'Entrez votre taux de HDL',
+            hint: 'Entrez votre taux de HDL entre 0.6 et 2.5 mmol/l',
           ),
           isOptional: true,
         ),
@@ -446,7 +448,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           ),
         ),
         InstructionStep(
-            title: "Passe temps",
+            title: "Vos habitudes",
             text: 'Voici la dernière partie',
             buttonText: 'C\'est partie ! '),
         QuestionStep(
@@ -460,17 +462,19 @@ class _QuestionnaireState extends State<QuestionnairePage> {
         ),
         QuestionStep(
           title: 'Quelle est votre habitude alimentaire ?',
+          text: '1 = petites habitudes\n2 = certaines habitudes',
           answerFormat: const ScaleAnswerFormat(
             step: 1,
             minimumValue: 0,
             maximumValue: 3,
             defaultValue: 2,
-            minimumValueDescription: 'Mauvaise',
+            minimumValueDescription: 'Mauvaises',
             maximumValueDescription: 'Bonnes',
           ),
         ),
         QuestionStep(
           title: 'Quelles sont vos habitudes sportives ?',
+          text: '1 = 30 min 2-3 jours/semaine\n2 = 30 min 5 jours/semaine',
           answerFormat: const ScaleAnswerFormat(
             step: 1,
             minimumValue: 0,
@@ -481,7 +485,8 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           ),
         ),
         QuestionStep(
-          title: 'Quelles sont vos habitudes au niveau de l\'alcool ?',
+          title: 'Qu\'elle est votre consommation d\'alcool ?',
+          text: '1 = 3 à 6 jours/semaine\n2 = 1 à 2 jours/semaine\n3 = moins 1 jours/semaine',
           answerFormat: const ScaleAnswerFormat(
             step: 1,
             minimumValue: 0,
