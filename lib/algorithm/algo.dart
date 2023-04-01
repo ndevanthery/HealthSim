@@ -251,9 +251,9 @@ double riskDiabete(ModelAnswer resultQuestionnaire) {
   if (resultQuestionnaire.age < 45) {
     points = 0;
   } else if (resultQuestionnaire.age <= 54) {
-    points = 2;
+    points += 2;
   } else {
-    points = 3;
+    points += 3;
   }
 
   if (bmi < 27) {
@@ -274,9 +274,6 @@ double riskDiabete(ModelAnswer resultQuestionnaire) {
   points += scoreTable.elementAt(resultQuestionnaire.sport * 10) +
       scoreTable.elementAt(resultQuestionnaire.alim * 10);
 
-  if (points - points.round() != 0) {
-    points += 1;
-  }
   if (resultQuestionnaire.gender == 1) {
     resultDiab = riskTableH.elementAt(points.round());
   } else {
