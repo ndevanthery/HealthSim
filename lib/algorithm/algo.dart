@@ -249,7 +249,7 @@ double riskDiabete(ModelAnswer resultQuestionnaire) {
   var points = 3.0;
 
   if (resultQuestionnaire.age < 45) {
-    points = 0;
+    points += 0;
   } else if (resultQuestionnaire.age <= 54) {
     points += 2;
   } else {
