@@ -5,6 +5,7 @@ import 'package:healthsim/questionnaire/ModelAnswer.dart';
 import 'package:healthsim/questionnaire/questionnaire.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../algorithm/algo.dart';
 
@@ -20,7 +21,7 @@ class ResultPage extends StatefulWidget {
 
 class _ResultPageState extends State<ResultPage> {
   late bool _isSmoking;
-  late bool _isDrinking;
+  late double _drinkingValue;
   late double _eatingValue;
   double _exerciseValue = 2;
   late ModelAnswer simulationQuestionnaire;
@@ -35,7 +36,7 @@ class _ResultPageState extends State<ResultPage> {
   void initSimulation() {
     simulationQuestionnaire = widget.resultQuestionnaire.copy();
     _isSmoking = simulationQuestionnaire.smoke == 1;
-    _isDrinking = simulationQuestionnaire.alcool == 1;
+    _drinkingValue = simulationQuestionnaire.alcool.toDouble();
     _eatingValue = simulationQuestionnaire.alim.toDouble();
     _exerciseValue = simulationQuestionnaire.sport.toDouble();
     if(simulationQuestionnaire.gender==0){
@@ -52,7 +53,7 @@ class _ResultPageState extends State<ResultPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Result'),
+        title: Text(AppLocalizations.of(context)!.resulttitle),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -62,7 +63,7 @@ class _ResultPageState extends State<ResultPage> {
             children: [
               const SizedBox(height: 20),
               Text(
-                'Your Health Risks',
+                AppLocalizations.of(context)!.resultriskresulttitle,
                 style: TextStyle(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
@@ -76,21 +77,21 @@ class _ResultPageState extends State<ResultPage> {
                       children: [
                         _buildResultsCard(
                             context,
-                            'Cancer Risk',
+                            AppLocalizations.of(context)!.resultcancerrisktitle,
                             'Medium',
                             'Higher than Normal',
                             riskCancer(widget.resultQuestionnaire),
                             riskCancer(normalValue)),
                         _buildResultsCard(
                             context,
-                            'Heart Disease Risk',
+                            AppLocalizations.of(context)!.resultinfrisktitle,
                             'High',
                             'Higher than Normal',
                             riskAVC(widget.resultQuestionnaire),
                             riskAVC(normalValue)),
                         _buildResultsCard(
                             context,
-                            'Diabetes Risk',
+                            AppLocalizations.of(context)!.resultdiabrisktitle,
                             'Low',
                             'Lower than Normal',
                             riskDiabete(widget.resultQuestionnaire),
@@ -102,21 +103,21 @@ class _ResultPageState extends State<ResultPage> {
                       children: [
                         _buildResultsCard(
                             context,
-                            'Cancer Risk',
+                            AppLocalizations.of(context)!.resultcancerrisktitle,
                             'Medium',
                             'Higher than Normal',
                             riskCancer(widget.resultQuestionnaire),
                             riskCancer(normalValue)),
                         _buildResultsCard(
                             context,
-                            'Heart Disease Risk',
+                            AppLocalizations.of(context)!.resultinfrisktitle,
                             'High',
                             'Higher than Normal',
                             riskAVC(widget.resultQuestionnaire),
                             riskAVC(normalValue)),
                         _buildResultsCard(
                             context,
-                            'Diabetes Risk',
+                            AppLocalizations.of(context)!.resultdiabrisktitle,
                             'Low',
                             'Lower than Normal',
                             riskDiabete(widget.resultQuestionnaire),
@@ -136,15 +137,15 @@ class _ResultPageState extends State<ResultPage> {
                   TableRow(
                       children: [
                         const Text(""),
-                        Text("Your answers",
+                        Text(AppLocalizations.of(context)!.resultcomparationtitlesecondcolunm,
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.blue[900]),),
-                        Text("The answers from average person",
+                        Text(AppLocalizations.of(context)!.resultcomparationtitlelastcolunm,
                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.blue[900])),
                       ]
                   ),
                   TableRow(
                       children: [
-                        Text("Sport",
+                        Text(AppLocalizations.of(context)!.resultcomparationtitlefirstrow,
                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.blue[900])),
                         Text("${widget.resultQuestionnaire.sport}",
                           style : const TextStyle(fontSize: 16)),
@@ -154,7 +155,7 @@ class _ResultPageState extends State<ResultPage> {
                   ),
                   TableRow(
                       children: [
-                        Text("Alimentation",
+                        Text(AppLocalizations.of(context)!.resultcomparationtitlesecondrow,
                             style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20, color: Colors.blue[900])),
                         Text("${widget.resultQuestionnaire.alim}",
                             style : const TextStyle(fontSize: 16)),
@@ -164,7 +165,7 @@ class _ResultPageState extends State<ResultPage> {
                   ),
                   TableRow(
                       children: [
-                        Text("Alcool",
+                        Text(AppLocalizations.of(context)!.resultcomparationtitlethirdrow,
                             style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20, color: Colors.blue[900])),
                         Text("${widget.resultQuestionnaire.alcool}",
                             style : const TextStyle(fontSize: 16)),
@@ -174,16 +175,16 @@ class _ResultPageState extends State<ResultPage> {
                   ),
                   TableRow(
                       children: [
-                        Text("Smoke ?",
+                        Text(AppLocalizations.of(context)!.resultcomparationtitlelastrow,
                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.blue[900])),
                         Container(
                           child: widget.resultQuestionnaire.smoke==1?
-                          const Text("yes",
+                          Text(AppLocalizations.of(context)!.answerpositive,
                               style : TextStyle(fontSize: 16)):
-                          const Text("no",
+                          Text(AppLocalizations.of(context)!.answernegative,
                               style : TextStyle(fontSize: 16))
                         ),
-                        const Text("half",
+                        const Text("50 %",
                             style : TextStyle(fontSize: 16))
                       ]
                   ),
@@ -194,8 +195,7 @@ class _ResultPageState extends State<ResultPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20),
-                  Text(
-                    'Simulate the Impact of Changing Your Habits',
+                  Text(AppLocalizations.of(context)!.resultsimulationtitle,
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -211,33 +211,102 @@ class _ResultPageState extends State<ResultPage> {
                           initSimulation();
                         });
                       },
-                      child: Text("Reset Simulation")),
+                      child: Text(AppLocalizations.of(context)!.resultsimulationresetbutton)),
                   const SizedBox(height: 10),
                   Row(children: [
                     Expanded(
-                      child: SwitchListTile(
-                        title: const Text('Smoking'),
-                        value: _isSmoking,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _isSmoking = newValue;
-                            simulationQuestionnaire.smoke = newValue ? 1 : 0;
-                          });
-                        },
+                        child: SwitchListTile(
+                          title: Text(AppLocalizations.of(context)!.resultsimulationsmokebutton),
+                          value: _isSmoking,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _isSmoking = newValue;
+                              simulationQuestionnaire.smoke = newValue ? 1 : 0;
+                            });
+                          },
+                        ),
                       ),
+                    const SizedBox(width: 50),
+                    Expanded(child:
+                    MediaQuery.of(context).size.width < 600
+                        ? Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(AppLocalizations.of(context)!.resultsimulationalcool,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue[900],
+                                  ),
+                                ),
+                                Text(
+                                  '$_drinkingValue',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue[900],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Slider(
+                              value: _drinkingValue,
+                              min: 0,
+                              max: 3,
+                              divisions: 3,
+                              label: _drinkingValue.round().toString(),
+                              onChanged: (value) {
+                                setState(() {
+                                  _drinkingValue = value;
+                                  simulationQuestionnaire.alcool =
+                                      value.toInt();
+                                });
+                              },
+                            )
+                          ],
+                    ):Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(AppLocalizations.of(context)!.resultsimulationalcool,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue[900],
+                              ),
+                            ),
+                            Text(
+                              '$_drinkingValue',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue[900],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Slider(
+                          value: _drinkingValue,
+                          min: 0,
+                          max: 3,
+                          divisions: 3,
+                          label: _drinkingValue.round().toString(),
+                          onChanged: (value) {
+                            setState(() {
+                              _drinkingValue = value;
+                              simulationQuestionnaire.alcool =
+                                  value.toInt();
+                            });
+                          },
+                        )
+                      ],
                     ),
-                    Expanded(
-                      child: SwitchListTile(
-                        title: const Text('Drinking Alcohol'),
-                        value: _isDrinking,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _isDrinking = newValue;
-                            simulationQuestionnaire.alcool = newValue ? 1 : 0;
-                          });
-                        },
-                      ),
-                    )
+                    ),
                   ]),
                   const SizedBox(height: 20),
                   MediaQuery.of(context).size.width < 600
@@ -249,8 +318,7 @@ class _ResultPageState extends State<ResultPage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      'Eating habits:',
+                                    Text(AppLocalizations.of(context)!.resultsimulationalim,
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -289,8 +357,7 @@ class _ResultPageState extends State<ResultPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'Exercising Regularly:',
+                                  Text(AppLocalizations.of(context)!.resultsimulationsport,
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -333,8 +400,7 @@ class _ResultPageState extends State<ResultPage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        'Eating habits:',
+                                      Text(AppLocalizations.of(context)!.resultsimulationalim,
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -377,8 +443,7 @@ class _ResultPageState extends State<ResultPage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      'Exercising Regularly:',
+                                    Text(AppLocalizations.of(context)!.resultsimulationsport,
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -420,21 +485,21 @@ class _ResultPageState extends State<ResultPage> {
                           children: [
                             _buildResultsCard(
                                 context,
-                                'Cancer Risk',
+                                AppLocalizations.of(context)!.resultcancerrisktitle,
                                 'Medium',
                                 'Higher than Normal',
                                 riskCancer(simulationQuestionnaire),
                                 riskCancer(normalValue)),
                             _buildResultsCard(
                                 context,
-                                'Heart Disease Risk',
+                                AppLocalizations.of(context)!.resultinfrisktitle,
                                 'High',
                                 'Higher than Normal',
                                 riskAVC(simulationQuestionnaire),
                                 riskAVC(normalValue)),
                             _buildResultsCard(
                                 context,
-                                'Diabetes Risk',
+                                AppLocalizations.of(context)!.resultdiabrisktitle,
                                 'Low',
                                 'Lower than Normal',
                                 riskDiabete(simulationQuestionnaire),
@@ -446,21 +511,21 @@ class _ResultPageState extends State<ResultPage> {
                           children: [
                             _buildResultsCard(
                                 context,
-                                'Cancer Risk',
+                                AppLocalizations.of(context)!.resultcancerrisktitle,
                                 'Medium',
                                 'Higher than Normal',
                                 riskCancer(simulationQuestionnaire),
                                 riskCancer(normalValue)),
                             _buildResultsCard(
                                 context,
-                                'Heart Disease Risk',
+                                AppLocalizations.of(context)!.resultinfrisktitle,
                                 'High',
                                 'Higher than Normal',
                                 riskAVC(simulationQuestionnaire),
                                 riskAVC(normalValue)),
                             _buildResultsCard(
                                 context,
-                                'Diabetes Risk',
+                                AppLocalizations.of(context)!.resultdiabrisktitle,
                                 'Low',
                                 'Lower than Normal',
                                 riskDiabete(simulationQuestionnaire),
@@ -511,7 +576,7 @@ class _ResultPageState extends State<ResultPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
-                              child: Text("you",
+                              child: Text(AppLocalizations.of(context)!.resultcardyou,
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0)),
@@ -536,7 +601,7 @@ class _ResultPageState extends State<ResultPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
-                              child: Text("Average people",
+                              child: Text(AppLocalizations.of(context)!.resultcardavgpeople,
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0)),
@@ -581,7 +646,7 @@ class _ResultPageState extends State<ResultPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: Text("you",
+                        child: Text(AppLocalizations.of(context)!.resultcardyou,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18.0)),
                       ),
@@ -605,7 +670,7 @@ class _ResultPageState extends State<ResultPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: Text("Average people",
+                        child: Text(AppLocalizations.of(context)!.resultcardavgpeople,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18.0)),
                       ),
