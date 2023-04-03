@@ -13,12 +13,14 @@ class ModelAnswer {
       diab,
       inf,
       avc,
-      afinf,
-      afcancer,
-      smoke,
+      alcool,
       alim,
       sport,
-      alcool;
+      afinf;
+
+  double afcancer,
+         smoke;
+
   DateTime date;
 
   //the constructor
