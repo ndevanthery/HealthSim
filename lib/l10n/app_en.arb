@@ -15,6 +15,8 @@
     "motdepasse": "Password",
     "nomcomplet": "Full name",
     "confirmemdp": "Confirm password",
+    "logout": "Logout"
+   
     "questionnairetitle": "Questionnaire",
     "questionnairecancel": "Cancel",
     "questionnairenext": "Next",

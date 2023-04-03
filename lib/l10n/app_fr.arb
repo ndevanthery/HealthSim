@@ -47,6 +47,8 @@
     "confirmemdp": "Confirmer Mot de passe",
     "@confirmemdp":{
     },
+    "logout": "Déconnecter",
+    "@logout":{
     "questionnairetitle": "Questionnaire",
     "@questionnairetitle":{
     },

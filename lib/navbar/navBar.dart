@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:healthsim/about.dart';
 import 'package:healthsim/authentification/welcome.dart';
+import 'package:healthsim/home.dart';
 import '../authentification/login.dart';
 import '../authentification/register.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -26,8 +29,29 @@ class NavBar extends StatelessWidget {
   }
 }
 
-class DesktopNavBar extends StatelessWidget {
+class DesktopNavBar extends StatefulWidget {
   const DesktopNavBar({super.key});
+
+  @override
+  _DesktopNavBarState createState() => _DesktopNavBarState();
+}
+
+class _DesktopNavBarState extends State<DesktopNavBar> {
+  bool isLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkAuthStatus();
+  }
+
+  Future<void> checkAuthStatus() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? currentUser = auth.currentUser;
+    setState(() {
+      isLoggedIn = currentUser != null;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,41 +135,68 @@ class DesktopNavBar extends StatelessWidget {
                 const SizedBox(
                   width: 30,
                 ),
-                MaterialButton(
-                  color: Colors.white,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RegisterPage(),
-                        ));
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.creercompte,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                MaterialButton(
-                  color: Colors.white,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ));
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.senregistrer,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                )
+                isLoggedIn
+                    ? MaterialButton(
+                        color: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0))),
+                        onPressed: () async {
+                          await FirebaseAuth.instance.signOut();
+                          checkAuthStatus();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const WelcomePage(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.logout,
+                          style: const TextStyle(color: Colors.blue),
+                        ),
+                      )
+                    : Row(
+                        children: [
+                          MaterialButton(
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const RegisterPage(),
+                                  ));
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.creercompte,
+                              style: const TextStyle(color: Colors.blue),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          MaterialButton(
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginPage(),
+                                  ));
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.senregistrer,
+                              style: const TextStyle(color: Colors.blue),
+                            ),
+                          )
+                        ],
+                      )
               ],
             )
           ],
@@ -155,7 +206,28 @@ class DesktopNavBar extends StatelessWidget {
   }
 }
 
-class MobileNavBar extends StatelessWidget {
+class MobileNavBar extends StatefulWidget {
+  @override
+  _MobileNavBarState createState() => _MobileNavBarState();
+}
+
+class _MobileNavBarState extends State<MobileNavBar> {
+  bool isLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkAuthStatus();
+  }
+
+  Future<void> checkAuthStatus() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? currentUser = auth.currentUser;
+    setState(() {
+      isLoggedIn = currentUser != null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -224,7 +296,7 @@ class MobileNavBar extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const WelcomePage(),
+                                builder: (context) => const HomePage(),
                               ));
                         },
                         child: Text(AppLocalizations.of(context)!.contact),
@@ -241,45 +313,73 @@ class MobileNavBar extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  MaterialButton(
-                    color: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const RegisterPage(),
-                          ));
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.creercompte,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  MaterialButton(
-                    color: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginPage(),
-                          ));
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.senregistrer,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
-                  )
+                  isLoggedIn
+                      ? MaterialButton(
+                          color: Colors.white,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0))),
+                          onPressed: () async {
+                            await FirebaseAuth.instance.signOut();
+                            checkAuthStatus();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const WelcomePage(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            AppLocalizations.of(context)!.logout,
+                            style: const TextStyle(color: Colors.blue),
+                          ),
+                        )
+                      : Row(
+                          children: [
+                            MaterialButton(
+                              color: Colors.white,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.0))),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const RegisterPage(),
+                                    ));
+                              },
+                              child: Text(
+                                AppLocalizations.of(context)!.creercompte,
+                                style: const TextStyle(color: Colors.blue),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            MaterialButton(
+                              color: Colors.white,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.0))),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginPage(),
+                                    ));
+                              },
+                              child: Text(
+                                AppLocalizations.of(context)!.senregistrer,
+                                style: const TextStyle(color: Colors.blue),
+                              ),
+                            )
+                          ],
+                        ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
