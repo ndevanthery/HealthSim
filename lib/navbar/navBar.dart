@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:healthsim/about.dart';
 import 'package:healthsim/authentification/welcome.dart';
+import 'package:healthsim/home.dart';
 import '../authentification/login.dart';
 import '../authentification/register.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -111,41 +114,64 @@ class DesktopNavBar extends StatelessWidget {
                 const SizedBox(
                   width: 30,
                 ),
-                MaterialButton(
-                  color: Colors.white,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RegisterPage(),
-                        ));
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.creercompte,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                MaterialButton(
-                  color: Colors.white,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ));
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.senregistrer,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                )
+                FirebaseAuth.instance.currentUser != null
+                    ? MaterialButton(
+                        color: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0))),
+                        onPressed: () async {
+                          await FirebaseAuth.instance.signOut();
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          );
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.logout,
+                          style: const TextStyle(color: Colors.blue),
+                        ),
+                      )
+                    : Row(
+                        children: [
+                          MaterialButton(
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const RegisterPage(),
+                                  ));
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.creercompte,
+                              style: const TextStyle(color: Colors.blue),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          MaterialButton(
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginPage(),
+                                  ));
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.senregistrer,
+                              style: const TextStyle(color: Colors.blue),
+                            ),
+                          )
+                        ],
+                      )
               ],
             )
           ],
@@ -227,7 +253,7 @@ class MobileNavBar extends StatelessWidget {
                                 builder: (context) => const WelcomePage(),
                               ));
                         },
-                        child: Text(AppLocalizations.of(context)!.contact),
+                        child: Text(AppLocalizations.of(context)!.logout),
                       ),
                     ],
                   ),
@@ -238,48 +264,67 @@ class MobileNavBar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(12),
             child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  MaterialButton(
-                    color: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const RegisterPage(),
-                          ));
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.creercompte,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  MaterialButton(
-                    color: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginPage(),
-                          ));
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.senregistrer,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                FirebaseAuth.instance.currentUser != null
+                    ? MaterialButton(
+                        color: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0))),
+                        onPressed: () async {
+                          await FirebaseAuth.instance.signOut();
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.contact,
+                          style: const TextStyle(color: Colors.blue),
+                        ),
+                      )
+                    : Row(
+                        children: [
+                          MaterialButton(
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const RegisterPage(),
+                                  ));
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.creercompte,
+                              style: const TextStyle(color: Colors.blue),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          MaterialButton(
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginPage(),
+                                  ));
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.senregistrer,
+                              style: const TextStyle(color: Colors.blue),
+                            ),
+                          )
+                        ],
+                      ),
+              ],
+            )),
+          ),
         ],
       ),
     );
