@@ -71,6 +71,30 @@ class ModelAnswer {
     return data;
   }
 
+  List<dynamic> toList() {
+    return [
+      gender,
+      age,
+      height,
+      weight,
+      glyc,
+      highSyst,
+      syst,
+      highChol,
+      chol,
+      hdl,
+      diab,
+      inf,
+      avc,
+      afinf,
+      afcancer,
+      smoke,
+      alim,
+      sport,
+      alcool
+    ];
+  }
+
   ModelAnswer copy() {
     return ModelAnswer(
         gender,

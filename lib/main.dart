@@ -5,6 +5,7 @@ import 'package:healthsim/authentification/welcome.dart';
 import 'package:healthsim/locale_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'algorithm/test_script.dart';
 import 'authentification/user_provider.dart';
 import 'firebase_options.dart';
 import 'l10n/l10n.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await TestScript.tests();
 
   final _firebaseApp = await Firebase.initializeApp(
     name: DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.web
