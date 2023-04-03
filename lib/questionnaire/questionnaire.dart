@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
 import 'package:provider/provider.dart';
 import 'package:survey_kit/survey_kit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../authentification/user_provider.dart';
 import '../result/result.dart';
@@ -26,7 +27,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
     final user = Provider.of<UserProvider>(context).user?.id;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Questionnaire"),
+        title: Text(AppLocalizations.of(context)!.questionnairetitle),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -87,9 +88,11 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                       diabFinal,
                       infFinal,
                       avcFinal,
-                      afinfFinal,
-                      afcancerFinal,
-                      smokeFinal;
+                      afinfFinal;
+
+                  double afcancerFinal,
+                         smokeFinal;
+
 
                   //change the boolean results in int
                   if (gender == BooleanResult.POSITIVE) {
@@ -134,14 +137,14 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                     afinfFinal = 0;
                   }
                   if (afcancer == BooleanResult.POSITIVE) {
-                    afcancerFinal = 1;
+                    afcancerFinal = 1.0;
                   } else {
-                    afcancerFinal = 0;
+                    afcancerFinal = 0.0;
                   }
                   if (smoke == BooleanResult.POSITIVE) {
-                    smokeFinal = 1;
+                    smokeFinal = 1.0;
                   } else {
-                    smokeFinal = 0;
+                    smokeFinal = 0.0;
                   }
 
                   //put a value in the null values
@@ -169,7 +172,8 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                       smokeFinal,
                       alim.toInt(),
                       sport.toInt(),
-                      alcool.toInt());
+                      alcool.toInt(),
+                      DateTime.now());
 
                   //Put the model in a global value
                   answers;
@@ -195,9 +199,9 @@ class _QuestionnaireState extends State<QuestionnairePage> {
               },
               task: getSampleTask(),
               showProgress: true,
-              localizations: const {
-                'cancel': 'Cancel',
-                'next': 'Next',
+              localizations: {
+                'cancel': AppLocalizations.of(context)!.questionnairecancel,
+                'next': AppLocalizations.of(context)!.questionnairenext,
               },
               themeData: Theme.of(context).copyWith(
                 backgroundColor: Colors.white,
@@ -317,184 +321,182 @@ class _QuestionnaireState extends State<QuestionnairePage> {
       steps: [
         //just information
         InstructionStep(
-          title:
-              'Ce questionnaire est divisée en 3 partie et en voici la première',
-          text:
-              'Toi-même\n Si vous n\'avez pas de réponse pour certaines questions passer directement à la prochaine',
-          buttonText: 'C\'est partie !',
+          title: AppLocalizations.of(context)!.questionnaireintrotitle,
+          text: AppLocalizations.of(context)!.questionnaireintrotext,
+          buttonText: AppLocalizations.of(context)!.questionnaireintrotextbutton,
         ),
         QuestionStep(
-          title: 'Quel est votre genre?',
-          answerFormat: const BooleanAnswerFormat(
-            positiveAnswer: 'Femme',
-            negativeAnswer: 'Homme',
+          title: AppLocalizations.of(context)!.questionnairegendertitle,
+          answerFormat: BooleanAnswerFormat(
+            positiveAnswer: AppLocalizations.of(context)!.questionnairegenderanswerpositive,
+            negativeAnswer: AppLocalizations.of(context)!.questionnairegenderanswernegative,
             result: BooleanResult.POSITIVE,
           ),
         ),
         QuestionStep(
-          title: 'Quel âge avez-vous ?',
-          answerFormat: const IntegerAnswerFormat(
-            hint: 'Entrez votre âge',
+          title: AppLocalizations.of(context)!.questionnaireagetitle,
+          answerFormat: IntegerAnswerFormat(
+            hint: AppLocalizations.of(context)!.questionnaireagehint,
           ),
           isOptional: false,
         ),
         QuestionStep(
-          title: 'Quel est votre taille en cm ?',
-          answerFormat: const IntegerAnswerFormat(
-            hint: 'Entrez votre taille',
+          title: AppLocalizations.of(context)!.questionnaireheighttitle,
+          answerFormat: IntegerAnswerFormat(
+            hint: AppLocalizations.of(context)!.questionnaireheighthint,
           ),
           isOptional: false,
         ),
         QuestionStep(
-          title: 'Quel est votre poids en kg ?',
-          answerFormat: const IntegerAnswerFormat(
-            hint: 'Entrez votre poids',
+          title: AppLocalizations.of(context)!.questionnaireweighttitle,
+          answerFormat: IntegerAnswerFormat(
+            hint: AppLocalizations.of(context)!.questionnaireweighthint,
           ),
           isOptional: false,
         ),
         QuestionStep(
-          title: 'Etes-vous connus pour un sucre sanguin élevé ?',
-          answerFormat: const BooleanAnswerFormat(
-            positiveAnswer: 'Oui',
-            negativeAnswer: 'Non',
+          title: AppLocalizations.of(context)!.questionnaireglyctitle,
+          answerFormat: BooleanAnswerFormat(
+            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+            negativeAnswer: AppLocalizations.of(context)!.answernegative,
             result: BooleanResult.NEGATIVE,
           ),
           isOptional: false,
         ),
         QuestionStep(
-          title: 'Etes-vous connus pour une tension élevée ?',
-          answerFormat: const BooleanAnswerFormat(
-            positiveAnswer: 'Oui',
-            negativeAnswer: 'Non',
+          title: AppLocalizations.of(context)!.questionnairehighsysttitle,
+          answerFormat: BooleanAnswerFormat(
+            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+            negativeAnswer: AppLocalizations.of(context)!.answernegative,
             result: BooleanResult.NEGATIVE,
           ),
         ),
         QuestionStep(
-          title: 'Quel est votre tension en mmHg?',
-          answerFormat: const IntegerAnswerFormat(
-            hint: 'Entrez votre tension',
+          title: AppLocalizations.of(context)!.questionnairesysttitle,
+          answerFormat: IntegerAnswerFormat(
+            hint: AppLocalizations.of(context)!.questionnairesysthint,
           ),
           isOptional: true,
         ),
         QuestionStep(
-          title: 'Etes-vous connus pour un taux de cholestérol élevé ?',
-          answerFormat: const BooleanAnswerFormat(
-            positiveAnswer: 'Oui',
-            negativeAnswer: 'Non',
+          title: AppLocalizations.of(context)!.questionnairehighcholtitle,
+          answerFormat: BooleanAnswerFormat(
+            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+            negativeAnswer: AppLocalizations.of(context)!.answernegative,
             result: BooleanResult.NEGATIVE,
           ),
         ),
         QuestionStep(
-          title: 'Quel est votre taux de cholestérol en mmol/l ?',
-          answerFormat: const IntegerAnswerFormat(
-            hint: 'Entrez votre taux de cholestérol',
+          title: AppLocalizations.of(context)!.questionnairecholtitle,
+          answerFormat: IntegerAnswerFormat(
+            hint: AppLocalizations.of(context)!.questionnairecholhint,
           ),
           isOptional: true,
         ),
         QuestionStep(
-          title: 'Quel est votre taux de HDL en mmol/l ?',
-          answerFormat: const IntegerAnswerFormat(
-            hint: 'Entrez votre taux de HDL',
+          title: AppLocalizations.of(context)!.questionnairehdltitle,
+          answerFormat: IntegerAnswerFormat(
+            hint: AppLocalizations.of(context)!.questionnairehdlhint,
           ),
           isOptional: true,
         ),
         QuestionStep(
-          title: 'Etes-vous diabétique ?',
-          answerFormat: const BooleanAnswerFormat(
-            positiveAnswer: 'Oui',
-            negativeAnswer: 'Non',
+          title: AppLocalizations.of(context)!.questionnairediabtitle,
+          answerFormat: BooleanAnswerFormat(
+            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+            negativeAnswer: AppLocalizations.of(context)!.answernegative,
             result: BooleanResult.NEGATIVE,
           ),
         ),
         QuestionStep(
-          title: 'Avez-vous déjà eu un infractus ?',
-          answerFormat: const BooleanAnswerFormat(
-            positiveAnswer: 'Oui',
-            negativeAnswer: 'Non',
+          title: AppLocalizations.of(context)!.questionnaireinftitle,
+          answerFormat: BooleanAnswerFormat(
+            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+            negativeAnswer: AppLocalizations.of(context)!.answernegative,
             result: BooleanResult.NEGATIVE,
           ),
         ),
         QuestionStep(
-          title: 'Avez-vous déjà eu une attaque cérébrale ?',
-          answerFormat: const BooleanAnswerFormat(
-            positiveAnswer: 'Oui',
-            negativeAnswer: 'Non',
+          title: AppLocalizations.of(context)!.questionnaireavctitle,
+          answerFormat: BooleanAnswerFormat(
+            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+            negativeAnswer: AppLocalizations.of(context)!.answernegative,
             result: BooleanResult.NEGATIVE,
           ),
         ),
         InstructionStep(
-            title: "Famille",
-            text: 'Voici la deuxième partie',
-            buttonText: 'C\'est partie ! '),
+            title: AppLocalizations.of(context)!.questionnairesecondparttitle,
+            text: AppLocalizations.of(context)!.questionnairesecondparttext,
+            buttonText: AppLocalizations.of(context)!.questionnairesecondparttextbutton),
         QuestionStep(
-          title:
-              'Est-ce que un de vos parents (père avant 55 ans, mère avant 65 ans) a déjà eu un infractus ?',
-          answerFormat: const BooleanAnswerFormat(
-            positiveAnswer: 'Oui',
-            negativeAnswer: 'Non',
+          title: AppLocalizations.of(context)!.questionnaireafinftitle,
+          answerFormat: BooleanAnswerFormat(
+            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+            negativeAnswer: AppLocalizations.of(context)!.answernegative,
             result: BooleanResult.NEGATIVE,
           ),
         ),
         QuestionStep(
-          title:
-              'Est-ce que un de vos proche (père, mère, frères ou soeurs) a un cancer ?',
-          answerFormat: const BooleanAnswerFormat(
-            positiveAnswer: 'Oui',
-            negativeAnswer: 'Non',
+          title: AppLocalizations.of(context)!.questionnaireafcancertitle,
+          answerFormat: BooleanAnswerFormat(
+            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+            negativeAnswer: AppLocalizations.of(context)!.answernegative,
             result: BooleanResult.NEGATIVE,
           ),
         ),
         InstructionStep(
-            title: "Passe temps",
-            text: 'Voici la dernière partie',
-            buttonText: 'C\'est partie ! '),
+            title: AppLocalizations.of(context)!.questionnairelastparttitle,
+            text: AppLocalizations.of(context)!.questionnairelastparttext,
+            buttonText: AppLocalizations.of(context)!.questionnairelastparttextbutton),
         QuestionStep(
-          title:
-              'Est-ce que vous avez déjà fumé régulièrement une fois dans votre vie ?',
-          answerFormat: const BooleanAnswerFormat(
-            positiveAnswer: 'Oui',
-            negativeAnswer: 'Non',
+          title: AppLocalizations.of(context)!.questionnairesmoketitle,
+          answerFormat: BooleanAnswerFormat(
+            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+            negativeAnswer: AppLocalizations.of(context)!.answernegative,
             result: BooleanResult.NEGATIVE,
           ),
         ),
         QuestionStep(
-          title: 'Quelle est votre habitude alimentaire ?',
-          answerFormat: const ScaleAnswerFormat(
+          title: AppLocalizations.of(context)!.questionnairealimtitle,
+          text: AppLocalizations.of(context)!.questionnairealimtext,
+          answerFormat: ScaleAnswerFormat(
             step: 1,
             minimumValue: 0,
             maximumValue: 3,
             defaultValue: 2,
-            minimumValueDescription: 'Mauvaise',
-            maximumValueDescription: 'Bonnes',
+            minimumValueDescription: AppLocalizations.of(context)!.questionnairealimminvalue,
+            maximumValueDescription: AppLocalizations.of(context)!.questionnairealimmaxvalue,
           ),
         ),
         QuestionStep(
-          title: 'Quelles sont vos habitudes sportives ?',
-          answerFormat: const ScaleAnswerFormat(
+          title: AppLocalizations.of(context)!.questionnairesporttitle,
+          text: AppLocalizations.of(context)!.questionnairesporttext,
+          answerFormat: ScaleAnswerFormat(
             step: 1,
             minimumValue: 0,
             maximumValue: 3,
             defaultValue: 2,
-            minimumValueDescription: 'Ne bouge pas',
-            maximumValueDescription: '2 h intense/semaine',
+            minimumValueDescription: AppLocalizations.of(context)!.questionnairesportminvalue,
+            maximumValueDescription: AppLocalizations.of(context)!.questionnairesportmaxvalue,
           ),
         ),
         QuestionStep(
-          title: 'Quelles sont vos habitudes au niveau de l\'alcool ?',
-          answerFormat: const ScaleAnswerFormat(
+          title: AppLocalizations.of(context)!.questionnairealcooltitle,
+          text: AppLocalizations.of(context)!.questionnairealcooltext,
+          answerFormat: ScaleAnswerFormat(
             step: 1,
             minimumValue: 0,
             maximumValue: 4,
             defaultValue: 2,
-            minimumValueDescription: 'Tous les jours',
-            maximumValueDescription: 'Ne bois pas',
+            minimumValueDescription: AppLocalizations.of(context)!.questionnairealcoolminvalue,
+            maximumValueDescription: AppLocalizations.of(context)!.questionnairealcoolmaxvalue,
           ),
         ),
         CompletionStep(
           stepIdentifier: StepIdentifier(id: '23'),
-          text: 'Vous avez terminé le questionnaire',
-          title: 'Félicitation !',
-          buttonText: 'Envoyer',
+          text: AppLocalizations.of(context)!.questionnairefinaltext,
+          title: AppLocalizations.of(context)!.questionnairefinaltitle,
+          buttonText: AppLocalizations.of(context)!.questionnairefinaltextbutton,
         ),
       ],
     );

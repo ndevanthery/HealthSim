@@ -13,12 +13,14 @@ class ModelAnswer {
       diab,
       inf,
       avc,
-      afinf,
-      afcancer,
-      smoke,
+      alcool,
       alim,
       sport,
-      alcool;
+      afinf;
+
+  double afcancer, smoke;
+
+  DateTime date;
 
   //the constructor
   ModelAnswer(
@@ -40,7 +42,8 @@ class ModelAnswer {
       this.smoke,
       this.alim,
       this.sport,
-      this.alcool);
+      this.alcool,
+      this.date);
 
 //Map to put the answers in the database
   Map<String, dynamic> toJson() {
@@ -64,8 +67,33 @@ class ModelAnswer {
     data["alim"] = alim;
     data["sport"] = sport;
     data["alcool"] = alcool;
+    data["date"] = date;
 
     return data;
+  }
+
+  List<dynamic> toList() {
+    return [
+      gender,
+      age,
+      height,
+      weight,
+      glyc,
+      highSyst,
+      //syst,
+      highChol,
+      //chol,
+      //hdl,
+      diab,
+      inf,
+      avc,
+      afinf,
+      afcancer,
+      smoke,
+      alim,
+      sport,
+      alcool
+    ];
   }
 
   ModelAnswer copy() {
@@ -88,6 +116,7 @@ class ModelAnswer {
         smoke,
         alim,
         sport,
-        alcool);
+        alcool,
+        date);
   }
 }

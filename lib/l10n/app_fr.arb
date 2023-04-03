@@ -1,0 +1,270 @@
+{
+    "accueil": "Accueil",
+    "@accueil":{
+    },
+    "apropos": "A propos",
+    "@apropos":{
+    },
+    "contact": "Contact",
+    "@contact":{
+    },
+    "creercompte": "Créer un compte",
+    "@creercompte":{
+    },
+    "senregistrer": "Se connecter",
+    "@senregistrer":{
+    },
+    "votresantetitre": "Votre santé \nc'est votre avenir",
+    "@votresantetitre":{
+    },
+    "completequetionnairedescription": "Répondez au questionnaire sur votre historique de santé, votre style de vie, vos habitudes et découvrez votre position par rapport à la population !",
+    "@completequetionnairedescription":{
+    },
+    "lancerquestionnaire": "Lancer le questionnaire",
+    "@lancerquestionnaire":{
+    },
+    "colonneun": "Rempli le questionnaire",
+    "@colonneun":{
+    },
+    "colonnedeux": "Compare toi",
+    "@colonnedeux":{
+    },
+    "colonnetrois": "Simule les résultats",
+    "@colonnetrois":{
+    },
+    "apropostexte": "Cette application a été créée par quatre étudiants dévoués qui ont travaillé en collaboration avec deux institutions éducatives prestigieuses - la HES-SO Valais Wallis et la Haaga-Helia University of Applied Sciences en Finlande, faisant de ce projet un effort international. Nous avons mis tout notre cœur et notre âme dans le développement d'une application innovante et de pointe qui vise à aider l'industrie de la santé en offrant aux utilisateurs l'accès aux dernières avancées en matière d'algorithmes médicaux. Axée sur l'expérience utilisateur, cette application a été conçue pour être intuitive et conviviale, avec des fonctionnalités adaptées aux besoins des prestataires de soins de santé et des patients. Nous sommes fiers d'avoir fait partie de ce projet incroyable et sommes ravis de voir l'impact qu'il aura sur l'industrie de la santé dans les années à venir.",
+    "@apropostexte":{
+    },    
+    "email": "E-Mail",
+    "@email":{
+    },
+    "motdepasse": "Mot de passe",
+    "@motdepasse":{
+    },
+    "nomcomplet": "Nom complet",
+    "@nomcomplet":{
+    },
+    "confirmemdp": "Confirmer Mot de passe",
+    "@confirmemdp":{
+    },
+    "logout": "Déconnecter",
+    "@logout":{
+    },
+    "questionnairetitle": "Questionnaire",
+    "@questionnairetitle":{
+    },
+    "questionnairecancel": "Annuler",
+    "@questionnairecancel":{
+    },
+    "questionnairenext": "Prochain",
+    "@questionnairenext":{
+    },
+    "questionnaireintrotitle": "Ce questionnaire est divisée en 3 partie et en voici la première",
+    "@questionnaireintrotitle":{
+    },
+    "questionnaireintrotext": "Toi-même\nSi vous n'avez pas de réponse pour certaines questions passer directement à la prochaine",
+    "@questionnaireintrotext":{
+    },
+    "questionnaireintrotextbutton": "C'est partie !",
+    "@questionnaireintrotextbutton":{
+    },
+    "questionnairegendertitle": "Quel est votre genre ?",
+    "@questionnairegendertitle":{
+    },
+    "questionnairegenderanswerpositive": "Homme",
+    "@questionnairegenderanswerpositive":{
+    },
+    "questionnairegenderanswernegative": "Femme",
+    "@questionnairegenderanswernegative":{
+    },
+    "questionnaireagetitle": "Quel âge avez-vous ?",
+    "@questionnaireagetitle":{
+    },
+    "questionnaireagehint": "Entrez votre âge",
+    "@questionnaireagehint":{
+    },
+    "questionnaireheighttitle": "Quel est votre taille en cm ?",
+    "@questionnaireheighttitle":{
+    },
+    "questionnaireheighthint": "Entrez votre taille",
+    "@questionnaireheighthint":{
+    },
+    "questionnaireweighttitle": "Quel est votre poids en kg ?",
+    "@questionnaireweighttitle":{
+    },
+    "questionnaireweighthint": "Entrez votre poids",
+    "@questionnaireweighthint":{
+    },
+    "questionnaireglyctitle": "Etes-vous connus pour un sucre sanguin élevé ?",
+    "@questionnaireglyctitle":{
+    },
+    "answerpositive": "Oui",
+    "@answerpositive":{
+    },
+    "answernegative": "Non",
+    "@answernegative":{
+    },
+    "questionnairehighsysttitle": "Etes-vous connus pour une tension élevée ?",
+    "@questionnairehighsysttitle":{
+    },
+    "questionnairesysttitle": "Quel est votre tension entre 80 et 200 mmHg ?",
+    "@questionnairesysttitle":{
+    },
+    "questionnairesysthint": "Entrez votre tension",
+    "@questionnairesysthint":{
+    },
+    "questionnairehighcholtitle": "Etes-vous connus pour un taux de cholestérol élevé ?",
+    "@questionnairehighcholtitle":{
+    },
+    "questionnairecholtitle": "Quel est votre taux de cholestérol entre 2.5 et 8 mmol/l ?",
+    "@questionnairecholtitle":{
+    },
+    "questionnairecholhint": "Entrez votre taux de cholestérol",
+    "@questionnairecholhint":{
+    },
+    "questionnairehdltitle": "Quel est votre taux de HDL entre 0.6 et 2.5 mmol/l ?",
+    "@questionnairehdltitle":{
+    },
+    "questionnairehdlhint": "Entrez votre taux de HDL",
+    "@questionnairehdlhint":{
+    },
+    "questionnairediabtitle": "Etes-vous diabétique ?",
+    "@questionnairediabtitle":{
+    },
+    "questionnaireinftitle": "Avez-vous déjà eu un infractus ?",
+    "@questionnaireinftitle":{
+    },
+    "questionnaireavctitle": "Avez-vous déjà eu une attaque cérébrale ?",
+    "@questionnaireavctitle":{
+    },
+    "questionnairesecondparttitle": "Famille",
+    "@questionnairesecondparttitle":{
+    },
+    "questionnairesecondparttext": "Voici la deuxième partie",
+    "@questionnairesecondparttext":{
+    },
+    "questionnairesecondparttextbutton": "C'est partie !",
+    "@questionnairesecondparttextbutton":{
+    },
+    "questionnaireafinftitle": "Est-ce que un de vos parents (père avant 55 ans, mère avant 65 ans) a déjà eu un infractus ?",
+    "@questionnaireafinftitle":{
+    },
+    "questionnaireafcancertitle": "Est-ce que un de vos proche (père, mère, frères ou soeurs) a un cancer ?",
+    "@questionnaireafcancertitle":{
+    },
+    "questionnairelastparttitle": "Vos habitudes",
+    "@questionnairelastparttitle":{
+    },
+    "questionnairelastparttext": "Voici la dernière partie",
+    "@questionnairelastparttext":{
+    },
+    "questionnairelastparttextbutton": "C'est partie !",
+    "@questionnairelastparttextbutton":{
+    },
+    "questionnairesmoketitle": "Est-ce que vous avez déjà fumé régulièrement une fois dans votre vie ?",
+    "@questionnairesmoketitle":{
+    },
+    "questionnairealimtitle": "Quelle est votre habitude alimentaire ?",
+    "@questionnairealimtitle":{
+    },
+    "questionnairealimtext": "0 = mauvaises\n1 = petites\n2 = certaines\n3 = bonnes",
+    "@questionnairealimtext":{
+    },
+    "questionnairealimminvalue": "Mauvaises",
+    "@questionnairealimminvalue":{
+    },
+    "questionnairealimmaxvalue": "Bonnes",
+    "@questionnairealimmaxvalue":{
+    },
+    "questionnairesporttitle": "Quelles sont vos habitudes sportives ?",
+    "@questionnairesporttitle":{
+    },
+    "questionnairesporttext": "0 = ne bouge pas\n1 = 30 min 2-3 jours/semaine\n2 = 30 min 5 jours/semaine\n3 = 2 h intense/semaine",
+    "@questionnairesporttext":{
+    },
+    "questionnairesportminvalue": "Ne bouge pas",
+    "@questionnairesportminvalue":{
+    },
+    "questionnairesportmaxvalue": "2 h intense/semaine",
+    "@questionnairesportmaxvalue":{
+    },
+    "questionnairealcooltitle": "Qu'elle est votre consommation d'alcool ?",
+    "@questionnairealcooltitle":{
+    },
+    "questionnairealcooltext": "0 = tous les jours\n1 = 3 à 6 jours/semaine\n2 = 1 à 2 jours/semaine\n3 = moins 1 jours/semaine\n4 = Ne bois pas",
+    "@questionnairealcooltext":{
+    },
+    "questionnairealcoolminvalue": "Tous les jours",
+    "@questionnairealcoolminvalue":{
+    },
+    "questionnairealcoolmaxvalue": "Ne bois pas",
+    "@questionnairealcoolmaxvalue":{
+    },
+    "questionnairefinaltitle": "Félicitation !",
+    "@questionnairefinaltitle":{
+    },
+    "questionnairefinaltext": "Vous avez terminé le questionnaire",
+    "@questionnairefinaltext":{
+    },
+    "questionnairefinaltextbutton": "Envoyer",
+    "@questionnairefinaltextbutton":{
+    },
+    "resulttitle": "Résultat",
+    "@resulttitle":{
+    },
+    "resultriskresulttitle": "Vos risques pour la santé",
+    "@resultriskresulttitle":{
+    },
+    "resultcancerrisktitle": "Risque de cancer",
+    "@resultriskresulttitle":{
+    },
+    "resultdiabrisktitle": "Risque de diabète",
+    "@resultriskresulttitle":{
+    },
+    "resultinfrisktitle": "Risque d'infractus",
+    "@resultriskresulttitle":{
+    },
+    "resultcomparationtitlesecondcolunm": "Vos réponses",
+    "@resultcomparationtitlesecondcolunm":{
+    },
+    "resultcomparationtitlelastcolunm": "Les réponses d'une personne moyenne",
+    "@resultcomparationtitlelastcolunm":{
+    },
+    "resultcomparationtitlefirstrow": "Sport",
+    "@resultcomparationtitlefirstrow":{
+    },
+    "resultcomparationtitlesecondrow": "Alimentation",
+    "@resultcomparationtitlefirstrow":{
+    },
+    "resultcomparationtitlethirdrow": "Alcool",
+    "@resultcomparationtitlefirstrow":{
+    },
+    "resultcomparationtitlelastrow": "Fume ?",
+    "@resultcomparationtitlefirstrow":{
+    },
+    "resultsimulationtitle": "Simuler l'impact d'un changement d'habitudes",
+    "@resultsimulationtitle":{
+    },
+    "resultsimulationresetbutton": "Réinitialiser la simulation",
+    "@resultsimulationresetbutton":{
+    },
+    "resultsimulationsmokebutton": "Fumer",
+    "@resultsimulationsmokebutton":{
+    },
+    "resultsimulationalcool": "Consommation d'alcool",
+    "@resultsimulationalcool":{
+    },
+    "resultsimulationalim": "Les habitudes alimentaires :",
+    "@resultsimulationalim":{
+    },
+    "resultsimulationsport": "L'exercice régulièrement :",
+    "@resultsimulationsport":{
+    },
+    "resultcardyou": "Toi",
+    "@resultcardyou":{
+    },
+    "resultcardavgpeople": "Personnes moyennes",
+    "@resultcardavgpeople":{
+    }
+
+}
