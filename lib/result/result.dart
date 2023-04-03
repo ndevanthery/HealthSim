@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthsim/navbar/navBar.dart';
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
 import 'package:healthsim/questionnaire/questionnaire.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -41,9 +42,25 @@ class _ResultPageState extends State<ResultPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Result'),
+        title: NavBar(),
+        toolbarHeight:
+            screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
+        backgroundColor: Colors.blue,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromRGBO(4, 66, 108, 1),
+                Color.fromRGBO(0, 137, 207, 1)
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
