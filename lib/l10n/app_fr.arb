@@ -49,6 +49,7 @@
     },
     "logout": "Déconnecter",
     "@logout":{
+    },
     "questionnairetitle": "Questionnaire",
     "@questionnairetitle":{
     },
@@ -265,6 +266,5 @@
     "resultcardavgpeople": "Personnes moyennes",
     "@resultcardavgpeople":{
     }
-
 
 }

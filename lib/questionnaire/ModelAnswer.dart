@@ -18,8 +18,7 @@ class ModelAnswer {
       sport,
       afinf;
 
-  double afcancer,
-         smoke;
+  double afcancer, smoke;
 
   DateTime date;
 
@@ -81,10 +80,10 @@ class ModelAnswer {
       weight,
       glyc,
       highSyst,
-      syst,
+      //syst,
       highChol,
-      chol,
-      hdl,
+      //chol,
+      //hdl,
       diab,
       inf,
       avc,

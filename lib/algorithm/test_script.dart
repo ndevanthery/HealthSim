@@ -25,8 +25,8 @@ class TestScript {
           Random().nextInt(2), //inf
           Random().nextInt(2), // avc
           Random().nextInt(2), // afInf
-          Random().nextInt(2), // afcancer
-          Random().nextInt(2), // smoke
+          Random().nextInt(2) * 1.0, // afcancer
+          Random().nextInt(2) * 1.0, // smoke
           Random().nextInt(4), // alim
           Random().nextInt(4), // sport
           Random().nextInt(5), // alcool
