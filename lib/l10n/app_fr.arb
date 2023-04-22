@@ -83,18 +83,25 @@
     "questionnaireagehint": "Entrez votre âge",
     "@questionnaireagehint":{
     },
+    "questionnaireageerror":"Entrez un âge entre 0 et 100 ans!",
+
     "questionnaireheighttitle": "Quel est votre taille en cm ?",
     "@questionnaireheighttitle":{
     },
     "questionnaireheighthint": "Entrez votre taille",
     "@questionnaireheighthint":{
     },
+    "questionnaireheighterror":"Entrez une taille entre 0 et 250 cm!",
+
+
     "questionnaireweighttitle": "Quel est votre poids en kg ?",
     "@questionnaireweighttitle":{
     },
     "questionnaireweighthint": "Entrez votre poids",
     "@questionnaireweighthint":{
     },
+    "questionnaireweighterror":"Entrez un poids entre 0 et 250 kg!",
+
     "questionnaireglyctitle": "Etes-vous connus pour un sucre sanguin élevé ?",
     "@questionnaireglyctitle":{
     },
