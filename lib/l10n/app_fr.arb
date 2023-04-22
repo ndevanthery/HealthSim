@@ -227,7 +227,7 @@
     "resultcomparationtitlesecondcolunm": "Vos réponses",
     "@resultcomparationtitlesecondcolunm":{
     },
-    "resultcomparationtitlelastcolunm": "Les réponses d'une personne moyenne",
+    "resultcomparationtitlelastcolunm": "Les réponses de la moyenne population",
     "@resultcomparationtitlelastcolunm":{
     },
     "resultcomparationtitlefirstrow": "Sport",
@@ -242,7 +242,7 @@
     "resultcomparationtitlelastrow": "Fume ?",
     "@resultcomparationtitlefirstrow":{
     },
-    "resultsimulationtitle": "Simuler l'impact d'un changement d'habitudes",
+    "resultsimulationtitle": "Simuler l'impact d'un changement de comportement",
     "@resultsimulationtitle":{
     },
     "resultsimulationresetbutton": "Réinitialiser la simulation",
@@ -263,8 +263,14 @@
     "resultcardyou": "Toi",
     "@resultcardyou":{
     },
-    "resultcardavgpeople": "Personnes moyennes",
+    "resultcardavgpeople": "Moyenne population",
     "@resultcardavgpeople":{
+    },
+    "resultsimulationinfo": "Simulateurs vers la droite: comportement plus favorable",
+    "@resultsimulationinfo": {
+    },
+    "resultsimulationweight": "Poids",
+    "@resultsimulationweight": {
     }
 
 }
