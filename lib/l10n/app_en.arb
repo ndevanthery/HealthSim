@@ -104,7 +104,9 @@
     "answeralcool1": "3 to 6 days/week",
     "answeralcool2": "1 to 2 days/week",
     "answeralcool3": "Less than 1 day/week",
-    "answeralcool4": "Do not drink"
+    "answeralcool4": "Do not drink",
+    "printtitlequestion": "Questions",
+    "printtitleanswer": "Answers"
 
 
 }

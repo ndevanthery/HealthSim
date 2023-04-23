@@ -313,6 +313,12 @@
     },
     "answeralcool4": "Ne bois pas",
     "@answeralcool4": {
+    },
+    "printtitlequestion": "Questions",
+    "@printtitlequestion": {
+    },
+    "printtitleanswer": "Réponses",
+    "@printtitleanswer": {
     }
 
 }

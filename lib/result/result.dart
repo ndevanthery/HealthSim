@@ -810,7 +810,7 @@ class _ResultPageState extends State<ResultPage> {
     afcancer="", smoke="",
         alim=alimText.elementAt(widget.resultQuestionnaire.alim),
         sport=sportText.elementAt(widget.resultQuestionnaire.sport),
-        alcool=sportText.elementAt(widget.resultQuestionnaire.alcool);
+        alcool=alcoolText.elementAt(widget.resultQuestionnaire.alcool);
 
     if(widget.resultQuestionnaire.gender==1){
       gender= AppLocalizations.of(context)!.questionnairegenderanswerpositive;
@@ -863,6 +863,9 @@ class _ResultPageState extends State<ResultPage> {
       smoke = AppLocalizations.of(context)!.answernegative;
     }
 
+    var questionsTitle = AppLocalizations.of(context)!.printtitlequestion,
+    answerTitle = AppLocalizations.of(context)!.printtitleanswer;
+
     var genderTitle = AppLocalizations.of(context)!.questionnairegendertitle,
     ageTitle = AppLocalizations.of(context)!.questionnaireagetitle,
     heightTitle = AppLocalizations.of(context)!.questionnaireheighttitle,
@@ -890,136 +893,295 @@ class _ResultPageState extends State<ResultPage> {
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
           return pw.Table(
+              columnWidths: const <int, pw.TableColumnWidth>{
+                0: pw.FlexColumnWidth(),
+                1: pw.FixedColumnWidth(20),
+                2: pw.FixedColumnWidth(100),
+              },
             children: [
               pw.TableRow(
                 children: [
-                  pw.Text("HealtSim"),
-                pw.Text(""),
+                  pw.Text("HealtSim",
+                      style: pw.TextStyle(
+                          fontSize: 24,
+                          fontWeight: pw.FontWeight.bold,
+                          color: PdfColors.blue900)
+                  ),
+                  pw.SizedBox(width: 10),
+                  pw.Text(""),
                 ]
+              ),
+              pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 30)
+                  ]
               ),
             pw.TableRow(
               children: [
-                pw.Text("Questions"),
-                pw.Text("Réponses")
+                pw.Text(questionsTitle,
+                    style: pw.TextStyle(
+                        fontSize: 18,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColors.blue900)),
+                pw.SizedBox(width: 10),
+                pw.Text(answerTitle,
+                    style: pw.TextStyle(
+                        fontSize: 18,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColors.blue900))
               ]
             ),
+              pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 20)
+                  ]
+              ),
             pw.TableRow(
               children: [
                 pw.Text(genderTitle),
+                pw.SizedBox(width: 10),
                 pw.Text(gender),
               ]
             ),
+              pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
             pw.TableRow(
               children: [
                 pw.Text(ageTitle),
+                pw.SizedBox(width: 10),
                 pw.Text(widget.resultQuestionnaire.age.toString()),
               ]
             ),
+              pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
             pw.TableRow(
               children: [
                 pw.Text(heightTitle),
+                pw.SizedBox(width: 10),
                 pw.Text(widget.resultQuestionnaire.height.toString()),
               ]
             ),
+              pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
             pw.TableRow(
               children: [
                 pw.Text(weightTitle),
+                pw.SizedBox(width: 10),
                 pw.Text(widget.resultQuestionnaire.weight.toString())
               ]
             ),
+              pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
             pw.TableRow(
               children: [
                 pw.Text(glycTitle),
+                pw.SizedBox(width: 10),
                 pw.Text(glyc),
               ]
             ),
+              pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
             pw.TableRow(
               children: [
                 pw.Text(highSystTitle),
+                pw.SizedBox(width: 10),
                 pw.Text(syst),
               ]
             ),
+              pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
             pw.TableRow(
               children: [
                 pw.Text(highCholTitle),
+                pw.SizedBox(width: 10),
                 pw.Text(chol),
               ]
             ),
+              pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
             pw.TableRow(
               children: [
                 pw.Text(diabTitle),
+                pw.SizedBox(width: 10),
                 pw.Text(diab),
               ]
             ),
+              pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
             pw.TableRow(
               children: [
                 pw.Text(infTitle),
+                pw.SizedBox(width: 10),
                 pw.Text(inf),
               ]
             ),
               pw.TableRow(
                   children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
                     pw.Text(avcTitle),
+                    pw.SizedBox(width: 10),
                     pw.Text(avc),
                   ]
               ),
               pw.TableRow(
                   children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
                     pw.Text(afinfTitle),
+                    pw.SizedBox(width: 10),
                     pw.Text(afinf),
                   ]
               ),
               pw.TableRow(
                   children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
                     pw.Text(afcancerTitle),
+                    pw.SizedBox(width: 10),
                     pw.Text(afcancer),
                   ]
               ),
               pw.TableRow(
                   children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
                     pw.Text(smokeTitle),
+                    pw.SizedBox(width: 10),
                     pw.Text(smoke),
                   ]
               ),
               pw.TableRow(
                   children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
                     pw.Text(alimTitle),
+                    pw.SizedBox(width: 10),
                     pw.Text(alim),
                   ]
               ),
               pw.TableRow(
                   children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
                     pw.Text(sportTitle),
+                    pw.SizedBox(width: 10),
                     pw.Text(sport),
                   ]
               ),
               pw.TableRow(
                   children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
                     pw.Text(alcoolTitle),
+                    pw.SizedBox(width: 10),
                     pw.Text(alcool),
                   ]
               ),
               pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 20)
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
+              pw.TableRow(
                 children: [
-                  pw.Text(riskTitle),
+                  pw.Text(riskTitle,
+                      style: pw.TextStyle(
+                          fontSize: 18,
+                          fontWeight: pw.FontWeight.bold,
+                          color: PdfColors.blue900)),
+                  pw.SizedBox(width: 10),
                   pw.Text("")
                 ]
               ),
               pw.TableRow(
+                  children: [
+                    pw.SizedBox(height: 20)
+                  ]
+              ),
+              pw.TableRow(
                 children: [
                   pw.Text(cancerRiskTitle),
+                  pw.SizedBox(width: 10),
                   pw.Text("${riskCancer(widget.resultQuestionnaire).toString()} %")
                 ]
               ),
               pw.TableRow(
                   children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
                     pw.Text(avcRiskTitle),
+                    pw.SizedBox(width: 10),
                     pw.Text("${riskAVC(widget.resultQuestionnaire).toString()} %")
                   ]
               ),
               pw.TableRow(
                   children: [
+                    pw.SizedBox(height: 5)
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
                     pw.Text(diabeteRiskTitle),
+                    pw.SizedBox(width: 10),
                     pw.Text("${riskDiabete(widget.resultQuestionnaire).toString()} %")
                   ]
               ),
