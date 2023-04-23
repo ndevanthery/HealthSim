@@ -168,9 +168,6 @@ double riskDiabete(ModelAnswer resultQuestionnaire) {
     1.2667,
     1.2,
     1.1333,
-    1.2667,
-    1.2,
-    1.1333,
     1.0667,
     1,
     0.9333,
@@ -287,25 +284,66 @@ double riskDiabete(ModelAnswer resultQuestionnaire) {
   return resultDiab * 1.0;
 }
 
+double riskBaseCancer(ModelAnswer resultQuestionnaire){
+  //variables for correction for user age
+  var maxAge=85, lifeRiskF=47.0, lifeRiskH=50.0;
+
+  double normalPopulationRisk=0.0;
+
+  //1 = Man / 0 = Woman
+  if(resultQuestionnaire.gender==1){
+    //calcul for correction for user age for a man
+    normalPopulationRisk =lifeRiskH/10000*(maxAge-resultQuestionnaire.age);
+  } else{
+    //calcul for correction for user age for a woman
+    normalPopulationRisk =lifeRiskF/10000*(maxAge-resultQuestionnaire.age);
+  }
+  normalPopulationRisk = normalPopulationRisk*100;
+  return normalPopulationRisk;
+
+}
+
 double riskCancer(ModelAnswer resultQuestionnaire) {
   //cancer algo
-  //points calcul
-  var sumCancer =
-      resultQuestionnaire.afcancer + resultQuestionnaire.smoke + 0.0;
+  //do the riskBaseCancer for normal population
+  var correctionAge= riskBaseCancer(resultQuestionnaire)/100;
+
+  //base variables for calculs
+  var afcancerF = [0.671384133654698, 1.30024926353954], afcancerH = [0.728388111407757, 1.31883958419197];
+  var smokeF = [0.72,1.19], smokeH = [0.50,1.67];
+  var alcoolF = [1.33374851388643,1.15,1.00,0.95,0.90], alcoolH = [1.16425276692004,1.08,1.00,0.95,0.90];
+  var sportF = [1.34398368456832,1.00,0.90,0.80], sportH = [1.10257819297523,1.00,0.90,0.80];
+  var alimFH = [1.10,1.05,1.00,0.95];
 
   var bmi = resultQuestionnaire.weight /
       (resultQuestionnaire.height / 100 * resultQuestionnaire.height / 100);
 
-  sumCancer += ((bmi - 25) / 10) * 0.5;
-  sumCancer += (3 - resultQuestionnaire.sport) / 3 * 0.5;
-  sumCancer += (4 - resultQuestionnaire.alcool) / 4 * 0.5;
-  sumCancer += (3 - resultQuestionnaire.alim) / 3 * 0.5;
+  double bmiFH=1.00;
 
-  var resultCancer = sumCancer / 4.0 * 100 + 9;
-
-  if(resultCancer>100) {
-    resultCancer=100;
+  if(bmi>25){
+    bmiFH += (bmi-25).ceil()/100;
   }
 
-  return resultCancer.roundToDouble();
+  double result;
+
+  //1 = Man / 0 = Woman
+  if(resultQuestionnaire.gender==1){
+    double correctionAF = afcancerH.elementAt(resultQuestionnaire.afcancer.toInt())*correctionAge;
+    result = correctionAF*smokeH.elementAt(resultQuestionnaire.smoke.toInt())*alcoolH.elementAt(resultQuestionnaire.alcool)*sportH.elementAt(resultQuestionnaire.sport)*alimFH.elementAt(resultQuestionnaire.alim)*bmiFH;
+
+  }else{
+    result = afcancerF.elementAt(resultQuestionnaire.afcancer.toInt())*correctionAge;
+    result = result*smokeF.elementAt(resultQuestionnaire.smoke.toInt())*alcoolF.elementAt(resultQuestionnaire.alcool)*sportF.elementAt(resultQuestionnaire.sport)*alimFH.elementAt(resultQuestionnaire.alim)*bmiFH;
+  }
+
+  result = result*100;
+  if(result>100){
+    result=100;
+  }
+  return double.parse(result.toStringAsFixed(2));
+
+
+
+
+
 }
