@@ -323,7 +323,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           .add(answers.toJson());
 
       //go to the result page
-      Navigator.push(
+      Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => ResultPage(
