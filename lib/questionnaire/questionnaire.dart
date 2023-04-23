@@ -236,22 +236,22 @@ class _QuestionnaireState extends State<QuestionnairePage> {
       print("${mapped.length} ${memoryResults.length}");
 
       //Pick the results and put it in variables
-      var gender = result.results.elementAt(1).results.first.result,
-          age = result.results.elementAt(2).results.first.result,
-          height = result.results.elementAt(3).results.first.result,
-          weight = result.results.elementAt(4).results.first.result,
-          glyc = result.results.elementAt(5).results.first.result,
-          highSyst = result.results.elementAt(6).results.first.result,
-          syst = result.results.elementAt(7).results.first.result,
-          highChol = result.results.elementAt(8).results.first.result,
-          chol = result.results.elementAt(9).results.first.result,
-          hdl = result.results.elementAt(10).results.first.result,
-          diab = result.results.elementAt(11).results.first.result,
-          inf = result.results.elementAt(12).results.first.result,
-          avc = result.results.elementAt(13).results.first.result,
-          afinf = result.results.elementAt(15).results.first.result,
-          afcancer = result.results.elementAt(16).results.first.result,
-          smoke = result.results.elementAt(18).results.first.result;
+      bool gender = result.results.elementAt(1).results.first.result;
+      int age = result.results.elementAt(2).results.first.result;
+      int height = result.results.elementAt(3).results.first.result;
+      int weight = result.results.elementAt(4).results.first.result;
+      bool glyc = result.results.elementAt(5).results.first.result;
+      bool highSyst = result.results.elementAt(6).results.first.result;
+      double? syst = result.results.elementAt(7).results.first.result;
+      bool highChol = result.results.elementAt(8).results.first.result;
+      double? chol = result.results.elementAt(9).results.first.result;
+      double? hdl = result.results.elementAt(10).results.first.result;
+      bool diab = result.results.elementAt(11).results.first.result;
+      bool inf = result.results.elementAt(12).results.first.result;
+      bool avc = result.results.elementAt(13).results.first.result;
+      bool afinf = result.results.elementAt(15).results.first.result;
+      bool afcancer = result.results.elementAt(16).results.first.result;
+      bool smoke = result.results.elementAt(18).results.first.result;
       double alim = result.results.elementAt(19).results.first.result ?? 0,
           sport = result.results.elementAt(20).results.first.result ?? 0,
           alcool = result.results.elementAt(21).results.first.result ?? 0;
@@ -286,7 +286,9 @@ class _QuestionnaireState extends State<QuestionnairePage> {
       syst ??= -1;
       chol ??= -1;
       hdl ??= -1;
-
+      syst = syst.toDouble();
+      chol = chol.toDouble();
+      hdl = hdl.toDouble();
       //Put all the answers in the Model
       final answers = ModelAnswer(
           genderFinal,
