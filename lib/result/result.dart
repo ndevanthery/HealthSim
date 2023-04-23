@@ -179,7 +179,7 @@ class _ResultPageState extends State<ResultPage> {
                     ),
               const SizedBox(height: 20),
               //Comparative
-              Table(
+/*               Table(
                 columnWidths: const <int, TableColumnWidth>{
                   0: FlexColumnWidth(),
                   1: FlexColumnWidth(),
@@ -262,6 +262,7 @@ class _ResultPageState extends State<ResultPage> {
                   ]),
                 ],
               ),
+ */
               const SizedBox(height: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

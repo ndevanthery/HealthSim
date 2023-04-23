@@ -1,14 +1,19 @@
-import 'dart:convert';
-import 'dart:developer';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
-import 'package:healthsim/questionnaire/custom_step.dart';
+import 'package:healthsim/questionnaire/boolean_custom/boolean_custom_step.dart';
+import 'package:healthsim/questionnaire/range_double/range_double_step.dart';
+import 'package:healthsim/questionnaire/range_integer/range_integer_step.dart';
+import 'package:healthsim/questionnaire/scale_integer/scale_integer_step.dart';
 import 'package:provider/provider.dart';
 import 'package:survey_kit/survey_kit.dart';
+import 'package:survey_kit/survey_kit.dart' as survey;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../authentification/user_provider.dart';
@@ -23,6 +28,34 @@ class QuestionnairePage extends StatefulWidget {
 
 class _QuestionnaireState extends State<QuestionnairePage> {
   var db = FirebaseFirestore.instance;
+  int indexMemory = 0;
+
+  List<dynamic> memoryResults = [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ];
+
   @override
   Widget build(BuildContext context) {
     //go research the user id
@@ -45,6 +78,27 @@ class _QuestionnaireState extends State<QuestionnairePage> {
         child: Align(
             alignment: Alignment.center,
             child: SurveyKit(
+              surveyController:
+                  SurveyController(onNextStep: (context, resultFunction) {
+                memoryResults[indexMemory] = resultFunction().result;
+                indexMemory++;
+                print(memoryResults);
+                setState(() {});
+                BlocProvider.of<SurveyPresenter>(context).add(
+                  NextStep(
+                    resultFunction.call(),
+                  ),
+                );
+              }, onStepBack: ((context, resultFunction) {
+                indexMemory--;
+
+                setState(() {});
+                BlocProvider.of<SurveyPresenter>(context).add(
+                  StepBack(
+                    resultFunction != null ? resultFunction.call() : null,
+                  ),
+                );
+              })),
               onResult: _onResult,
               task: getSampleTask(),
               showProgress: true,
@@ -164,8 +218,12 @@ class _QuestionnaireState extends State<QuestionnairePage> {
   }
 
   _onResult(SurveyResult result) {
-    final user = Provider.of<UserProvider>(context).user?.id;
-
+    late final user;
+    try {
+      user = Provider.of<UserProvider>(context).user?.id;
+    } catch (e) {
+      user = null;
+    }
     if (result.finishReason == FinishReason.COMPLETED) {
       //See id the user is connected
       String userFinal;
@@ -174,6 +232,8 @@ class _QuestionnaireState extends State<QuestionnairePage> {
       } else {
         userFinal = user;
       }
+      var mapped = result.results.map((e) => e.results.first.result).toList();
+      print("${mapped.length} ${memoryResults.length}");
 
       //Pick the results and put it in variables
       var gender = result.results.elementAt(1).results.first.result,
@@ -192,9 +252,11 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           afinf = result.results.elementAt(15).results.first.result,
           afcancer = result.results.elementAt(16).results.first.result,
           smoke = result.results.elementAt(18).results.first.result;
-      double alim = result.results.elementAt(19).results.first.result,
-          sport = result.results.elementAt(20).results.first.result,
-          alcool = result.results.elementAt(21).results.first.result;
+      double alim = result.results.elementAt(19).results.first.result ?? 0,
+          sport = result.results.elementAt(20).results.first.result ?? 0,
+          alcool = result.results.elementAt(21).results.first.result ?? 0;
+
+      print("$age $weight $height");
 
       //create new variable that be in the database
       int genderFinal,
@@ -209,57 +271,16 @@ class _QuestionnaireState extends State<QuestionnairePage> {
       double afcancerFinal, smokeFinal;
 
       //change the boolean results in int
-      if (gender == BooleanResult.POSITIVE) {
-        genderFinal = 1;
-      } else {
-        genderFinal = 0;
-      }
-      if (glyc == BooleanResult.POSITIVE) {
-        glycFinal = 1;
-      } else {
-        glycFinal = 0;
-      }
-      if (highSyst == BooleanResult.POSITIVE) {
-        highSystFinal = 1;
-      } else {
-        highSystFinal = 0;
-      }
-
-      if (highChol == BooleanResult.POSITIVE) {
-        highCholFinal = 1;
-      } else {
-        highCholFinal = 0;
-      }
-      if (diab == BooleanResult.POSITIVE) {
-        diabFinal = 1;
-      } else {
-        diabFinal = 0;
-      }
-      if (inf == BooleanResult.POSITIVE) {
-        infFinal = 1;
-      } else {
-        infFinal = 0;
-      }
-      if (avc == BooleanResult.POSITIVE) {
-        avcFinal = 1;
-      } else {
-        avcFinal = 0;
-      }
-      if (afinf == BooleanResult.POSITIVE) {
-        afinfFinal = 1;
-      } else {
-        afinfFinal = 0;
-      }
-      if (afcancer == BooleanResult.POSITIVE) {
-        afcancerFinal = 1.0;
-      } else {
-        afcancerFinal = 0.0;
-      }
-      if (smoke == BooleanResult.POSITIVE) {
-        smokeFinal = 1.0;
-      } else {
-        smokeFinal = 0.0;
-      }
+      genderFinal = gender ? 1 : 0;
+      glycFinal = glyc ? 1 : 0;
+      highSystFinal = highSyst ? 1 : 0;
+      highCholFinal = highChol ? 1 : 0;
+      diabFinal = diab ? 1 : 0;
+      infFinal = inf ? 1 : 0;
+      avcFinal = avc ? 1 : 0;
+      afinfFinal = afinf ? 1 : 0;
+      afcancerFinal = afcancer ? 1 : 0;
+      smokeFinal = smoke ? 1 : 0;
 
       //put a value in the null values
       syst ??= -1;
@@ -313,10 +334,8 @@ class _QuestionnaireState extends State<QuestionnairePage> {
   }
 
   Task getSampleTask() {
-    print("getTask");
-    //see all the questions in this order
     var task = OrderedTask(
-      id: TaskIdentifier(),
+      id: TaskIdentifier(id: Random().nextInt(800000000).toString()),
       steps: [
         //just information
         InstructionStep(
@@ -325,26 +344,32 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           buttonText:
               AppLocalizations.of(context)!.questionnaireintrotextbutton,
         ),
-        QuestionStep(
+        BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnairegendertitle,
-          answerFormat: BooleanAnswerFormat(
-            positiveAnswer:
-                AppLocalizations.of(context)!.questionnairegenderanswerpositive,
-            negativeAnswer:
-                AppLocalizations.of(context)!.questionnairegenderanswernegative,
-            result: BooleanResult.POSITIVE,
-          ),
+          defaultVal: () {
+            return memoryResults[1];
+          },
+          positiveAnswer:
+              AppLocalizations.of(context)!.questionnairegenderanswerpositive,
+          negativeAnswer:
+              AppLocalizations.of(context)!.questionnairegenderanswernegative,
         ),
         RangeIntegerStep(
             title: AppLocalizations.of(context)!.questionnaireagetitle,
             minValue: 0,
             maxValue: 100,
+            defaultVal: () {
+              return memoryResults[2];
+            },
             hint: AppLocalizations.of(context)!.questionnaireagehint,
             errorMessage: AppLocalizations.of(context)!.questionnaireageerror),
         RangeIntegerStep(
             title: AppLocalizations.of(context)!.questionnaireheighttitle,
             minValue: 0,
             maxValue: 250,
+            defaultVal: () {
+              return memoryResults[3];
+            },
             hint: AppLocalizations.of(context)!.questionnaireheighthint,
             errorMessage:
                 AppLocalizations.of(context)!.questionnaireheighterror),
@@ -354,156 +379,164 @@ class _QuestionnaireState extends State<QuestionnairePage> {
             isOptional: false,
             minValue: 0,
             maxValue: 250,
+            defaultVal: () {
+              return memoryResults[4];
+            },
             errorMessage:
                 AppLocalizations.of(context)!.questionnaireweighterror),
-
-        QuestionStep(
+        BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnaireglyctitle,
-          answerFormat: BooleanAnswerFormat(
-            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
-            negativeAnswer: AppLocalizations.of(context)!.answernegative,
-            result: BooleanResult.NEGATIVE,
-          ),
-          isOptional: false,
+          defaultVal: () {
+            return memoryResults[5] ?? false;
+          },
+          positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+          negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
 
-        QuestionStep(
+        BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnairehighsysttitle,
-          answerFormat: BooleanAnswerFormat(
-            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
-            negativeAnswer: AppLocalizations.of(context)!.answernegative,
-            result: BooleanResult.NEGATIVE,
-          ),
+          defaultVal: () {
+            return memoryResults[6] ?? false;
+          },
+          positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+          negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
-        QuestionStep(
-          title: AppLocalizations.of(context)!.questionnairesysttitle,
-          answerFormat: IntegerAnswerFormat(
+
+        RangeDoubleStep(
+            title: AppLocalizations.of(context)!.questionnairesysttitle,
             hint: AppLocalizations.of(context)!.questionnairesysthint,
-          ),
-          isOptional: true,
-        ),
-        QuestionStep(
+            isOptional: true,
+            minValue: 80,
+            maxValue: 200,
+            defaultVal: () {
+              return memoryResults[7];
+            },
+            errorMessage: AppLocalizations.of(context)!.questionnairesysterror),
+
+        BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnairehighcholtitle,
-          answerFormat: BooleanAnswerFormat(
-            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
-            negativeAnswer: AppLocalizations.of(context)!.answernegative,
-            result: BooleanResult.NEGATIVE,
-          ),
+          defaultVal: () {
+            return memoryResults[8] ?? false;
+          },
+          positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+          negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
-        QuestionStep(
-          title: AppLocalizations.of(context)!.questionnairecholtitle,
-          answerFormat: IntegerAnswerFormat(
+
+        RangeDoubleStep(
+            title: AppLocalizations.of(context)!.questionnairecholtitle,
             hint: AppLocalizations.of(context)!.questionnairecholhint,
-          ),
-          isOptional: true,
-        ),
-        QuestionStep(
-          title: AppLocalizations.of(context)!.questionnairehdltitle,
-          answerFormat: IntegerAnswerFormat(
+            isOptional: true,
+            minValue: 2.5,
+            maxValue: 8,
+            defaultVal: () {
+              return memoryResults[9];
+            },
+            errorMessage: AppLocalizations.of(context)!.questionnairecholerror),
+
+        RangeDoubleStep(
+            title: AppLocalizations.of(context)!.questionnairehdltitle,
             hint: AppLocalizations.of(context)!.questionnairehdlhint,
-          ),
-          isOptional: true,
-        ),
-        QuestionStep(
+            isOptional: true,
+            minValue: 0.6,
+            maxValue: 2.5,
+            defaultVal: () {
+              return memoryResults[10];
+            },
+            errorMessage: AppLocalizations.of(context)!.questionnairehdlerror),
+
+        BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnairediabtitle,
-          answerFormat: BooleanAnswerFormat(
-            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
-            negativeAnswer: AppLocalizations.of(context)!.answernegative,
-            result: BooleanResult.NEGATIVE,
-          ),
+          defaultVal: () {
+            return memoryResults[11] ?? false;
+          },
+          positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+          negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
-        QuestionStep(
+
+        BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnaireinftitle,
-          answerFormat: BooleanAnswerFormat(
-            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
-            negativeAnswer: AppLocalizations.of(context)!.answernegative,
-            result: BooleanResult.NEGATIVE,
-          ),
+          defaultVal: () {
+            return memoryResults[12] ?? false;
+          },
+          positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+          negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
-        QuestionStep(
+        BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnaireavctitle,
-          answerFormat: BooleanAnswerFormat(
-            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
-            negativeAnswer: AppLocalizations.of(context)!.answernegative,
-            result: BooleanResult.NEGATIVE,
-          ),
+          defaultVal: () {
+            return memoryResults[13] ?? false;
+          },
+          positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+          negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
+
         InstructionStep(
             title: AppLocalizations.of(context)!.questionnairesecondparttitle,
             text: AppLocalizations.of(context)!.questionnairesecondparttext,
             buttonText: AppLocalizations.of(context)!
                 .questionnairesecondparttextbutton),
-        QuestionStep(
+
+        BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnaireafinftitle,
-          answerFormat: BooleanAnswerFormat(
-            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
-            negativeAnswer: AppLocalizations.of(context)!.answernegative,
-            result: BooleanResult.NEGATIVE,
-          ),
+          defaultVal: () {
+            return memoryResults[15] ?? false;
+          },
+          positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+          negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
-        QuestionStep(
+
+        BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnaireafcancertitle,
-          answerFormat: BooleanAnswerFormat(
-            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
-            negativeAnswer: AppLocalizations.of(context)!.answernegative,
-            result: BooleanResult.NEGATIVE,
-          ),
+          defaultVal: () {
+            return memoryResults[16] ?? false;
+          },
+          positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+          negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
+
         InstructionStep(
             title: AppLocalizations.of(context)!.questionnairelastparttitle,
             text: AppLocalizations.of(context)!.questionnairelastparttext,
             buttonText:
                 AppLocalizations.of(context)!.questionnairelastparttextbutton),
-        QuestionStep(
+
+        BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnairesmoketitle,
-          answerFormat: BooleanAnswerFormat(
-            positiveAnswer: AppLocalizations.of(context)!.answerpositive,
-            negativeAnswer: AppLocalizations.of(context)!.answernegative,
-            result: BooleanResult.NEGATIVE,
-          ),
+          defaultVal: () {
+            return memoryResults[18] ?? false;
+          },
+          positiveAnswer: AppLocalizations.of(context)!.answerpositive,
+          negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
-        QuestionStep(
+
+        ScaleIntegerStep(
           title: AppLocalizations.of(context)!.questionnairealimtitle,
           text: AppLocalizations.of(context)!.questionnairealimtext,
-          answerFormat: ScaleAnswerFormat(
-            step: 1,
-            minimumValue: 0,
-            maximumValue: 3,
-            defaultValue: 2,
-            minimumValueDescription:
-                AppLocalizations.of(context)!.questionnairealimminvalue,
-            maximumValueDescription:
-                AppLocalizations.of(context)!.questionnairealimmaxvalue,
-          ),
+          minValue: 0,
+          maxValue: 3,
+          defaultVal: () {
+            return memoryResults[19] ?? 2;
+          },
         ),
-        QuestionStep(
+        ScaleIntegerStep(
           title: AppLocalizations.of(context)!.questionnairesporttitle,
           text: AppLocalizations.of(context)!.questionnairesporttext,
-          answerFormat: ScaleAnswerFormat(
-            step: 1,
-            minimumValue: 0,
-            maximumValue: 3,
-            defaultValue: 2,
-            minimumValueDescription:
-                AppLocalizations.of(context)!.questionnairesportminvalue,
-            maximumValueDescription:
-                AppLocalizations.of(context)!.questionnairesportmaxvalue,
-          ),
+          minValue: 0,
+          maxValue: 3,
+          defaultVal: () {
+            return memoryResults[20] ?? 2;
+          },
         ),
-        QuestionStep(
-          title: AppLocalizations.of(context)!.questionnairealcooltitle,
-          text: AppLocalizations.of(context)!.questionnairealcooltext,
-          answerFormat: ScaleAnswerFormat(
-            step: 1,
-            minimumValue: 0,
-            maximumValue: 4,
-            defaultValue: 2,
-            minimumValueDescription:
-                AppLocalizations.of(context)!.questionnairealcoolminvalue,
-            maximumValueDescription:
-                AppLocalizations.of(context)!.questionnairealcoolmaxvalue,
-          ),
+        ScaleIntegerStep(
+          title: AppLocalizations.of(context)!.questionnairesporttitle,
+          text: AppLocalizations.of(context)!.questionnairesporttext,
+          minValue: 0,
+          maxValue: 3,
+          defaultVal: () {
+            return memoryResults[21] ?? 2;
+          },
         ),
+
         CompletionStep(
           stepIdentifier: StepIdentifier(id: '23'),
           text: AppLocalizations.of(context)!.questionnairefinaltext,

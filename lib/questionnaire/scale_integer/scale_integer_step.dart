@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:healthsim/questionnaire/custom_view.dart';
+import 'package:healthsim/questionnaire/scale_integer/scale_integer_view.dart';
 import 'package:survey_kit/survey_kit.dart' as survey;
 import 'package:survey_kit/survey_kit.dart';
 
-class CustomResult extends QuestionResult<int> {
+class ScaleIntegerResult extends QuestionResult<double> {
   final String customData;
-  final int value; //Custom value
+  final double? value; //Custom value
 
-  CustomResult(
+  ScaleIntegerResult(
       {required this.customData,
       required String valueIdentifier,
       Identifier? identifier,
@@ -24,37 +23,40 @@ class CustomResult extends QuestionResult<int> {
             result: value);
 }
 
-class RangeIntegerStep extends survey.Step {
+class ScaleIntegerStep extends survey.Step {
   final String title;
-  final int minValue;
-  final int maxValue;
-  final String errorMessage;
-  final String hint;
+  final String text;
+  final double minValue;
+  final double maxValue;
+  final double? Function() defaultVal;
 
-  RangeIntegerStep({
+  ScaleIntegerStep({
     StepIdentifier? id,
     bool isOptional = false,
     String buttonText = 'Next',
     required this.title,
+    required this.text,
     required this.minValue,
     required this.maxValue,
-    required this.errorMessage,
-    required this.hint,
+    required this.defaultVal,
   }) : super(
             isOptional: isOptional, stepIdentifier: id, buttonText: buttonText);
 
   @override
   Widget createView({QuestionResult? questionResult}) {
-    var controller = TextEditingController();
+    final key = ObjectKey(stepIdentifier.id);
+
     bool isvalid = false;
     //print(questionResult!.result);
-    return CustomView(
-        step: this,
-        title: title,
-        minValue: minValue,
-        maxValue: maxValue,
-        errorMessage: errorMessage,
-        hint: hint);
+    return ScaleIntegerView(
+      key: key,
+      step: this,
+      title: title,
+      text: text,
+      minValue: minValue,
+      maxValue: maxValue,
+      defaultVal: defaultVal,
+    );
   }
 
   @override

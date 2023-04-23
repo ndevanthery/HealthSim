@@ -3,44 +3,63 @@ import 'package:flutter/scheduler.dart';
 import 'package:survey_kit/survey_kit.dart';
 import 'package:survey_kit/survey_kit.dart' as survey;
 
-import 'custom_step.dart';
+import 'range_integer_step.dart';
 
-class CustomView extends StatefulWidget {
+class RangeIntegerView extends StatefulWidget {
   final survey.Step step;
   final String title;
   final int minValue;
   final int maxValue;
+  final int? Function() defaultVal;
   final String errorMessage;
   final String hint;
-  const CustomView(
+  const RangeIntegerView(
       {super.key,
       required this.step,
       required this.title,
       required this.minValue,
       required this.maxValue,
+      required this.defaultVal,
       required this.errorMessage,
       required this.hint});
 
   @override
-  State<CustomView> createState() => _CustomViewState();
+  State<RangeIntegerView> createState() => _RangeIntegerViewState();
 }
 
-class _CustomViewState extends State<CustomView> {
+class _RangeIntegerViewState extends State<RangeIntegerView> {
   var controller = TextEditingController();
   bool isvalid = false;
+
+  @override
+  void initState() {
+    controller.text =
+        widget.defaultVal() == null ? "" : widget.defaultVal().toString();
+    var val = int.tryParse(controller.text);
+    print(val);
+    val ??= -1;
+    if (val > widget.maxValue || val < widget.minValue) {
+      isvalid = false;
+    } else {
+      isvalid = true;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     //print(questionResult!.result);
     return StepView(
       isValid: isvalid,
       step: widget.step,
-      resultFunction: () => CustomResult(
-        customData: "",
-        startDate: DateTime.now(),
-        endDate: DateTime.now(),
-        valueIdentifier: 'custom', //Identification for NavigableTask,
-        value: int.parse(controller.text),
-      ),
+      resultFunction: () => RangeIntegerResult(
+          customData: "",
+          startDate: DateTime.now(),
+          endDate: DateTime.now(),
+          identifier: widget.step.stepIdentifier,
+          valueIdentifier:
+              widget.step.stepIdentifier.id, //Identification for NavigableTask,
+          value: isvalid ? int.parse(controller.text) : null),
       title: Text(widget.title),
       child: Container(
         child: TextFormField(
@@ -62,7 +81,8 @@ class _CustomViewState extends State<CustomView> {
               return null;
             }
             var val = int.tryParse(value);
-            val ??= 0;
+            print(val);
+            val ??= -1;
             if (val > widget.maxValue || val < widget.minValue) {
               SchedulerBinding.instance.addPostFrameCallback((duration) {
                 setState(() {
