@@ -65,7 +65,31 @@ class _LinksState extends State<Links> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Material(
+      child: ListView(
+        children: [
+          ListTile(
+            title: Text('Et si je commençais quelque chose ?'),
+          ),
+          ListTile(
+            title: Text('TABAC'),
+            subtitle: Text('http://www.stop-tabac.ch/'),
+            onTap: () {
+              // Navigate to the link
+            },
+          ),
+          ListTile(
+            title: Text('ALIMENTATION'),
+            subtitle: Text(
+                'https://swissheart.ch/fr/comment-rester-en-bonne-sante/une-vie-saine/alimentation'),
+            onTap: () {
+              // Navigate to the link
+            },
+          ),
+          // Add more links here
+        ],
+      ),
+    );
   }
 
   Future<void> _askNotificationPermission(BuildContext context) async {

@@ -51,6 +51,7 @@ dependencies:
   csv: ^5.0.1
   firebase_messaging: ^14.4.1
   http: ^0.13.4
+  url_launcher: ^6.1.10
 
 
 dev_dependencies:
