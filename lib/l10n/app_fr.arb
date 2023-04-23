@@ -83,18 +83,25 @@
     "questionnaireagehint": "Entrez votre âge",
     "@questionnaireagehint":{
     },
+    "questionnaireageerror":"Entrez un âge entre 0 et 100 ans!",
+
     "questionnaireheighttitle": "Quel est votre taille en cm ?",
     "@questionnaireheighttitle":{
     },
     "questionnaireheighthint": "Entrez votre taille",
     "@questionnaireheighthint":{
     },
+    "questionnaireheighterror":"Entrez une taille entre 0 et 250 cm!",
+
+
     "questionnaireweighttitle": "Quel est votre poids en kg ?",
     "@questionnaireweighttitle":{
     },
     "questionnaireweighthint": "Entrez votre poids",
     "@questionnaireweighthint":{
     },
+    "questionnaireweighterror":"Entrez un poids entre 0 et 250 kg!",
+
     "questionnaireglyctitle": "Etes-vous connus pour un sucre sanguin élevé ?",
     "@questionnaireglyctitle":{
     },
@@ -113,6 +120,7 @@
     "questionnairesysthint": "Entrez votre tension",
     "@questionnairesysthint":{
     },
+    "questionnairesysterror":"Entrez une valeur entre 80 et 200!",
     "questionnairehighcholtitle": "Etes-vous connus pour un taux de cholestérol élevé ?",
     "@questionnairehighcholtitle":{
     },
@@ -122,12 +130,16 @@
     "questionnairecholhint": "Entrez votre taux de cholestérol",
     "@questionnairecholhint":{
     },
+    "questionnairecholerror":"Entrez une valeur entre 2.5 et 8!",
+
     "questionnairehdltitle": "Quel est votre taux de HDL entre 0.6 et 2.5 mmol/l ?",
     "@questionnairehdltitle":{
     },
     "questionnairehdlhint": "Entrez votre taux de HDL",
     "@questionnairehdlhint":{
     },
+    "questionnairehdlerror":"Entrez une valeur entre 0.6 et 2.5!",
+
     "questionnairediabtitle": "Etes-vous diabétique ?",
     "@questionnairediabtitle":{
     },
@@ -216,18 +228,18 @@
     "@resultriskresulttitle":{
     },
     "resultcancerrisktitle": "Risque de cancer",
-    "@resultriskresulttitle":{
+    "@resultcancerrisktitle":{
     },
     "resultdiabrisktitle": "Risque de diabète",
-    "@resultriskresulttitle":{
+    "@resultdiabrisktitle":{
     },
     "resultinfrisktitle": "Risque d'infractus",
-    "@resultriskresulttitle":{
+    "@resultinfrisktitle":{
     },
     "resultcomparationtitlesecondcolunm": "Vos réponses",
     "@resultcomparationtitlesecondcolunm":{
     },
-    "resultcomparationtitlelastcolunm": "Les réponses d'une personne moyenne",
+    "resultcomparationtitlelastcolunm": "Les réponses de la moyenne population",
     "@resultcomparationtitlelastcolunm":{
     },
     "resultcomparationtitlefirstrow": "Sport",
@@ -242,7 +254,7 @@
     "resultcomparationtitlelastrow": "Fume ?",
     "@resultcomparationtitlefirstrow":{
     },
-    "resultsimulationtitle": "Simuler l'impact d'un changement d'habitudes",
+    "resultsimulationtitle": "Simuler l'impact d'un changement de comportement",
     "@resultsimulationtitle":{
     },
     "resultsimulationresetbutton": "Réinitialiser la simulation",
@@ -263,8 +275,62 @@
     "resultcardyou": "Toi",
     "@resultcardyou":{
     },
-    "resultcardavgpeople": "Personnes moyennes",
+    "resultcardavgpeople": "Moyenne population",
     "@resultcardavgpeople":{
+    },
+    "resultsimulationinfo": "Simulateurs vers la droite: comportement plus favorable",
+    "@resultsimulationinfo": {
+    },
+    "resultsimulationweight": "Poids",
+    "@resultsimulationweight": {
+    },
+    "resultprintbutton": "Imprimer",
+    "@resultprintbutton": {
+    },
+    "answeralim0": "Jamais",
+    "@answeralim0": {
+    },
+    "answeralim1": "De temps en temps",
+    "@answeralim1": {
+    },
+    "answeralim2": "Fréquemment",
+    "@answeralim2": {
+    },
+    "answeralim3": "La plupart du temps",
+    "@answeralim3": {
+    },
+    "answersport0": "Ne bouge pas",
+    "@answersport0": {
+    },
+    "answersport1": "30 min 2-3 jours/semaine",
+    "@answersport1": {
+    },
+    "answersport2": "30 min 5 jours/semaine",
+    "@answersport2": {
+    },
+    "answersport3": "2 h intense/semaine",
+    "@answersport3": {
+    },
+    "answeralcool0": "Tous les jours",
+    "@answeralcool0": {
+    },
+    "answeralcool1": "3 à 6 jours/semaine",
+    "@answeralcool1": {
+    },
+    "answeralcool2": "1 à 2 jours/semaine",
+    "@answeralcool2": {
+    },
+    "answeralcool3": "Moins 1 jours/semaine",
+    "@answeralcool3": {
+    },
+    "answeralcool4": "Ne bois pas",
+    "@answeralcool4": {
+    },
+    "printtitlequestion": "Questions",
+    "@printtitlequestion": {
+    },
+    "printtitleanswer": "Réponses",
+    "@printtitleanswer": {
     }
 
 }
