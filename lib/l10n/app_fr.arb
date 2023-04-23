@@ -83,18 +83,25 @@
     "questionnaireagehint": "Entrez votre âge",
     "@questionnaireagehint":{
     },
+    "questionnaireageerror":"Entrez un âge entre 0 et 100 ans!",
+
     "questionnaireheighttitle": "Quel est votre taille en cm ?",
     "@questionnaireheighttitle":{
     },
     "questionnaireheighthint": "Entrez votre taille",
     "@questionnaireheighthint":{
     },
+    "questionnaireheighterror":"Entrez une taille entre 0 et 250 cm!",
+
+
     "questionnaireweighttitle": "Quel est votre poids en kg ?",
     "@questionnaireweighttitle":{
     },
     "questionnaireweighthint": "Entrez votre poids",
     "@questionnaireweighthint":{
     },
+    "questionnaireweighterror":"Entrez un poids entre 0 et 250 kg!",
+
     "questionnaireglyctitle": "Etes-vous connus pour un sucre sanguin élevé ?",
     "@questionnaireglyctitle":{
     },
@@ -113,6 +120,7 @@
     "questionnairesysthint": "Entrez votre tension",
     "@questionnairesysthint":{
     },
+    "questionnairesysterror":"Entrez une valeur entre 80 et 200!",
     "questionnairehighcholtitle": "Etes-vous connus pour un taux de cholestérol élevé ?",
     "@questionnairehighcholtitle":{
     },
@@ -122,12 +130,16 @@
     "questionnairecholhint": "Entrez votre taux de cholestérol",
     "@questionnairecholhint":{
     },
+    "questionnairecholerror":"Entrez une valeur entre 2.5 et 8!",
+
     "questionnairehdltitle": "Quel est votre taux de HDL entre 0.6 et 2.5 mmol/l ?",
     "@questionnairehdltitle":{
     },
     "questionnairehdlhint": "Entrez votre taux de HDL",
     "@questionnairehdlhint":{
     },
+    "questionnairehdlerror":"Entrez une valeur entre 0.6 et 2.5!",
+
     "questionnairediabtitle": "Etes-vous diabétique ?",
     "@questionnairediabtitle":{
     },
