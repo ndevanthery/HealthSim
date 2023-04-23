@@ -216,13 +216,13 @@
     "@resultriskresulttitle":{
     },
     "resultcancerrisktitle": "Risque de cancer",
-    "@resultriskresulttitle":{
+    "@resultcancerrisktitle":{
     },
     "resultdiabrisktitle": "Risque de diabète",
-    "@resultriskresulttitle":{
+    "@resultdiabrisktitle":{
     },
     "resultinfrisktitle": "Risque d'infractus",
-    "@resultriskresulttitle":{
+    "@resultinfrisktitle":{
     },
     "resultcomparationtitlesecondcolunm": "Vos réponses",
     "@resultcomparationtitlesecondcolunm":{
@@ -271,6 +271,48 @@
     },
     "resultsimulationweight": "Poids",
     "@resultsimulationweight": {
+    },
+    "resultprintbutton": "Imprimer",
+    "@resultprintbutton": {
+    },
+    "answeralim0": "Jamais",
+    "@answeralim0": {
+    },
+    "answeralim1": "De temps en temps",
+    "@answeralim1": {
+    },
+    "answeralim2": "Fréquemment",
+    "@answeralim2": {
+    },
+    "answeralim3": "La plupart du temps",
+    "@answeralim3": {
+    },
+    "answersport0": "Ne bouge pas",
+    "@answersport0": {
+    },
+    "answersport1": "30 min 2-3 jours/semaine",
+    "@answersport1": {
+    },
+    "answersport2": "30 min 5 jours/semaine",
+    "@answersport2": {
+    },
+    "answersport3": "2 h intense/semaine",
+    "@answersport3": {
+    },
+    "answeralcool0": "Tous les jours",
+    "@answeralcool0": {
+    },
+    "answeralcool1": "3 à 6 jours/semaine",
+    "@answeralcool1": {
+    },
+    "answeralcool2": "1 à 2 jours/semaine",
+    "@answeralcool2": {
+    },
+    "answeralcool3": "Moins 1 jours/semaine",
+    "@answeralcool3": {
+    },
+    "answeralcool4": "Ne bois pas",
+    "@answeralcool4": {
     }
 
 }

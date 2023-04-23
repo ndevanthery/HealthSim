@@ -3,6 +3,9 @@ import 'package:healthsim/navbar/navBar.dart';
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 
 import '../algorithm/algo.dart';
 
@@ -117,13 +120,27 @@ class _ResultPageState extends State<ResultPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 20),
-              Text(
-                AppLocalizations.of(context)!.resultriskresulttitle,
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue[900],
-                ),
+              Row(
+                children:[
+                  Expanded(child:
+                  Text(
+                    AppLocalizations.of(context)!.resultriskresulttitle,
+                    style:
+                    TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue[900],
+                    ),
+                  )),
+                  Expanded(
+                      child: Container(
+                          alignment: Alignment.centerLeft,
+                          child:  TextButton(
+                              onPressed: _createPDF,
+                              child: Text(AppLocalizations.of(context)!.resultprintbutton))
+                      )
+                  ),
+                  ]
               ),
               const SizedBox(height: 20),
               MediaQuery.of(context).size.width < 600
@@ -781,6 +798,238 @@ class _ResultPageState extends State<ResultPage> {
     } else {
       return Colors.red;
     }
+  }
+
+  void _createPDF() async {
+    final doc = pw.Document();
+    var alimText = [AppLocalizations.of(context)!.answeralim0, AppLocalizations.of(context)!.answeralim1, AppLocalizations.of(context)!.answeralim2, AppLocalizations.of(context)!.answeralim3];
+    var sportText = [AppLocalizations.of(context)!.answersport0, AppLocalizations.of(context)!.answersport1, AppLocalizations.of(context)!.answersport2, AppLocalizations.of(context)!.answersport3];
+    var alcoolText = [AppLocalizations.of(context)!.answeralcool0, AppLocalizations.of(context)!.answeralcool1, AppLocalizations.of(context)!.answeralcool2, AppLocalizations.of(context)!.answeralcool3, AppLocalizations.of(context)!.answeralcool4];
+
+    var gender="", glyc="", syst="", chol="", diab="", inf="", avc="", afinf="",
+    afcancer="", smoke="",
+        alim=alimText.elementAt(widget.resultQuestionnaire.alim),
+        sport=sportText.elementAt(widget.resultQuestionnaire.sport),
+        alcool=sportText.elementAt(widget.resultQuestionnaire.alcool);
+
+    if(widget.resultQuestionnaire.gender==1){
+      gender= AppLocalizations.of(context)!.questionnairegenderanswerpositive;
+    } else{
+      gender= AppLocalizations.of(context)!.questionnairegenderanswernegative;
+    }
+    if(widget.resultQuestionnaire.glyc==1){
+      glyc = AppLocalizations.of(context)!.answerpositive;
+    } else{
+      glyc = AppLocalizations.of(context)!.answernegative;
+    }
+    if(widget.resultQuestionnaire.syst==1){
+      syst = AppLocalizations.of(context)!.answerpositive;
+    } else{
+      syst = AppLocalizations.of(context)!.answernegative;
+    }
+    if(widget.resultQuestionnaire.chol==1){
+      chol = AppLocalizations.of(context)!.answerpositive;
+    } else{
+      chol = AppLocalizations.of(context)!.answernegative;
+    }
+    if(widget.resultQuestionnaire.diab==1){
+      diab = AppLocalizations.of(context)!.answerpositive;
+    } else{
+      diab = AppLocalizations.of(context)!.answernegative;
+    }
+    if(widget.resultQuestionnaire.inf==1){
+      inf = AppLocalizations.of(context)!.answerpositive;
+    } else{
+      inf = AppLocalizations.of(context)!.answernegative;
+    }
+    if(widget.resultQuestionnaire.avc==1){
+      avc = AppLocalizations.of(context)!.answerpositive;
+    } else{
+      avc = AppLocalizations.of(context)!.answernegative;
+    }
+    if(widget.resultQuestionnaire.afinf==1){
+      afinf = AppLocalizations.of(context)!.answerpositive;
+    } else{
+      afinf = AppLocalizations.of(context)!.answernegative;
+    }
+    if(widget.resultQuestionnaire.afcancer==1){
+      afcancer = AppLocalizations.of(context)!.answerpositive;
+    } else{
+      afcancer = AppLocalizations.of(context)!.answernegative;
+    }
+    if(widget.resultQuestionnaire.smoke==1){
+      smoke = AppLocalizations.of(context)!.answerpositive;
+    } else{
+      smoke = AppLocalizations.of(context)!.answernegative;
+    }
+
+    var genderTitle = AppLocalizations.of(context)!.questionnairegendertitle,
+    ageTitle = AppLocalizations.of(context)!.questionnaireagetitle,
+    heightTitle = AppLocalizations.of(context)!.questionnaireheighttitle,
+    weightTitle = AppLocalizations.of(context)!.questionnaireweighttitle,
+    glycTitle = AppLocalizations.of(context)!.questionnaireglyctitle,
+    highSystTitle = AppLocalizations.of(context)!.questionnairehighsysttitle,
+    highCholTitle = AppLocalizations.of(context)!.questionnairehighcholtitle,
+    diabTitle = AppLocalizations.of(context)!.questionnairediabtitle,
+    infTitle = AppLocalizations.of(context)!.questionnaireinftitle,
+    avcTitle = AppLocalizations.of(context)!.questionnaireavctitle,
+    afinfTitle = AppLocalizations.of(context)!.questionnaireafinftitle,
+    afcancerTitle = AppLocalizations.of(context)!.questionnaireafcancertitle,
+    smokeTitle = AppLocalizations.of(context)!.questionnairesmoketitle,
+    alimTitle = AppLocalizations.of(context)!.questionnairealimtitle,
+    sportTitle = AppLocalizations.of(context)!.questionnairesporttitle,
+    alcoolTitle = AppLocalizations.of(context)!.questionnairealcooltitle;
+
+    var riskTitle = AppLocalizations.of(context)!.resulttitle,
+    cancerRiskTitle = AppLocalizations.of(context)!.resultcancerrisktitle,
+    avcRiskTitle = AppLocalizations.of(context)!.resultinfrisktitle,
+    diabeteRiskTitle = AppLocalizations.of(context)!.resultdiabrisktitle;
+
+    doc.addPage(
+        pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return pw.Table(
+            children: [
+              pw.TableRow(
+                children: [
+                  pw.Text("HealtSim"),
+                pw.Text(""),
+                ]
+              ),
+            pw.TableRow(
+              children: [
+                pw.Text("Questions"),
+                pw.Text("Réponses")
+              ]
+            ),
+            pw.TableRow(
+              children: [
+                pw.Text(genderTitle),
+                pw.Text(gender),
+              ]
+            ),
+            pw.TableRow(
+              children: [
+                pw.Text(ageTitle),
+                pw.Text(widget.resultQuestionnaire.age.toString()),
+              ]
+            ),
+            pw.TableRow(
+              children: [
+                pw.Text(heightTitle),
+                pw.Text(widget.resultQuestionnaire.height.toString()),
+              ]
+            ),
+            pw.TableRow(
+              children: [
+                pw.Text(weightTitle),
+                pw.Text(widget.resultQuestionnaire.weight.toString())
+              ]
+            ),
+            pw.TableRow(
+              children: [
+                pw.Text(glycTitle),
+                pw.Text(glyc),
+              ]
+            ),
+            pw.TableRow(
+              children: [
+                pw.Text(highSystTitle),
+                pw.Text(syst),
+              ]
+            ),
+            pw.TableRow(
+              children: [
+                pw.Text(highCholTitle),
+                pw.Text(chol),
+              ]
+            ),
+            pw.TableRow(
+              children: [
+                pw.Text(diabTitle),
+                pw.Text(diab),
+              ]
+            ),
+            pw.TableRow(
+              children: [
+                pw.Text(infTitle),
+                pw.Text(inf),
+              ]
+            ),
+              pw.TableRow(
+                  children: [
+                    pw.Text(avcTitle),
+                    pw.Text(avc),
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
+                    pw.Text(afinfTitle),
+                    pw.Text(afinf),
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
+                    pw.Text(afcancerTitle),
+                    pw.Text(afcancer),
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
+                    pw.Text(smokeTitle),
+                    pw.Text(smoke),
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
+                    pw.Text(alimTitle),
+                    pw.Text(alim),
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
+                    pw.Text(sportTitle),
+                    pw.Text(sport),
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
+                    pw.Text(alcoolTitle),
+                    pw.Text(alcool),
+                  ]
+              ),
+              pw.TableRow(
+                children: [
+                  pw.Text(riskTitle),
+                  pw.Text("")
+                ]
+              ),
+              pw.TableRow(
+                children: [
+                  pw.Text(cancerRiskTitle),
+                  pw.Text("${riskCancer(widget.resultQuestionnaire).toString()} %")
+                ]
+              ),
+              pw.TableRow(
+                  children: [
+                    pw.Text(avcRiskTitle),
+                    pw.Text("${riskAVC(widget.resultQuestionnaire).toString()} %")
+                  ]
+              ),
+              pw.TableRow(
+                  children: [
+                    pw.Text(diabeteRiskTitle),
+                    pw.Text("${riskDiabete(widget.resultQuestionnaire).toString()} %")
+                  ]
+              ),
+            ]
+          ); // Center
+        }
+        )
+    );
+
+    await Printing.layoutPdf(onLayout: (PdfPageFormat format) async => doc.save());
   }
 }
 
