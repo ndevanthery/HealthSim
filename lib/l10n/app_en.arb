@@ -102,6 +102,24 @@
     "vaud": "IN THE CANTON OF VAUD",
     "savoirplus": "LEARN MORE",
     "cancer": "CANCER"
+    "resultsimulationinfo": "Simulators to the right: more favorable behavior",
+    "resultsimulationweight": "Weight",
+    "resultprintbutton": "Print",
+    "answeralim0": "Never",
+    "answeralim1": "Occasionally",
+    "answeralim2": "Frequently",
+    "answeralim3": "Most of the time",
+    "answersport0": "No movement",
+    "answersport1": "30 min 2-3 days/week",
+    "answersport2": "30 min 5 days/week",
+    "answersport3": "2 hrs intense/week",
+    "answeralcool0": "Every day",
+    "answeralcool1": "3 to 6 days/week",
+    "answeralcool2": "1 to 2 days/week",
+    "answeralcool3": "Less than 1 day/week",
+    "answeralcool4": "Do not drink",
+    "printtitlequestion": "Questions",
+    "printtitleanswer": "Answers"
 
 
 }

@@ -3,13 +3,10 @@ class ModelAnswer {
   int gender,
       age,
       height,
-      weight,
       glyc,
+      weight,
       highSyst,
-      syst,
       highChol,
-      chol,
-      hdl,
       diab,
       inf,
       avc,
@@ -18,7 +15,7 @@ class ModelAnswer {
       sport,
       afinf;
 
-  double afcancer, smoke;
+  double afcancer, smoke, syst, chol, hdl;
 
   DateTime date;
 

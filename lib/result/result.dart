@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:healthsim/navbar/navBar.dart';
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
+import 'package:healthsim/result/pdfPreview.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -23,6 +25,7 @@ class _ResultPageState extends State<ResultPage> {
   double _exerciseValue = 2;
   late ModelAnswer simulationQuestionnaire;
   late ModelAnswer normalValue;
+  late TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -36,6 +39,7 @@ class _ResultPageState extends State<ResultPage> {
     _drinkingValue = simulationQuestionnaire.alcool.toDouble();
     _eatingValue = simulationQuestionnaire.alim.toDouble();
     _exerciseValue = simulationQuestionnaire.sport.toDouble();
+    _controller.text = simulationQuestionnaire.weight.toString();
     if (simulationQuestionnaire.gender == 0) {
       normalValue = ModelAnswer(
           simulationQuestionnaire.gender,
@@ -115,14 +119,31 @@ class _ResultPageState extends State<ResultPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 20),
-              Text(
-                AppLocalizations.of(context)!.resultriskresulttitle,
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue[900],
-                ),
-              ),
+              Row(children: [
+                Expanded(
+                    child: Text(
+                  AppLocalizations.of(context)!.resultriskresulttitle,
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue[900],
+                  ),
+                )),
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PDFPreviewCustom(
+                                          resultQuestionnaire:
+                                              widget.resultQuestionnaire)));
+                            },
+                            child: Text(AppLocalizations.of(context)!
+                                .resultprintbutton)))),
+              ]),
               const SizedBox(height: 20),
               MediaQuery.of(context).size.width < 600
                   ? Column(
@@ -134,7 +155,7 @@ class _ResultPageState extends State<ResultPage> {
                             'Medium',
                             'Higher than Normal',
                             riskCancer(widget.resultQuestionnaire),
-                            riskCancer(normalValue)),
+                            riskBaseCancer(normalValue)),
                         _buildResultsCard(
                             context,
                             AppLocalizations.of(context)!.resultinfrisktitle,
@@ -160,7 +181,7 @@ class _ResultPageState extends State<ResultPage> {
                             'Medium',
                             'Higher than Normal',
                             riskCancer(widget.resultQuestionnaire),
-                            riskCancer(normalValue)),
+                            riskBaseCancer(normalValue)),
                         _buildResultsCard(
                             context,
                             AppLocalizations.of(context)!.resultinfrisktitle,
@@ -179,7 +200,7 @@ class _ResultPageState extends State<ResultPage> {
                     ),
               const SizedBox(height: 20),
               //Comparative
-              Table(
+/*               Table(
                 columnWidths: const <int, TableColumnWidth>{
                   0: FlexColumnWidth(),
                   1: FlexColumnWidth(),
@@ -262,7 +283,9 @@ class _ResultPageState extends State<ResultPage> {
                   ]),
                 ],
               ),
+ */
               const SizedBox(height: 20),
+              //simulation part
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -286,6 +309,34 @@ class _ResultPageState extends State<ResultPage> {
                       },
                       child: Text(AppLocalizations.of(context)!
                           .resultsimulationresetbutton)),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: Text(AppLocalizations.of(context)!
+                              .resultsimulationweight)),
+                      // Form(
+                      //     child:
+                      Expanded(
+                          child: Wrap(
+                              direction: Axis.horizontal,
+                              children: <Widget>[
+                            TextField(
+                              controller: _controller,
+                              onChanged: (newValue) {
+                                int newValueInt = int.parse(newValue);
+                                setState(() {
+                                  //_controller.text = newValue;
+                                  simulationQuestionnaire.weight = newValueInt;
+                                });
+                              },
+                            )
+                          ])),
+                      // ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Text(AppLocalizations.of(context)!.resultsimulationinfo),
                   const SizedBox(height: 10),
                   MediaQuery.of(context).size.width < 600
                       ? Column(children: [
@@ -325,96 +376,6 @@ class _ResultPageState extends State<ResultPage> {
                                           value.toInt();
                                     });
                                   }),
-/*                               Expanded(
-                                child: MediaQuery.of(context).size.width < 600
-                                    ? Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                AppLocalizations.of(context)!
-                                                    .resultsimulationalcool,
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.blue[900],
-                                                ),
-                                              ),
-                                              Text(
-                                                '$_drinkingValue',
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.blue[900],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Slider(
-                                            value: _drinkingValue,
-                                            min: 0,
-                                            max: 3,
-                                            divisions: 3,
-                                            label: _drinkingValue
-                                                .round()
-                                                .toString(),
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _drinkingValue = value;
-                                                simulationQuestionnaire.alcool =
-                                                    value.toInt();
-                                              });
-                                            },
-                                          )
-                                        ],
-                                      )
-                                    : Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                AppLocalizations.of(context)!
-                                                    .resultsimulationalcool,
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.blue[900],
-                                                ),
-                                              ),
-                                              Text(
-                                                '$_drinkingValue',
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.blue[900],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Slider(
-                                            value: _drinkingValue,
-                                            min: 0,
-                                            max: 3,
-                                            divisions: 3,
-                                            label: _drinkingValue
-                                                .round()
-                                                .toString(),
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _drinkingValue = value;
-                                                simulationQuestionnaire.alcool =
-                                                    value.toInt();
-                                              });
-                                            },
-                                          )
-                                        ],
-                                      ),
-                              ),
-                             */
                             ],
                           ),
                         ])
@@ -612,7 +573,7 @@ class _ResultPageState extends State<ResultPage> {
                                 'Medium',
                                 'Higher than Normal',
                                 riskCancer(simulationQuestionnaire),
-                                riskCancer(normalValue)),
+                                riskBaseCancer(normalValue)),
                             _buildResultsCard(
                                 context,
                                 AppLocalizations.of(context)!
@@ -641,7 +602,7 @@ class _ResultPageState extends State<ResultPage> {
                                 'Medium',
                                 'Higher than Normal',
                                 riskCancer(simulationQuestionnaire),
-                                riskCancer(normalValue)),
+                                riskBaseCancer(normalValue)),
                             _buildResultsCard(
                                 context,
                                 AppLocalizations.of(context)!
