@@ -370,6 +370,15 @@
     },
     "printtitleanswer": "Réponses",
     "@printtitleanswer": {
+    },
+    "changerNotif": "Êtes-vous prêt à changer vos habitudes ?",
+    "@changerNotif": {
+    },
+    "oui": "Oui",
+    "@oui": {
+    },
+    "non": "Non",
+    "@non": {
     }
 
 
