@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:healthsim/linksPage.dart';
 import 'package:healthsim/navbar/navBar.dart';
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
+import 'package:healthsim/questionnaire/questionnaire.dart';
 import 'package:healthsim/result/pdfPreview.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -129,6 +130,20 @@ class _ResultPageState extends State<ResultPage> {
                     color: Colors.blue[900],
                   ),
                 )),
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => QuestionnairePage(
+                                            questionnaire:
+                                                widget.resultQuestionnaire,
+                                          )));
+                            },
+                            child: Text("Go back to Survey")))),
                 Expanded(
                     child: Container(
                         alignment: Alignment.centerLeft,

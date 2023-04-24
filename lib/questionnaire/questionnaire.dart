@@ -20,7 +20,8 @@ import '../authentification/user_provider.dart';
 import '../result/result.dart';
 
 class QuestionnairePage extends StatefulWidget {
-  QuestionnairePage({super.key});
+  ModelAnswer? questionnaire;
+  QuestionnairePage({super.key, this.questionnaire});
 
   @override
   _QuestionnaireState createState() => _QuestionnaireState();
@@ -52,6 +53,41 @@ class _QuestionnaireState extends State<QuestionnairePage> {
     null,
     null,
   ];
+
+  intToBool(int val) {
+    return val == 1 ? true : false;
+  }
+
+  @override
+  void initState() {
+    if (widget.questionnaire != null) // Come back from result page
+    {
+      ModelAnswer m = widget.questionnaire!;
+      memoryResults = [
+        null,
+        intToBool(m.gender),
+        m.age,
+        m.height,
+        m.weight,
+        intToBool(m.glyc),
+        intToBool(m.highSyst),
+        intToBool(m.highChol),
+        intToBool(m.diab),
+        intToBool(m.inf),
+        intToBool(m.avc),
+        null,
+        intToBool(m.afinf),
+        intToBool(m.afcancer.toInt()),
+        null,
+        intToBool(m.smoke.toInt()),
+        m.alim,
+        m.sport,
+        m.alcool,
+        null,
+      ];
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
