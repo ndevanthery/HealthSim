@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:healthsim/about.dart';
 import 'package:healthsim/authentification/welcome.dart';
 import 'package:healthsim/home.dart';
+import 'package:healthsim/linksPage.dart';
 import '../authentification/login.dart';
 import '../authentification/register.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -300,6 +301,23 @@ class _MobileNavBarState extends State<MobileNavBar> {
                               ));
                         },
                         child: Text(AppLocalizations.of(context)!.contact),
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          textStyle: const TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                              fontFamily: "Montserrat"),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Links(),
+                              ));
+                        },
+                        child: Text("Links"),
                       ),
                     ],
                   ),

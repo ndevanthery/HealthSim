@@ -83,7 +83,7 @@
     "questionnaireagehint": "Entrez votre âge",
     "@questionnaireagehint":{
     },
-    "questionnaireageerror":"Entrez un âge entre 0 et 100 ans!",
+    "questionnaireageerror":"Entrez un âge entre 0 et 85 ans!",
 
     "questionnaireheighttitle": "Quel est votre taille en cm ?",
     "@questionnaireheighttitle":{
@@ -130,7 +130,7 @@
     "questionnairecholhint": "Entrez votre taux de cholestérol",
     "@questionnairecholhint":{
     },
-    "questionnairecholerror":"Entrez une valeur entre 2.5 et 8!",
+    "questionnairecholerror":"Entrez une valeur entre 2.5 et 8 mmol/l!",
 
     "questionnairehdltitle": "Quel est votre taux de HDL entre 0.6 et 2.5 mmol/l ?",
     "@questionnairehdltitle":{
@@ -278,6 +278,45 @@
     "resultcardavgpeople": "Moyenne population",
     "@resultcardavgpeople":{
     },
+    "changer": "Seriez-vous prêt à changer vos habitudes ?",
+    "@changer":{
+    },
+    "commencer": "Et si je commençais quelque chose ?",
+    "@commencer":{
+    },
+    "tabac": "TABAC",
+    "@tabac":{
+    },
+    "alimentation": "ALIMENTATION",
+    "@alimentation":{
+    },
+    "alcool": "ALCOOL",
+    "@alcool":{
+    },
+    "activite": "ACTIVITE PHYSIQUE",
+    "@activite":{
+    },
+    "chute": "CHUTE COORDINATION",
+    "@chute":{
+    },
+    "region": "DANS VOTRE REGION :",
+    "@region":{
+    },
+    "fribourg": "A FRIBOURG",
+    "@fribourg":{
+    },
+    "jura": "DANS LE JURA",
+    "@jura":{
+    },
+    "vaud": "DANS LE CANTON DE FRIBOURG",
+    "@vaud":{
+    },
+    "savoirplus": "EN SAVOIR PLUS",
+    "@savoirplus":{
+    },
+    "cancer": "CANCER",
+    "@cancer":{
+    },
     "resultsimulationinfo": "Simulateurs vers la droite: comportement plus favorable",
     "@resultsimulationinfo": {
     },
@@ -331,6 +370,17 @@
     },
     "printtitleanswer": "Réponses",
     "@printtitleanswer": {
-    }
+    },
+    "changerNotif": "Êtes-vous prêt à changer vos habitudes ?",
+    "@changerNotif": {
+    },
+    "oui": "Oui",
+    "@oui": {
+    },
+    "non": "Non",
+    "@non": {
+    },
+    "links":"liens"
+
 
 }
