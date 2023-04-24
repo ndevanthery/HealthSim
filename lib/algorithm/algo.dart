@@ -103,8 +103,8 @@ double riskAVC(ModelAnswer resultQuestionnaire) {
         baseSystAge * coeffSystAge +
         baseCholAge * coeffCholAge +
         baseHdlAge * coeffHdlAge;
-    resultAVC = 1.0 - pow(0.9605, exp(sumAVC));
-    resultAVC = 1.0 - exp(-exp(-0.5699 + 0.7476 * log(-log(1 - resultAVC))));
+    resultAVC = 1.0 - pow(0.9776, exp(sumAVC));
+    resultAVC = 1.0 - exp(-exp(-0.738 + 0.7019 * log(-log(1 - resultAVC))));
     resultAVC = resultAVC * baseAfinf;
     double riskAlim = resultAVC - (resultAVC * alimP * baseAlim);
     double riskSport = resultAVC - (resultAVC * sportP * baseSport);
