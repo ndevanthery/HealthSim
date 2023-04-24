@@ -255,7 +255,7 @@ double riskDiabete(ModelAnswer resultQuestionnaire) {
 
   if (bmi < 27) {
     points += 0;
-  } else if (bmi >= 30) {
+  } else if (bmi <= 30) {
     points += 2;
   } else {
     points += 3;
