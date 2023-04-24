@@ -278,6 +278,45 @@
     "resultcardavgpeople": "Moyenne population",
     "@resultcardavgpeople":{
     },
+    "changer": "Seriez-vous prêt à changer vos habitudes ?",
+    "@changer":{
+    },
+    "commencer": "Et si je commençais quelque chose ?",
+    "@commencer":{
+    },
+    "tabac": "TABAC",
+    "@tabac":{
+    },
+    "alimentation": "ALIMENTATION",
+    "@alimentation":{
+    },
+    "alcool": "ALCOOL",
+    "@alcool":{
+    },
+    "activite": "ACTIVITE PHYSIQUE",
+    "@activite":{
+    },
+    "chute": "CHUTE COORDINATION",
+    "@chute":{
+    },
+    "region": "DANS VOTRE REGION :",
+    "@region":{
+    },
+    "fribourg": "A FRIBOURG",
+    "@fribourg":{
+    },
+    "jura": "DANS LE JURA",
+    "@jura":{
+    },
+    "vaud": "DANS LE CANTON DE FRIBOURG",
+    "@vaud":{
+    },
+    "savoirplus": "EN SAVOIR PLUS",
+    "@savoirplus":{
+    },
+    "cancer": "CANCER",
+    "@cancer":{
+
     "resultsimulationinfo": "Simulateurs vers la droite: comportement plus favorable",
     "@resultsimulationinfo": {
     },
@@ -332,5 +371,6 @@
     "printtitleanswer": "Réponses",
     "@printtitleanswer": {
     }
+
 
 }
