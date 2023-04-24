@@ -303,7 +303,6 @@ packages:
     version: "0.15.2"
   http:
     dependency: "direct main"
-
     description:
       name: http
       url: "https://pub.dartlang.org"

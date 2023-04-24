@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:healthsim/navbar/navBar.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class Links extends StatefulWidget {
   @override
@@ -65,31 +67,55 @@ class _LinksState extends State<Links> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: ListView(
-        children: [
-          ListTile(
-            title: Text('Et si je commençais quelque chose ?'),
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+        appBar: AppBar(
+            title: NavBar(),
+            toolbarHeight:
+                screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
+            backgroundColor: Colors.blue,
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color.fromRGBO(4, 66, 108, 1),
+                    Color.fromRGBO(0, 137, 207, 1)
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+            )),
+        body: Material(
+          child: ListView(
+            children: [
+              ListTile(
+                title: Text('Et si je commençais quelque chose ?'),
+              ),
+              ListTile(
+                title: Text('TABAC'),
+                subtitle: Text('http://www.stop-tabac.ch/'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse('http://www.stop-tabac.ch/'),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text('ALIMENTATION'),
+                subtitle: Text(
+                    'https://swissheart.ch/fr/comment-rester-en-bonne-sante/une-vie-saine/alimentation'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse('http://www.stop-tabac.ch/'),
+                  );
+                },
+              ),
+              // Add more links here
+            ],
           ),
-          ListTile(
-            title: Text('TABAC'),
-            subtitle: Text('http://www.stop-tabac.ch/'),
-            onTap: () {
-              // Navigate to the link
-            },
-          ),
-          ListTile(
-            title: Text('ALIMENTATION'),
-            subtitle: Text(
-                'https://swissheart.ch/fr/comment-rester-en-bonne-sante/une-vie-saine/alimentation'),
-            onTap: () {
-              // Navigate to the link
-            },
-          ),
-          // Add more links here
-        ],
-      ),
-    );
+        ));
   }
 
   Future<void> _askNotificationPermission(BuildContext context) async {
