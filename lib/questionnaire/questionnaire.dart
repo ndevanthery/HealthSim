@@ -530,10 +530,10 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           },
         ),
         ScaleIntegerStep(
-          title: AppLocalizations.of(context)!.questionnairesporttitle,
-          text: AppLocalizations.of(context)!.questionnairesporttext,
+          title: AppLocalizations.of(context)!.questionnairealcooltitle,
+          text: AppLocalizations.of(context)!.questionnairealcooltext,
           minValue: 0,
-          maxValue: 3,
+          maxValue: 4,
           defaultVal: () {
             return memoryResults[21] ?? 2;
           },
