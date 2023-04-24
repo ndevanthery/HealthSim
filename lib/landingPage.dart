@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:healthsim/questionnaire/ModelAnswer.dart';
 import 'package:healthsim/questionnaire/questionnaire.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:healthsim/result/result.dart';
 
 const maxWidthScreen = 2500.0;
 
@@ -33,6 +35,37 @@ class _LandingPageState extends State<LandingPage> {
                   style: const TextStyle(fontSize: 16.0, color: Colors.white),
                 ),
               ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ResultPage(
+                            resultQuestionnaire: ModelAnswer(
+                                1,
+                                25,
+                                173,
+                                79,
+                                -1,
+                                0,
+                                -1,
+                                0,
+                                -1,
+                                -1,
+                                0,
+                                1,
+                                0,
+                                0,
+                                0.03,
+                                0.5,
+                                2,
+                                1,
+                                3,
+                                DateTime.now()),
+                          ),
+                        ));
+                  },
+                  child: Text("Direct Result")),
               MaterialButton(
                   color: Colors.white,
                   shape: const RoundedRectangleBorder(
