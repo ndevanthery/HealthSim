@@ -24,6 +24,10 @@ class _PDFPreviewCustomState extends State<PDFPreviewCustom> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PdfPreview(
+        canChangeOrientation: false,
+        canChangePageFormat: false,
+        canDebug: false,
+        maxPageWidth: 1000,
         build: (format) => _createPDF(),
       ),
     );
