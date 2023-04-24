@@ -359,7 +359,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
         RangeIntegerStep(
             title: AppLocalizations.of(context)!.questionnaireagetitle,
             minValue: 0,
-            maxValue: 100,
+            maxValue: 84,
             defaultVal: () {
               return memoryResults[2];
             },

@@ -83,7 +83,7 @@
     "questionnaireagehint": "Entrez votre âge",
     "@questionnaireagehint":{
     },
-    "questionnaireageerror":"Entrez un âge entre 0 et 100 ans!",
+    "questionnaireageerror":"Entrez un âge entre 0 et 85 ans!",
 
     "questionnaireheighttitle": "Quel est votre taille en cm ?",
     "@questionnaireheighttitle":{
@@ -130,7 +130,7 @@
     "questionnairecholhint": "Entrez votre taux de cholestérol",
     "@questionnairecholhint":{
     },
-    "questionnairecholerror":"Entrez une valeur entre 2.5 et 8!",
+    "questionnairecholerror":"Entrez une valeur entre 2.5 et 8 mmol/l!",
 
     "questionnairehdltitle": "Quel est votre taux de HDL entre 0.6 et 2.5 mmol/l ?",
     "@questionnairehdltitle":{
