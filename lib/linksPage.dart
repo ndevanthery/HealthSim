@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:healthsim/navbar/navBar.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Links extends StatefulWidget {
   @override
@@ -33,11 +34,10 @@ class _LinksState extends State<Links> {
           builder: (BuildContext context) {
             return AlertDialog(
               elevation: 10,
-              title: Text(
-                  'Are you willing to change something in your behaviour?'),
+              title: Text(AppLocalizations.of(context)!.changerNotif),
               actions: <Widget>[
                 TextButton(
-                  child: Text('No'),
+                  child: Text(AppLocalizations.of(context)!.non),
                   onPressed: () {
                     Navigator.of(context).pop();
                     setState(() {
@@ -46,7 +46,7 @@ class _LinksState extends State<Links> {
                   },
                 ),
                 TextButton(
-                  child: Text('Yes'),
+                  child: Text(AppLocalizations.of(context)!.oui),
                   onPressed: () {
                     Navigator.of(context).pop();
                     _askNotificationPermission(context);
@@ -91,10 +91,13 @@ class _LinksState extends State<Links> {
           child: ListView(
             children: [
               ListTile(
-                title: Text('Et si je commençais quelque chose ?'),
+                title: Text(
+                  AppLocalizations.of(context)!.commencer,
+                  style: TextStyle(fontSize: 30),
+                ),
               ),
               ListTile(
-                title: Text('TABAC'),
+                title: Text(AppLocalizations.of(context)!.tabac),
                 subtitle: Text('http://www.stop-tabac.ch/'),
                 onTap: () {
                   launchUrl(
@@ -103,12 +106,161 @@ class _LinksState extends State<Links> {
                 },
               ),
               ListTile(
-                title: Text('ALIMENTATION'),
+                title: Text(AppLocalizations.of(context)!.alimentation),
                 subtitle: Text(
                     'https://swissheart.ch/fr/comment-rester-en-bonne-sante/une-vie-saine/alimentation'),
                 onTap: () {
                   launchUrl(
-                    Uri.parse('http://www.stop-tabac.ch/'),
+                    Uri.parse(
+                        'https://swissheart.ch/fr/comment-rester-en-bonne-sante/une-vie-saine/alimentation'),
+                  );
+                },
+              ),
+              ListTile(
+                subtitle: Text(
+                    'https://www.planetesante.ch/content/search?SearchText=alimentation+'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse(
+                        'https://www.planetesante.ch/content/search?SearchText=alimentation+'),
+                  );
+                },
+              ),
+              ListTile(
+                subtitle: Text(
+                    'https://www.planetesante.ch/Magazine/Alimentation-et-nutrition/Mieux-manger'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse(
+                        'https://www.planetesante.ch/Magazine/Alimentation-et-nutrition/Mieux-manger'),
+                  );
+                },
+              ),
+              ListTile(
+                subtitle: Text('https://www.mangerbouger.fr/manger-mieux'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse('https://www.mangerbouger.fr/manger-mieux'),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.alcool),
+                subtitle: Text(
+                    'https://www.planetesante.ch/content/search?SearchText=alcool'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse(
+                        'https://www.planetesante.ch/content/search?SearchText=alcool'),
+                  );
+                },
+              ),
+              ListTile(
+                subtitle: Text(
+                    'https://www.stop-alcool.ch/fr/j-ai-decide-de-boire-moins'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse(
+                        'https://www.stop-alcool.ch/fr/j-ai-decide-de-boire-moins'),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.activite),
+                subtitle:
+                    Text('https://www.jemebouge.ch/trouver-une-activite/'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse('https://www.jemebouge.ch/trouver-une-activite/'),
+                  );
+                },
+              ),
+              ListTile(
+                subtitle: Text(
+                    'https://www.planetesante.ch/content/search?SearchText=activit%C3%A9+physique'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse(
+                        'https://www.planetesante.ch/content/search?SearchText=activit%C3%A9+physique'),
+                  );
+                },
+              ),
+              ListTile(
+                subtitle: Text('https://www.pas-a-pas.ch/'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse('https://www.pas-a-pas.ch/'),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.chute),
+                subtitle: Text(
+                    'https://www.dalcroze.ch/cours/cours-seniors/rythmique-seniors/'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse(
+                        'https://www.dalcroze.ch/cours/cours-seniors/rythmique-seniors/'),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text(
+                  AppLocalizations.of(context)!.region,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.fribourg),
+                subtitle: Text('https://www.liguessante-fr.ch/prevention/'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse('https://www.liguessante-fr.ch/prevention/'),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.jura),
+                subtitle: Text('https://fondationo2.ch/'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse('https://fondationo2.ch/'),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.vaud),
+                subtitle: Text('https://cours.unisante.ch/les-cours/'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse('https://cours.unisante.ch/les-cours/'),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text(
+                  AppLocalizations.of(context)!.savoirplus,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.cancer),
+                subtitle: Text(
+                    'https://www.planetesante.ch/content/search?SearchText=cancer'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse(
+                        'https://www.planetesante.ch/content/search?SearchText=cancer'),
+                  );
+                },
+              ),
+              ListTile(
+                subtitle: Text(
+                    'https://alimentation.liguecancer.ch/prevention-du-cancer/manger-equilibre/?gclid=CjwKCAjwq-WgBhBMEiwAzKSH6FQH-fm_DUwyPcrMiT3AJ7L5zU4EDGnbsEScOk_eTbkeDtRC7WAPSxoC19MQAvD_BwE'),
+                onTap: () {
+                  launchUrl(
+                    Uri.parse(
+                        'https://alimentation.liguecancer.ch/prevention-du-cancer/manger-equilibre/?gclid=CjwKCAjwq-WgBhBMEiwAzKSH6FQH-fm_DUwyPcrMiT3AJ7L5zU4EDGnbsEScOk_eTbkeDtRC7WAPSxoC19MQAvD_BwE'),
                   );
                 },
               ),

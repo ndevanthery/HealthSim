@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:healthsim/linksPage.dart';
 import 'package:healthsim/navbar/navBar.dart';
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
 import 'package:healthsim/result/pdfPreview.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../algorithm/algo.dart';
 
 class ResultPage extends StatefulWidget {
-  bool _showSimulationSection = false;
   ModelAnswer resultQuestionnaire;
 
   ResultPage({super.key, required this.resultQuestionnaire});
@@ -143,6 +143,17 @@ class _ResultPageState extends State<ResultPage> {
                             },
                             child: Text(AppLocalizations.of(context)!
                                 .resultprintbutton)))),
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Links()));
+                            },
+                            child: Text(AppLocalizations.of(context)!.links)))),
               ]),
               const SizedBox(height: 20),
               MediaQuery.of(context).size.width < 600

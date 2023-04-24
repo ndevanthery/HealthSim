@@ -122,6 +122,10 @@
     "answeralcool3",
     "answeralcool4",
     "printtitlequestion",
-    "printtitleanswer"
+    "printtitleanswer",
+    "changerNotif",
+    "oui",
+    "non",
+    "links"
   ]
 }

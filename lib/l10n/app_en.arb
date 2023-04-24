@@ -120,12 +120,17 @@
     "answeralcool4": "Do not drink",
     "printtitlequestion": "Questions",
     "printtitleanswer": "Answers",
+    "changerNotif": "Are you willing to change something in your behaviour?",
+    "oui": "Yes",
+    "non": "No",
     "questionnaireageerror" : "Enter an age between 0 et 85 ans!",
     "questionnaireheighterror" : "Enter a height between 0 and 250 cm!",
     "questionnaireweighterror" : "Enter a weight between 0 and 250 kg!",
     "questionnairesysterror" : "Enter a value between 80 and 200 !",
     "questionnairecholerror": "Enter a value between 2.5 and 8 mmol/l !",
-    "questionnairehdlerror": "Enter a value between 0.6 and 2.5!"
+    "questionnairehdlerror": "Enter a value between 0.6 and 2.5!",
+    "links":"links"
+
 
 
 }
