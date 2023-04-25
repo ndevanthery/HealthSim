@@ -62,7 +62,7 @@
     "questionnaireintrotitle": "Ce questionnaire est divisé en 3 partie. Voici la première",
     "@questionnaireintrotitle":{
     },
-    "questionnaireintrotext": "Données personnelles\nSi vous n'avez pas de réponse pour certaines questions passer directement à la prochaine",
+    "questionnaireintrotext": "Données personnelles",
     "@questionnaireintrotext":{
     },
     "questionnaireintrotextbutton": "C'est parti !",
