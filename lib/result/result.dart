@@ -97,6 +97,7 @@ class _ResultPageState extends State<ResultPage> {
     return Scaffold(
       appBar: AppBar(
         title: NavBar(),
+        automaticallyImplyLeading: false,
         toolbarHeight:
             screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
         backgroundColor: Colors.blue,
@@ -121,7 +122,9 @@ class _ResultPageState extends State<ResultPage> {
             children: [
               const SizedBox(height: 20),
               Row(children: [
-                Expanded(
+                MediaQuery.of(context).size.width < 600?
+                    const SizedBox():
+                    Expanded(
                     child: Text(
                   AppLocalizations.of(context)!.resultriskresulttitle,
                   style: TextStyle(
@@ -176,6 +179,16 @@ class _ResultPageState extends State<ResultPage> {
                             child: Text(AppLocalizations.of(context)!.links,
                                 style: TextStyle(fontSize: 20))))),
               ]),
+              MediaQuery.of(context).size.width < 600?
+              Text(
+                AppLocalizations.of(context)!.resultriskresulttitle,
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue[900],
+                ),
+              ):
+              const SizedBox(),
               const SizedBox(height: 20),
               MediaQuery.of(context).size.width < 600
                   ? Column(

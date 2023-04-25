@@ -115,26 +115,6 @@ class _DesktopNavBarState extends State<DesktopNavBar> {
                 const SizedBox(
                   width: 30,
                 ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    textStyle: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.white,
-                        fontFamily: "Montserrat"),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const WelcomePage(),
-                        ));
-                  },
-                  child: Text(AppLocalizations.of(context)!.contact),
-                ),
-                const SizedBox(
-                  width: 30,
-                ),
                 isLoggedIn
                     ? MaterialButton(
                         color: Colors.white,
@@ -283,23 +263,6 @@ class _MobileNavBarState extends State<MobileNavBar> {
                               ));
                         },
                         child: Text(AppLocalizations.of(context)!.apropos),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          textStyle: const TextStyle(
-                              fontSize: 15,
-                              color: Colors.white,
-                              fontFamily: "Montserrat"),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const HomePage(),
-                              ));
-                        },
-                        child: Text(AppLocalizations.of(context)!.contact),
                       ),
                     ],
                   ),
