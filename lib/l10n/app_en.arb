@@ -122,7 +122,10 @@
     "printtitleanswer": "Answers",
     "changerNotif": "Are you willing to change something in your behaviour?",
     "oui": "Yes",
-    "non": "No"
+    "non": "No",
+    "printtimesmore" : " times more than the average population",
+    "printtimesless": " times less than the average population",
+    "printtimesequal": "the same as the average population"
 
 
 }
