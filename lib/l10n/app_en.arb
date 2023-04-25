@@ -129,8 +129,10 @@
     "questionnairesysterror" : "Enter a value between 80 and 200 !",
     "questionnairecholerror": "Enter a value between 2.5 and 8 mmol/l !",
     "questionnairehdlerror": "Enter a value between 0.6 and 2.5!",
-    "links":"links"
-
+    "links":"links",
+    "printtimesmore" : " times more than the average population",
+    "printtimesless": " times less than the average population",
+    "printtimesequal": "the same as the average population"
 
 
 }

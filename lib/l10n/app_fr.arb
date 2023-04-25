@@ -380,7 +380,15 @@
     "non": "Non",
     "@non": {
     },
-    "links":"liens"
-
+    "links":"liens",
+    "printtimesmore": " fois plus que la moyenne population",
+    "@printtimesmore": {
+    },
+    "printtimesless": " fois moins que la moyenne population",
+    "@printtimesless": {
+    },
+    "printtimesequal": "la même que la moyenne population",
+    "@printtimesequal": {
+    }
 
 }
