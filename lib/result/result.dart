@@ -143,7 +143,11 @@ class _ResultPageState extends State<ResultPage> {
                                                 widget.resultQuestionnaire,
                                           )));
                             },
-                            child: Text("Go back to Survey")))),
+                            child: Text(
+                              AppLocalizations.of(context)!
+                                  .retourauquestionnaire,
+                              style: TextStyle(fontSize: 20),
+                            )))),
                 Expanded(
                     child: Container(
                         alignment: Alignment.centerLeft,
@@ -156,8 +160,9 @@ class _ResultPageState extends State<ResultPage> {
                                           resultQuestionnaire:
                                               widget.resultQuestionnaire)));
                             },
-                            child: Text(AppLocalizations.of(context)!
-                                .resultprintbutton)))),
+                            child: Text(
+                                AppLocalizations.of(context)!.resultprintbutton,
+                                style: TextStyle(fontSize: 20))))),
                 Expanded(
                     child: Container(
                         alignment: Alignment.centerLeft,
@@ -168,7 +173,8 @@ class _ResultPageState extends State<ResultPage> {
                                   MaterialPageRoute(
                                       builder: (context) => Links()));
                             },
-                            child: Text(AppLocalizations.of(context)!.links)))),
+                            child: Text(AppLocalizations.of(context)!.links,
+                                style: TextStyle(fontSize: 20))))),
               ]),
               const SizedBox(height: 20),
               MediaQuery.of(context).size.width < 600

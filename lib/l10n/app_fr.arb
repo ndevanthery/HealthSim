@@ -8,7 +8,7 @@
     "contact": "Contact",
     "@contact":{
     },
-    "creercompte": "Créer un compte",
+    "creercompte": "S'enregistrer",
     "@creercompte":{
     },
     "senregistrer": "Se connecter",
@@ -59,13 +59,13 @@
     "questionnairenext": "Prochain",
     "@questionnairenext":{
     },
-    "questionnaireintrotitle": "Ce questionnaire est divisée en 3 partie et en voici la première",
+    "questionnaireintrotitle": "Ce questionnaire est divisé en 3 partie. Voici la première",
     "@questionnaireintrotitle":{
     },
-    "questionnaireintrotext": "Toi-même\nSi vous n'avez pas de réponse pour certaines questions passer directement à la prochaine",
+    "questionnaireintrotext": "Données personnelles\nSi vous n'avez pas de réponse pour certaines questions passer directement à la prochaine",
     "@questionnaireintrotext":{
     },
-    "questionnaireintrotextbutton": "C'est partie !",
+    "questionnaireintrotextbutton": "C'est parti !",
     "@questionnaireintrotextbutton":{
     },
     "questionnairegendertitle": "Quel est votre genre ?",
@@ -114,7 +114,7 @@
     "questionnairehighsysttitle": "Etes-vous connus pour une tension élevée ?",
     "@questionnairehighsysttitle":{
     },
-    "questionnairesysttitle": "Quel est votre tension entre 80 et 200 mmHg ?",
+    "questionnairesysttitle": "Quelle est votre tension entre 80 et 200 mmHg ? \nCliquez sur 'Next' si vous ne le savez pas",
     "@questionnairesysttitle":{
     },
     "questionnairesysthint": "Entrez votre tension",
@@ -124,7 +124,7 @@
     "questionnairehighcholtitle": "Etes-vous connus pour un taux de cholestérol élevé ?",
     "@questionnairehighcholtitle":{
     },
-    "questionnairecholtitle": "Quel est votre taux de cholestérol entre 2.5 et 8 mmol/l ?",
+    "questionnairecholtitle": "Quel est votre taux de cholestérol entre 2.5 et 8 mmol/l ? \nCliquez sur 'Next' si vous ne le savez pas",
     "@questionnairecholtitle":{
     },
     "questionnairecholhint": "Entrez votre taux de cholestérol",
@@ -132,7 +132,7 @@
     },
     "questionnairecholerror":"Entrez une valeur entre 2.5 et 8 mmol/l!",
 
-    "questionnairehdltitle": "Quel est votre taux de HDL entre 0.6 et 2.5 mmol/l ?",
+    "questionnairehdltitle": "Quel est votre taux de HDL entre 0.6 et 2.5 mmol/l ? \nCliquez sur 'Next' si vous ne le savez pas",
     "@questionnairehdltitle":{
     },
     "questionnairehdlhint": "Entrez votre taux de HDL",
@@ -143,7 +143,7 @@
     "questionnairediabtitle": "Etes-vous diabétique ?",
     "@questionnairediabtitle":{
     },
-    "questionnaireinftitle": "Avez-vous déjà eu un infractus ?",
+    "questionnaireinftitle": "Avez-vous déjà eu un infarctus ?",
     "@questionnaireinftitle":{
     },
     "questionnaireavctitle": "Avez-vous déjà eu une attaque cérébrale ?",
@@ -158,7 +158,7 @@
     "questionnairesecondparttextbutton": "C'est partie !",
     "@questionnairesecondparttextbutton":{
     },
-    "questionnaireafinftitle": "Est-ce que un de vos parents (père avant 55 ans, mère avant 65 ans) a déjà eu un infractus ?",
+    "questionnaireafinftitle": "Est-ce que un de vos parents (père avant 55 ans, mère avant 65 ans) a déjà eu un infarctus ?",
     "@questionnaireafinftitle":{
     },
     "questionnaireafcancertitle": "Est-ce que un de vos proche (père, mère, frères ou soeurs) a un cancer ?",
@@ -176,10 +176,10 @@
     "questionnairesmoketitle": "Est-ce que vous avez déjà fumé régulièrement une fois dans votre vie ?",
     "@questionnairesmoketitle":{
     },
-    "questionnairealimtitle": "Quelle est votre habitude alimentaire ?",
+    "questionnairealimtitle": "Quels sont vos habitudes alimentaires ? (Fruits, légumes, huile d'olive, noix, poissons gras, peu de viande, de crème, de charcuterie)",
     "@questionnairealimtitle":{
     },
-    "questionnairealimtext": "0 = mauvaises\n1 = petites\n2 = certaines\n3 = bonnes",
+    "questionnairealimtext": "0 = Jamais\n1 = Partiellement, de temps en temps\n2 = Partiellement, fréquemment\n3 = Totalement, la plupart du temps",
     "@questionnairealimtext":{
     },
     "questionnairealimminvalue": "Mauvaises",
@@ -233,7 +233,7 @@
     "resultdiabrisktitle": "Risque de diabète",
     "@resultdiabrisktitle":{
     },
-    "resultinfrisktitle": "Risque d'infractus",
+    "resultinfrisktitle": "Risque d'infarctus",
     "@resultinfrisktitle":{
     },
     "resultcomparationtitlesecondcolunm": "Vos réponses",
@@ -323,7 +323,7 @@
     "resultsimulationweight": "Poids",
     "@resultsimulationweight": {
     },
-    "resultprintbutton": "Imprimer",
+    "resultprintbutton": "Imprimer les résultats",
     "@resultprintbutton": {
     },
     "answeralim0": "Jamais",
@@ -380,7 +380,9 @@
     "non": "Non",
     "@non": {
     },
-    "links":"liens",
+    "links":"Finir le test",
+    "@links": {
+    },
     "printtimesmore": " fois plus que la moyenne population",
     "@printtimesmore": {
     },
@@ -389,6 +391,21 @@
     },
     "printtimesequal": "la même que la moyenne population",
     "@printtimesequal": {
+    },
+    "remplirquestionnairedescription": "Réponds à quelques questions concernant ta santé et tes habitudes.",
+    "@remplirquestionnairedescription": {
+    },
+    "comparetoidescription": "Compare tes résultats à la moyenne de la population.",
+    "@comparetoidescription": {
+    },
+    "simuleresultatsdescription": "Simule des changement dans tes habitudes et regarde les résultats en instantanés.",
+    "@simuleresultatsdescription": {
+    },
+    "allerauxresultats": "Aller aux résultats",
+    "@allerauxresultats": {
+    },
+    "retourauquestionnaire": "Retour au questionnaire",
+    "@retourauquestionnaire": {
     }
 
 

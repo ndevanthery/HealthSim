@@ -29,11 +29,13 @@ class BottomColumns extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Text(
-                    "Describe what this feature does, and how it benefits your users.",
-                    style: TextStyle(fontSize: 10.0, color: Colors.white),
+                    AppLocalizations.of(context)
+                            ?.remplirquestionnairedescription ??
+                        '',
+                    style: const TextStyle(fontSize: 10.0, color: Colors.white),
                   ),
                 ),
               ]),
@@ -59,11 +61,11 @@ class BottomColumns extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Text(
-                    "Describe what this feature does, and how it benefits your users.",
-                    style: TextStyle(fontSize: 10.0, color: Colors.white),
+                    AppLocalizations.of(context)?.comparetoidescription ?? '',
+                    style: const TextStyle(fontSize: 10.0, color: Colors.white),
                   ),
                 ),
               ]),
@@ -90,11 +92,12 @@ class BottomColumns extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Text(
-                    "Describe what this feature does, and how it benefits your users.",
-                    style: TextStyle(fontSize: 10.0, color: Colors.white),
+                    AppLocalizations.of(context)?.simuleresultatsdescription ??
+                        '',
+                    style: const TextStyle(fontSize: 10.0, color: Colors.white),
                   ),
                 ),
               ]),

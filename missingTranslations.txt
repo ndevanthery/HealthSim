@@ -126,6 +126,14 @@
     "changerNotif",
     "oui",
     "non",
-    "links"
+    "links",
+    "printtimesmore",
+    "printtimesless",
+    "printtimesequal",
+    "remplirquestionnairedescription",
+    "comparetoidescription",
+    "simuleresultatsdescription",
+    "allerauxresultats",
+    "retourauquestionnaire"
   ]
 }

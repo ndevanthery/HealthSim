@@ -65,7 +65,7 @@ class _LandingPageState extends State<LandingPage> {
                           ),
                         ));
                   },
-                  child: Text("Direct Result")),
+                  child: Text(AppLocalizations.of(context)!.allerauxresultats)),
               MaterialButton(
                   color: Colors.white,
                   shape: const RoundedRectangleBorder(
