@@ -39,6 +39,10 @@ double riskAVC(ModelAnswer resultQuestionnaire) {
   var resultAVC = 0.0;
   //reduction risk
   var alimP = 0.65, sportP = 0.45;
+  var variableSumF = 0.9776, variableSumH = 0.9605;
+  var variableCorr1F = -0.738, variableCorr1H = -0.5699;
+  var variableCorr2F = 0.7019, variableCorr2H = 0.7476;
+
 
   //if never had heart attack/avc
   if (resultQuestionnaire.inf == 0 && resultQuestionnaire.avc == 0) {
@@ -103,8 +107,15 @@ double riskAVC(ModelAnswer resultQuestionnaire) {
         baseSystAge * coeffSystAge +
         baseCholAge * coeffCholAge +
         baseHdlAge * coeffHdlAge;
-    resultAVC = 1.0 - pow(0.9605, exp(sumAVC));
-    resultAVC = 1.0 - exp(-exp(-0.5699 + 0.7476 * log(-log(1 - resultAVC))));
+
+    if(resultQuestionnaire.gender==1){
+      resultAVC = 1.0 - pow(variableSumH, exp(sumAVC));
+      resultAVC = 1.0 - exp(-exp(variableCorr1H + variableCorr2H * log(-log(1 - resultAVC))));
+    } else{
+      resultAVC = 1.0 - pow(variableSumF, exp(sumAVC));
+      resultAVC = 1.0 - exp(-exp(variableCorr1F + variableCorr2F * log(-log(1 - resultAVC))));
+    }
+
     resultAVC = resultAVC * baseAfinf;
     double riskAlim = resultAVC - (resultAVC * alimP * baseAlim);
     double riskSport = resultAVC - (resultAVC * sportP * baseSport);
@@ -255,7 +266,7 @@ double riskDiabete(ModelAnswer resultQuestionnaire) {
 
   if (bmi < 27) {
     points += 0;
-  } else if (bmi >= 30) {
+  } else if (bmi <= 30) {
     points += 2;
   } else {
     points += 3;

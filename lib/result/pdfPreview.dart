@@ -148,6 +148,110 @@ class _PDFPreviewCustomState extends State<PDFPreviewCustom> {
         avcRiskTitle = AppLocalizations.of(context)!.resultinfrisktitle,
         diabeteRiskTitle = AppLocalizations.of(context)!.resultdiabrisktitle;
 
+    //variable for the result part
+    var normalValue;
+    if (widget.resultQuestionnaire.gender == 0) {
+      normalValue = ModelAnswer(
+          widget.resultQuestionnaire.gender,
+          widget.resultQuestionnaire.age,
+          173,
+          79,
+          -1,
+          0,
+          -1,
+          0,
+          -1,
+          -1,
+          0,
+          widget.resultQuestionnaire.inf,
+          widget.resultQuestionnaire.avc,
+          0,
+          0.03,
+          0.5,
+          2,
+          1,
+          3,
+          DateTime.now());
+    } else {
+      normalValue = ModelAnswer(
+          widget.resultQuestionnaire.gender,
+          widget.resultQuestionnaire.age,
+          178,
+          83,
+          -1,
+          0,
+          -1,
+          0,
+          -1,
+          -1,
+          0,
+          widget.resultQuestionnaire.inf,
+          widget.resultQuestionnaire.avc,
+          0,
+          0.08,
+          0.5,
+          2,
+          1,
+          3,
+          DateTime.now());
+    }
+
+    var riskCancerPop = riskCancer(normalValue), riskCancerYou = riskCancer(widget.resultQuestionnaire);
+    double timesRiskCancer=0.0;
+    var textResultCancer;
+    if(riskCancerPop>riskCancerYou){
+      //less than population
+      timesRiskCancer = riskCancerYou/riskCancerPop;
+      textResultCancer = timesRiskCancer.toStringAsFixed(2)+AppLocalizations.of(context)!.printtimesless;
+    } else if(riskCancerPop==riskCancerYou) {
+      //equal than population
+      textResultCancer= AppLocalizations.of(context)!.printtimesequal;
+    } else{
+      //more than population
+      timesRiskCancer = riskCancerPop/riskCancerYou;
+      textResultCancer = timesRiskCancer.toStringAsFixed(2)+AppLocalizations.of(context)!.printtimesmore;
+    }
+    if(timesRiskCancer<0.01){
+      textResultCancer= AppLocalizations.of(context)!.printtimesequal;
+    }
+
+    var riskAVCPop = riskAVC(normalValue), riskAVCYou = riskAVC(widget.resultQuestionnaire);
+    var timesRiskAVC, textResultAVC;
+    if(riskAVCPop>riskAVCYou){
+      //less than population
+      timesRiskAVC = riskAVCYou/riskAVCPop;
+      textResultAVC = timesRiskAVC.toStringAsFixed(2)+AppLocalizations.of(context)!.printtimesless;
+    } else if(riskAVCPop==riskAVCYou) {
+      //equal than population
+      textResultAVC= AppLocalizations.of(context)!.printtimesequal;
+    } else{
+      //more than population
+      timesRiskAVC = riskAVCPop/riskAVCYou;
+      textResultAVC = timesRiskAVC.toStringAsFixed(2)+AppLocalizations.of(context)!.printtimesmore;
+    }
+    if(timesRiskAVC<0.01){
+      textResultAVC= AppLocalizations.of(context)!.printtimesequal;
+    }
+
+    var riskDiabetePop = riskDiabete(normalValue), riskDiabeteYou = riskDiabete(widget.resultQuestionnaire);
+    var timesRiskDiabete, textResultDiabete;
+    if(riskDiabetePop>riskDiabeteYou){
+      //less than population
+      timesRiskDiabete = riskDiabeteYou/riskDiabetePop;
+      textResultDiabete = timesRiskDiabete.toStringAsFixed(2)+AppLocalizations.of(context)!.printtimesless;
+    } else if(riskDiabetePop==riskDiabeteYou) {
+      //equal than population
+      textResultDiabete= AppLocalizations.of(context)!.printtimesequal;
+    } else{
+      //more than population
+      timesRiskDiabete = riskDiabetePop/riskDiabeteYou;
+      textResultDiabete = timesRiskDiabete.toStringAsFixed(2)+AppLocalizations.of(context)!.printtimesmore;
+    }
+    if(timesRiskDiabete<0.01){
+      textResultDiabete= AppLocalizations.of(context)!.printtimesequal;
+    }
+
+
     doc.addPage(pw.Page(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
@@ -291,19 +395,19 @@ class _PDFPreviewCustomState extends State<PDFPreviewCustom> {
             pw.TableRow(children: [
               pw.Text(cancerRiskTitle),
               pw.SizedBox(width: 10),
-              pw.Text("${riskCancer(widget.resultQuestionnaire).toString()} %")
+              pw.Text(textResultCancer)
             ]),
             pw.TableRow(children: [pw.SizedBox(height: 5)]),
             pw.TableRow(children: [
               pw.Text(avcRiskTitle),
               pw.SizedBox(width: 10),
-              pw.Text("${riskAVC(widget.resultQuestionnaire).toString()} %")
+              pw.Text(textResultAVC)
             ]),
             pw.TableRow(children: [pw.SizedBox(height: 5)]),
             pw.TableRow(children: [
               pw.Text(diabeteRiskTitle),
               pw.SizedBox(width: 10),
-              pw.Text("${riskDiabete(widget.resultQuestionnaire).toString()} %")
+              pw.Text(textResultDiabete)
             ]),
           ]); // Center
         }));
