@@ -72,6 +72,7 @@ class _LinksState extends State<Links> {
     return Scaffold(
         appBar: AppBar(
             title: NavBar(),
+            automaticallyImplyLeading: false,
             toolbarHeight:
                 screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
             backgroundColor: Colors.blue,
