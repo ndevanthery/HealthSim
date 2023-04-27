@@ -3,6 +3,7 @@ import 'package:healthsim/questionnaire/scale_integer/scale_integer_view.dart';
 import 'package:survey_kit/survey_kit.dart' as survey;
 import 'package:survey_kit/survey_kit.dart';
 
+//custom of the scale question
 class ScaleIntegerResult extends QuestionResult<double> {
   final String customData;
   final double? value; //Custom value

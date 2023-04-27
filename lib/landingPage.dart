@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 const maxWidthScreen = 2500.0;
 
+//the content of the welcome page
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
 

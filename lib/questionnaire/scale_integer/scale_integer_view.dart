@@ -4,6 +4,7 @@ import 'package:survey_kit/survey_kit.dart' as survey;
 
 import 'scale_integer_step.dart';
 
+//custom of the view of the scale question
 class ScaleIntegerView extends StatefulWidget {
   final survey.Step step;
   final String title;

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:healthsim/l10n/l10n.dart';
-
+//change the language
 class LocaleProvider extends ChangeNotifier {
   Locale? _locale = WidgetsBinding.instance.window.locale;
 

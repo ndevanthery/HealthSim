@@ -31,8 +31,11 @@ class _PDFPreviewCustomState extends State<PDFPreviewCustom> {
     );
   }
 
+
+  //create the pdf
   /* void */ Future<Uint8List> _createPDF() async {
     final doc = pw.Document();
+    //initialize variables
     var alimText = [
       AppLocalizations.of(context)!.answeralim0,
       AppLocalizations.of(context)!.answeralim1,
@@ -118,6 +121,7 @@ class _PDFPreviewCustomState extends State<PDFPreviewCustom> {
       smoke = AppLocalizations.of(context)!.answernegative;
     }
 
+    //put text to variables
     var questionsTitle = AppLocalizations.of(context)!.printtitlequestion,
         answerTitle = AppLocalizations.of(context)!.printtitleanswer;
 
@@ -194,6 +198,7 @@ class _PDFPreviewCustomState extends State<PDFPreviewCustom> {
           DateTime.now());
     }
 
+    //pick the result of average population
     var riskCancerPop = riskCancer(normalValue), riskCancerYou = riskCancer(widget.resultQuestionnaire);
     double timesRiskCancer=0.0;
     String textResultCancer;
@@ -251,7 +256,7 @@ class _PDFPreviewCustomState extends State<PDFPreviewCustom> {
       textResultDiabete= AppLocalizations.of(context)!.printtimesequal;
     }
 
-
+    //create the page with all variables
     doc.addPage(pw.Page(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
@@ -412,7 +417,5 @@ class _PDFPreviewCustomState extends State<PDFPreviewCustom> {
           ]); // Center
         }));
     return doc.save();
-    /* await Printing.layoutPdf(
-        onLayout: (PdfPageFormat format) async => doc.save()); */
   }
 }

@@ -89,6 +89,7 @@ class _LinksState extends State<Links> {
                 ),
               ),
             )),
+        //all links
         body: Material(
           child: ListView(
             children: [
@@ -272,6 +273,7 @@ class _LinksState extends State<Links> {
         ));
   }
 
+  //ask authorization to receive notifications
   Future<void> _askNotificationPermission(BuildContext context) async {
     NotificationSettings settings =
         await _firebaseMessaging.requestPermission();

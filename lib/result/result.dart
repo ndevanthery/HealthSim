@@ -246,7 +246,6 @@ class _ResultPageState extends State<ResultPage> {
                       ],
                     ),
               const SizedBox(height: 20),
-
               const SizedBox(height: 20),
               //simulation part
               Column(
@@ -485,66 +484,6 @@ class _ResultPageState extends State<ResultPage> {
                             ),
                           ],
                         ),
-                  const SizedBox(height: 20),
-                  /* MediaQuery.of(context).size.width < 600
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            _buildResultsCard(
-                                context,
-                                AppLocalizations.of(context)!
-                                    .resultcancerrisktitle,
-                                'Medium',
-                                'Higher than Normal',
-                                riskCancer(simulationQuestionnaire),
-                                riskBaseCancer(normalValue)),
-                            _buildResultsCard(
-                                context,
-                                AppLocalizations.of(context)!
-                                    .resultinfrisktitle,
-                                'High',
-                                'Higher than Normal',
-                                riskAVC(simulationQuestionnaire),
-                                riskAVC(normalValue)),
-                            _buildResultsCard(
-                                context,
-                                AppLocalizations.of(context)!
-                                    .resultdiabrisktitle,
-                                'Low',
-                                'Lower than Normal',
-                                riskDiabete(simulationQuestionnaire),
-                                riskDiabete(normalValue)),
-                          ],
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            _buildResultsCard(
-                                context,
-                                AppLocalizations.of(context)!
-                                    .resultcancerrisktitle,
-                                'Medium',
-                                'Higher than Normal',
-                                riskCancer(simulationQuestionnaire),
-                                riskBaseCancer(normalValue)),
-                            _buildResultsCard(
-                                context,
-                                AppLocalizations.of(context)!
-                                    .resultinfrisktitle,
-                                'High',
-                                'Higher than Normal',
-                                riskAVC(simulationQuestionnaire),
-                                riskAVC(normalValue)),
-                            _buildResultsCard(
-                                context,
-                                AppLocalizations.of(context)!
-                                    .resultdiabrisktitle,
-                                'Low',
-                                'Lower than Normal',
-                                riskDiabete(simulationQuestionnaire),
-                                riskDiabete(normalValue)),
-                          ],
-                        ), */
                   const SizedBox(height: 20),
                 ],
               ),

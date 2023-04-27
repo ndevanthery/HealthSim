@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
 
-
+//Algorithm of the heart attack
 double riskAVC(ModelAnswer resultQuestionnaire) {
   //standard score
   var alimH = 0.99,

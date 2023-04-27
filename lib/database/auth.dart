@@ -20,12 +20,11 @@ class AuthService {
       map.putIfAbsent('uid', () => res.user!.uid);
       return map;
     } catch (e) {
-      /* print(e.toString());
-      print("ERROR"); */
       return null;
     }
   }
 
+  //login
   Future loginWithEmail(email, pwd) async {
     try {
       UserCredential res =

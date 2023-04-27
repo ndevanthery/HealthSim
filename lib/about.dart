@@ -31,13 +31,6 @@ class AboutPage extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       Image.asset("assets/images/about.png"),
-                      // Text(
-                      //   "",
-                      //   style: TextStyle(
-                      //       fontWeight: FontWeight.bold,
-                      //       fontSize: 40.0,
-                      //       color: Colors.white),
-                      // ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20.0),
                         child: Text(

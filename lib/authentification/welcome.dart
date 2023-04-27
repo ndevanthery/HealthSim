@@ -22,7 +22,7 @@ class WelcomePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              NavBar(),
+              const NavBar(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Padding(
@@ -30,6 +30,7 @@ class WelcomePage extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                   child: Column(
                     children: const <Widget>[
+                      //another class to put the content
                       LandingPage(),
                       SizedBox(
                         height: 20,

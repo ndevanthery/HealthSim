@@ -34,6 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
+    //put error message depending of the error
     errorMessage = (emailError
         ? "your email not valid !"
         : (passwordConditionError
@@ -47,6 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
         appBar: AppBar(
           title: const NavBar(),
+          //The height of the nav bar change depending of if is the mobile or the website version
           toolbarHeight:
               screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
           backgroundColor: Colors.blue,
@@ -72,6 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 minWidth: 100,
                 maxWidth: 600,
               ),
+              //content of the page
               child: Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -211,6 +214,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                   const SizedBox(height: 60),
+                  //The sign up button
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(1000, 50),
@@ -274,6 +278,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ));
   }
 
+  //verify if the password is correctly write
   bool validatePassword(String password) {
     // Define a regular expression pattern to match against the password
     const pattern =
@@ -285,7 +290,7 @@ class _RegisterPageState extends State<RegisterPage> {
  */ // Return true if the password matches the pattern, false otherwise
     return regExp.hasMatch(password);
   }
-
+//verify if it is all correct
   verifications(String email, String password, String passwordConf) {
     final bool emailValid = RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -295,6 +300,7 @@ class _RegisterPageState extends State<RegisterPage> {
         emailValid, password == passwordConf, validatePassword(password));
   }
 
+  //register the account on firebase
   register(String email, String password, UserM userM) async {
     AuthService myService = AuthService();
 

@@ -3,6 +3,7 @@ import 'package:healthsim/questionnaire/range_double/range_double_view.dart';
 import 'package:survey_kit/survey_kit.dart' as survey;
 import 'package:survey_kit/survey_kit.dart';
 
+//custom of the double question
 class RangeDoubleResult extends QuestionResult<double> {
   final String customData;
   final double? value; //Custom value

@@ -12,6 +12,7 @@ const maxWidthScreen = 2500.0;
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
 
+  //The navbar change depending if it's the mobile or the website version
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -29,6 +30,7 @@ class NavBar extends StatelessWidget {
   }
 }
 
+//the website version
 class DesktopNavBar extends StatefulWidget {
   const DesktopNavBar({super.key});
 
@@ -72,6 +74,7 @@ class _DesktopNavBarState extends State<DesktopNavBar> {
             const SizedBox(
               width: 30,
             ),
+            //Change the language
             const LanguagePickerWidget(),
             Row(
               children: <Widget>[
@@ -95,6 +98,7 @@ class _DesktopNavBarState extends State<DesktopNavBar> {
                 const SizedBox(
                   width: 30,
                 ),
+                //The about button
                 TextButton(
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -115,6 +119,7 @@ class _DesktopNavBarState extends State<DesktopNavBar> {
                 const SizedBox(
                   width: 30,
                 ),
+                //see if login or not
                 isLoggedIn
                     ? MaterialButton(
                         color: Colors.white,
@@ -186,6 +191,7 @@ class _DesktopNavBarState extends State<DesktopNavBar> {
   }
 }
 
+//the mobile version
 class MobileNavBar extends StatefulWidget {
   const MobileNavBar({super.key});
 
@@ -275,6 +281,7 @@ class _MobileNavBarState extends State<MobileNavBar> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                //see if it's login
                 isLoggedIn
                     ? MaterialButton(
                         color: Colors.white,

@@ -5,6 +5,7 @@ import 'package:survey_kit/survey_kit.dart' as survey;
 
 import 'range_double_step.dart';
 
+//custom of the view of the double question
 class RangeDoubleView extends StatefulWidget {
   final survey.Step step;
   final String title;

@@ -3,6 +3,7 @@ import 'package:healthsim/l10n/l10n.dart';
 import 'package:healthsim/locale_provider.dart';
 import 'package:provider/provider.dart';
 
+//put the language
 class LanguagePickerWidget extends StatelessWidget {
   const LanguagePickerWidget({super.key});
 

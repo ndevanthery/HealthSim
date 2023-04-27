@@ -28,6 +28,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
   var db = FirebaseFirestore.instance;
   int indexMemory = 0;
 
+  //that memorise the result each time you answer a question
   List<dynamic> memoryResults = [
     null,
     null,
@@ -283,21 +284,6 @@ class _QuestionnaireState extends State<QuestionnairePage> {
       double alim = result.results.elementAt(16).results.first.result ?? 0,
           sport = result.results.elementAt(17).results.first.result ?? 0,
           alcool = result.results.elementAt(18).results.first.result ?? 0;
-      /* double? syst = result.results.elementAt(7).results.first.result;
-      bool highChol = result.results.elementAt(8).results.first.result;
-      double? chol = result.results.elementAt(9).results.first.result;
-      double? hdl = result.results.elementAt(10).results.first.result;
-      bool diab = result.results.elementAt(11).results.first.result;
-      bool inf = result.results.elementAt(12).results.first.result;
-      bool avc = result.results.elementAt(13).results.first.result;
-      bool afinf = result.results.elementAt(15).results.first.result;
-      bool afcancer = result.results.elementAt(16).results.first.result;
-      bool smoke = result.results.elementAt(18).results.first.result;
-      double alim = result.results.elementAt(19).results.first.result ?? 0,
-          sport = result.results.elementAt(20).results.first.result ?? 0,
-          alcool = result.results.elementAt(21).results.first.result ?? 0; */
-
-
 
       //create new variable that be in the database
       int genderFinal,
@@ -445,17 +431,6 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
 
-        /*  RangeDoubleStep(
-            title: AppLocalizations.of(context)!.questionnairesysttitle,
-            hint: AppLocalizations.of(context)!.questionnairesysthint,
-            isOptional: true,
-            minValue: 80,
-            maxValue: 200,
-            defaultVal: () {
-              return memoryResults[7];
-            },
-            errorMessage: AppLocalizations.of(context)!.questionnairesysterror),
- */
         BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnairehighcholtitle,
           defaultVal: () {
@@ -465,28 +440,6 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
 
-        /*  RangeDoubleStep(
-            title: AppLocalizations.of(context)!.questionnairecholtitle,
-            hint: AppLocalizations.of(context)!.questionnairecholhint,
-            isOptional: true,
-            minValue: 2.5,
-            maxValue: 8,
-            defaultVal: () {
-              return memoryResults[9];
-            },
-            errorMessage: AppLocalizations.of(context)!.questionnairecholerror),
- */
-/*         RangeDoubleStep(
-            title: AppLocalizations.of(context)!.questionnairehdltitle,
-            hint: AppLocalizations.of(context)!.questionnairehdlhint,
-            isOptional: true,
-            minValue: 0.6,
-            maxValue: 2.5,
-            defaultVal: () {
-              return memoryResults[10];
-            },
-            errorMessage: AppLocalizations.of(context)!.questionnairehdlerror),
- */
         BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnairediabtitle,
           defaultVal: () {

@@ -5,6 +5,7 @@ import 'package:survey_kit/survey_kit.dart' as survey;
 
 import 'range_integer_step.dart';
 
+//custom of the view of the int question
 class RangeIntegerView extends StatefulWidget {
   final survey.Step step;
   final String title;

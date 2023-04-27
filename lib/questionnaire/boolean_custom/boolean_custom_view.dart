@@ -4,6 +4,7 @@ import 'package:survey_kit/survey_kit.dart' as survey;
 
 import 'boolean_custom_step.dart';
 
+//custom the view of the boolean question
 class BooleanCustomView extends StatefulWidget {
   final survey.Step step;
   final String title;

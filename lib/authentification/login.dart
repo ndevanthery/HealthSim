@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         appBar: AppBar(
           title: const NavBar(),
+          //The height of the nav bar change depending of if is the mobile or the website version
           toolbarHeight:
               screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
           backgroundColor: Colors.blue,
@@ -50,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
             minWidth: 100,
             maxWidth: 600,
           ),
+          //content of the page
           child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -60,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                     contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                     alignLabelWithHint: true,
                     label: Text(AppLocalizations.of(context)!.email),
+                    //if the email is wrong the border change color
                     border: OutlineInputBorder(
                         borderSide: BorderSide(
                             color:
@@ -97,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                           ? const Icon(Icons.visibility_off)
                           : const Icon(Icons.visibility),
                     ),
+                    //if the password is wrong the border change color
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                           color:
@@ -121,6 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: const TextStyle(fontSize: 18, color: Colors.red),
                 ),
                 const SizedBox(height: 60),
+                //the log in button
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(1000, 50),
@@ -131,6 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {
                         loading = true;
                       });
+                      //check if the email and the password is wrong
                       bool isError = await login(
                           emailController.text, passController.text);
                       setState(() {
@@ -153,6 +159,7 @@ class _LoginPageState extends State<LoginPage> {
         ))));
   }
 
+  //check if the login is correct
   Future<bool> login(String email, String password) async {
     AuthService myService = AuthService();
 

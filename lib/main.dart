@@ -10,8 +10,10 @@ import 'firebase_options.dart';
 import 'l10n/l10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+// the main
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //that is the script to help to verify if the algorithm is correct
   // await TestScript.tests();
 
   final _firebaseApp = await Firebase.initializeApp(

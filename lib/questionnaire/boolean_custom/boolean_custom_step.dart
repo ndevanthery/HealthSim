@@ -3,6 +3,7 @@ import 'package:healthsim/questionnaire/boolean_custom/boolean_custom_view.dart'
 import 'package:survey_kit/survey_kit.dart' as survey;
 import 'package:survey_kit/survey_kit.dart';
 
+//custom the boolean question
 class BooleanCustomResult extends QuestionResult<bool> {
   final String customData;
   final bool value; //Custom value

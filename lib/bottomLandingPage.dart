@@ -108,29 +108,24 @@ class BottomColumns extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          //color: Colors.white,
-          ),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth > 800) {
-            return Column(children: [
-              const SizedBox(
-                height: 50,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: pageColumn(constraints.biggest.width / 3),
-              )
-            ]);
-          } else {
-            return Column(
-              children: pageColumn(constraints.biggest.width),
-            );
-          }
-        },
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth > 800) {
+          return Column(children: [
+            const SizedBox(
+              height: 50,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: pageColumn(constraints.biggest.width / 3),
+            )
+          ]);
+        } else {
+          return Column(
+            children: pageColumn(constraints.biggest.width),
+          );
+        }
+      },
     );
   }
 }
