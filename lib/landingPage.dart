@@ -35,37 +35,6 @@ class _LandingPageState extends State<LandingPage> {
                   style: const TextStyle(fontSize: 16.0, color: Colors.white),
                 ),
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ResultPage(
-                            resultQuestionnaire: ModelAnswer(
-                                1,
-                                25,
-                                173,
-                                79,
-                                -1,
-                                0,
-                                -1,
-                                0,
-                                -1,
-                                -1,
-                                0,
-                                1,
-                                0,
-                                0,
-                                0.03,
-                                0.5,
-                                2,
-                                1,
-                                3,
-                                DateTime.now()),
-                          ),
-                        ));
-                  },
-                  child: Text(AppLocalizations.of(context)!.allerauxresultats)),
               MaterialButton(
                   color: Colors.white,
                   shape: const RoundedRectangleBorder(
