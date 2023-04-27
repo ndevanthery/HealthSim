@@ -80,9 +80,9 @@ class _QuestionnaireState extends State<QuestionnairePage> {
         intToBool(m.afcancer.toInt()),
         null,
         intToBool(m.smoke.toInt()),
-        m.alim,
-        m.sport,
-        m.alcool,
+        m.alim.toDouble(),
+        m.sport.toDouble(),
+        m.alcool.toDouble(),
         null,
       ];
     }

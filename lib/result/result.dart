@@ -122,17 +122,17 @@ class _ResultPageState extends State<ResultPage> {
             children: [
               const SizedBox(height: 20),
               Row(children: [
-                MediaQuery.of(context).size.width < 600?
-                    const SizedBox():
-                    Expanded(
-                    child: Text(
-                  AppLocalizations.of(context)!.resultriskresulttitle,
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue[900],
-                  ),
-                )),
+                MediaQuery.of(context).size.width < 600
+                    ? const SizedBox()
+                    : Expanded(
+                        child: Text(
+                        AppLocalizations.of(context)!.resultriskresulttitle,
+                        style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue[900],
+                        ),
+                      )),
                 Expanded(
                     child: Container(
                         alignment: Alignment.centerLeft,
@@ -179,16 +179,16 @@ class _ResultPageState extends State<ResultPage> {
                             child: Text(AppLocalizations.of(context)!.links,
                                 style: TextStyle(fontSize: 20))))),
               ]),
-              MediaQuery.of(context).size.width < 600?
-              Text(
-                AppLocalizations.of(context)!.resultriskresulttitle,
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue[900],
-                ),
-              ):
-              const SizedBox(),
+              MediaQuery.of(context).size.width < 600
+                  ? Text(
+                      AppLocalizations.of(context)!.resultriskresulttitle,
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue[900],
+                      ),
+                    )
+                  : const SizedBox(),
               const SizedBox(height: 20),
               MediaQuery.of(context).size.width < 600
                   ? Column(
