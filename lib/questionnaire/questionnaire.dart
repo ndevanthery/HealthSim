@@ -3,24 +3,22 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
 import 'package:healthsim/questionnaire/boolean_custom/boolean_custom_step.dart';
-import 'package:healthsim/questionnaire/range_double/range_double_step.dart';
 import 'package:healthsim/questionnaire/range_integer/range_integer_step.dart';
 import 'package:healthsim/questionnaire/scale_integer/scale_integer_step.dart';
 import 'package:provider/provider.dart';
 import 'package:survey_kit/survey_kit.dart';
-import 'package:survey_kit/survey_kit.dart' as survey;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../authentification/user_provider.dart';
 import '../result/result.dart';
 
 class QuestionnairePage extends StatefulWidget {
-  QuestionnairePage({super.key});
+  ModelAnswer? questionnaire;
+  QuestionnairePage({super.key, this.questionnaire});
 
   @override
   _QuestionnaireState createState() => _QuestionnaireState();
@@ -51,10 +49,42 @@ class _QuestionnaireState extends State<QuestionnairePage> {
     null,
     null,
     null,
-    null,
-    null,
-    null,
   ];
+
+  intToBool(int val) {
+    return val == 1 ? true : false;
+  }
+
+  @override
+  void initState() {
+    if (widget.questionnaire != null) // Come back from result page
+    {
+      ModelAnswer m = widget.questionnaire!;
+      memoryResults = [
+        null,
+        intToBool(m.gender),
+        m.age,
+        m.height,
+        m.weight,
+        intToBool(m.glyc),
+        intToBool(m.highSyst),
+        intToBool(m.highChol),
+        intToBool(m.diab),
+        intToBool(m.inf),
+        intToBool(m.avc),
+        null,
+        intToBool(m.afinf),
+        intToBool(m.afcancer.toInt()),
+        null,
+        intToBool(m.smoke.toInt()),
+        m.alim.toDouble(),
+        m.sport.toDouble(),
+        m.alcool.toDouble(),
+        null,
+      ];
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +112,6 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                   SurveyController(onNextStep: (context, resultFunction) {
                 memoryResults[indexMemory] = resultFunction().result;
                 indexMemory++;
-                print(memoryResults);
                 setState(() {});
                 BlocProvider.of<SurveyPresenter>(context).add(
                   NextStep(
@@ -95,7 +124,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                 setState(() {});
                 BlocProvider.of<SurveyPresenter>(context).add(
                   StepBack(
-                    resultFunction != null ? resultFunction.call() : null,
+                    resultFunction?.call(),
                   ),
                 );
               })),
@@ -218,7 +247,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
   }
 
   _onResult(SurveyResult result) {
-    late final user;
+    late final String? user;
     try {
       user = Provider.of<UserProvider>(context).user?.id;
     } catch (e) {
@@ -232,8 +261,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
       } else {
         userFinal = user;
       }
-      var mapped = result.results.map((e) => e.results.first.result).toList();
-      print("${mapped.length} ${memoryResults.length}");
+      result.results.map((e) => e.results.first.result).toList();
 
       //Pick the results and put it in variables
       bool gender = result.results.elementAt(1).results.first.result;
@@ -242,7 +270,20 @@ class _QuestionnaireState extends State<QuestionnairePage> {
       int weight = result.results.elementAt(4).results.first.result;
       bool glyc = result.results.elementAt(5).results.first.result;
       bool highSyst = result.results.elementAt(6).results.first.result;
-      double? syst = result.results.elementAt(7).results.first.result;
+      double? syst;
+      bool highChol = result.results.elementAt(7).results.first.result;
+      double? chol;
+      double? hdl;
+      bool diab = result.results.elementAt(8).results.first.result;
+      bool inf = result.results.elementAt(9).results.first.result;
+      bool avc = result.results.elementAt(10).results.first.result;
+      bool afinf = result.results.elementAt(12).results.first.result;
+      bool afcancer = result.results.elementAt(13).results.first.result;
+      bool smoke = result.results.elementAt(15).results.first.result;
+      double alim = result.results.elementAt(16).results.first.result ?? 0,
+          sport = result.results.elementAt(17).results.first.result ?? 0,
+          alcool = result.results.elementAt(18).results.first.result ?? 0;
+      /* double? syst = result.results.elementAt(7).results.first.result;
       bool highChol = result.results.elementAt(8).results.first.result;
       double? chol = result.results.elementAt(9).results.first.result;
       double? hdl = result.results.elementAt(10).results.first.result;
@@ -254,9 +295,9 @@ class _QuestionnaireState extends State<QuestionnairePage> {
       bool smoke = result.results.elementAt(18).results.first.result;
       double alim = result.results.elementAt(19).results.first.result ?? 0,
           sport = result.results.elementAt(20).results.first.result ?? 0,
-          alcool = result.results.elementAt(21).results.first.result ?? 0;
+          alcool = result.results.elementAt(21).results.first.result ?? 0; */
 
-      print("$age $weight $height");
+
 
       //create new variable that be in the database
       int genderFinal,
@@ -404,7 +445,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
 
-        RangeDoubleStep(
+        /*  RangeDoubleStep(
             title: AppLocalizations.of(context)!.questionnairesysttitle,
             hint: AppLocalizations.of(context)!.questionnairesysthint,
             isOptional: true,
@@ -414,17 +455,17 @@ class _QuestionnaireState extends State<QuestionnairePage> {
               return memoryResults[7];
             },
             errorMessage: AppLocalizations.of(context)!.questionnairesysterror),
-
+ */
         BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnairehighcholtitle,
           defaultVal: () {
-            return memoryResults[8] ?? false;
+            return memoryResults[7] ?? false;
           },
           positiveAnswer: AppLocalizations.of(context)!.answerpositive,
           negativeAnswer: AppLocalizations.of(context)!.answernegative,
         ),
 
-        RangeDoubleStep(
+        /*  RangeDoubleStep(
             title: AppLocalizations.of(context)!.questionnairecholtitle,
             hint: AppLocalizations.of(context)!.questionnairecholhint,
             isOptional: true,
@@ -434,8 +475,8 @@ class _QuestionnaireState extends State<QuestionnairePage> {
               return memoryResults[9];
             },
             errorMessage: AppLocalizations.of(context)!.questionnairecholerror),
-
-        RangeDoubleStep(
+ */
+/*         RangeDoubleStep(
             title: AppLocalizations.of(context)!.questionnairehdltitle,
             hint: AppLocalizations.of(context)!.questionnairehdlhint,
             isOptional: true,
@@ -445,11 +486,11 @@ class _QuestionnaireState extends State<QuestionnairePage> {
               return memoryResults[10];
             },
             errorMessage: AppLocalizations.of(context)!.questionnairehdlerror),
-
+ */
         BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnairediabtitle,
           defaultVal: () {
-            return memoryResults[11] ?? false;
+            return memoryResults[8] ?? false;
           },
           positiveAnswer: AppLocalizations.of(context)!.answerpositive,
           negativeAnswer: AppLocalizations.of(context)!.answernegative,
@@ -458,7 +499,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
         BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnaireinftitle,
           defaultVal: () {
-            return memoryResults[12] ?? false;
+            return memoryResults[9] ?? false;
           },
           positiveAnswer: AppLocalizations.of(context)!.answerpositive,
           negativeAnswer: AppLocalizations.of(context)!.answernegative,
@@ -466,7 +507,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
         BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnaireavctitle,
           defaultVal: () {
-            return memoryResults[13] ?? false;
+            return memoryResults[10] ?? false;
           },
           positiveAnswer: AppLocalizations.of(context)!.answerpositive,
           negativeAnswer: AppLocalizations.of(context)!.answernegative,
@@ -481,7 +522,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
         BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnaireafinftitle,
           defaultVal: () {
-            return memoryResults[15] ?? false;
+            return memoryResults[12] ?? false;
           },
           positiveAnswer: AppLocalizations.of(context)!.answerpositive,
           negativeAnswer: AppLocalizations.of(context)!.answernegative,
@@ -490,7 +531,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
         BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnaireafcancertitle,
           defaultVal: () {
-            return memoryResults[16] ?? false;
+            return memoryResults[13] ?? false;
           },
           positiveAnswer: AppLocalizations.of(context)!.answerpositive,
           negativeAnswer: AppLocalizations.of(context)!.answernegative,
@@ -505,7 +546,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
         BooleanCustomStep(
           title: AppLocalizations.of(context)!.questionnairesmoketitle,
           defaultVal: () {
-            return memoryResults[18] ?? false;
+            return memoryResults[15] ?? false;
           },
           positiveAnswer: AppLocalizations.of(context)!.answerpositive,
           negativeAnswer: AppLocalizations.of(context)!.answernegative,
@@ -517,7 +558,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           minValue: 0,
           maxValue: 3,
           defaultVal: () {
-            return memoryResults[19] ?? 2;
+            return memoryResults[16] ?? 2;
           },
         ),
         ScaleIntegerStep(
@@ -526,7 +567,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           minValue: 0,
           maxValue: 3,
           defaultVal: () {
-            return memoryResults[20] ?? 2;
+            return memoryResults[17] ?? 2;
           },
         ),
         ScaleIntegerStep(
@@ -535,7 +576,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           minValue: 0,
           maxValue: 4,
           defaultVal: () {
-            return memoryResults[21] ?? 2;
+            return memoryResults[18] ?? 2;
           },
         ),
 

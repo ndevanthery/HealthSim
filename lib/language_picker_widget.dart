@@ -16,19 +16,19 @@ class LanguagePickerWidget extends StatelessWidget {
         items: L10n.all.map((locale) {
           final flag = L10n.getFlag(locale.languageCode);
           return DropdownMenuItem(
-            child: Center(
-              child: Text(
-                flag,
-                style: TextStyle(
-                    fontSize: 15, color: Color.fromRGBO(144, 202, 249, 1)),
-              ),
-            ),
             value: locale,
             onTap: () {
               final provider =
                   Provider.of<LocaleProvider>(context, listen: false);
               provider.setLocale(locale);
             },
+            child: Center(
+              child: Text(
+                flag,
+                style: const TextStyle(
+                    fontSize: 15, color: Color.fromRGBO(144, 202, 249, 1)),
+              ),
+            ),
           );
         }).toList(),
         onChanged: (_) {},

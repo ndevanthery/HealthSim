@@ -14,7 +14,7 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   List<Widget> pageChildren(double width) {
     return <Widget>[
-      Container(
+      SizedBox(
         width: width,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +51,7 @@ class _LandingPageState extends State<LandingPage> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         AppLocalizations.of(context)!.lancerquestionnaire,
-                        style: TextStyle(color: Colors.blue),
+                        style: const TextStyle(color: Colors.blue),
                       ),
                     ),
                   ))

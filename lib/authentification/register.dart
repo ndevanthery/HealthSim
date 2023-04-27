@@ -46,12 +46,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: NavBar(),
+          title: const NavBar(),
           toolbarHeight:
               screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
           backgroundColor: Colors.blue,
           flexibleSpace: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Color.fromRGBO(4, 66, 108, 1),
@@ -83,11 +83,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           const EdgeInsets.symmetric(horizontal: 10),
                       alignLabelWithHint: true,
                       label: Text(AppLocalizations.of(context)!.nomcomplet),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(50))),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(50))),
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(50))),
                     ),
                   ),
@@ -276,7 +276,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool validatePassword(String password) {
     // Define a regular expression pattern to match against the password
-    final pattern =
+    const pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*(),.?":{}|<>]).{8,}$';
 
     // Create a RegExp object to use for matching

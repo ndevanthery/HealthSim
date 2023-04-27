@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthsim/questionnaire/questionnaire.dart';
-import 'package:healthsim/result/result.dart';
 import 'package:provider/provider.dart';
 
 import 'authentification/user_provider.dart';

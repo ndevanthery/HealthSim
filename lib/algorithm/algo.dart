@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
 
-import '../questionnaire/questionnaire.dart';
 
 double riskAVC(ModelAnswer resultQuestionnaire) {
   //standard score
@@ -15,7 +14,7 @@ double riskAVC(ModelAnswer resultQuestionnaire) {
 // syst, chol, hdl
   List<double> difIfHigh = [40, 2.9, -1.1], nbStandard = [110, 3.0, 2.0];
 
-  var syst, chol, hdl;
+  var syst = 0.0, chol = 0.0, hdl = 0.0;
 //put value in syst, chol and hdl if don't have it
   if (resultQuestionnaire.syst == -1) {
     syst = nbStandard.elementAt(0) +
@@ -39,6 +38,10 @@ double riskAVC(ModelAnswer resultQuestionnaire) {
   var resultAVC = 0.0;
   //reduction risk
   var alimP = 0.65, sportP = 0.45;
+  var variableSumF = 0.9776, variableSumH = 0.9605;
+  var variableCorr1F = -0.738, variableCorr1H = -0.5699;
+  var variableCorr2F = 0.7019, variableCorr2H = 0.7476;
+
 
   //if never had heart attack/avc
   if (resultQuestionnaire.inf == 0 && resultQuestionnaire.avc == 0) {
@@ -103,8 +106,15 @@ double riskAVC(ModelAnswer resultQuestionnaire) {
         baseSystAge * coeffSystAge +
         baseCholAge * coeffCholAge +
         baseHdlAge * coeffHdlAge;
-    resultAVC = 1.0 - pow(0.9605, exp(sumAVC));
-    resultAVC = 1.0 - exp(-exp(-0.5699 + 0.7476 * log(-log(1 - resultAVC))));
+
+    if(resultQuestionnaire.gender==1){
+      resultAVC = 1.0 - pow(variableSumH, exp(sumAVC));
+      resultAVC = 1.0 - exp(-exp(variableCorr1H + variableCorr2H * log(-log(1 - resultAVC))));
+    } else{
+      resultAVC = 1.0 - pow(variableSumF, exp(sumAVC));
+      resultAVC = 1.0 - exp(-exp(variableCorr1F + variableCorr2F * log(-log(1 - resultAVC))));
+    }
+
     resultAVC = resultAVC * baseAfinf;
     double riskAlim = resultAVC - (resultAVC * alimP * baseAlim);
     double riskSport = resultAVC - (resultAVC * sportP * baseSport);
@@ -255,7 +265,7 @@ double riskDiabete(ModelAnswer resultQuestionnaire) {
 
   if (bmi < 27) {
     points += 0;
-  } else if (bmi >= 30) {
+  } else if (bmi <= 30) {
     points += 2;
   } else {
     points += 3;

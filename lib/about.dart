@@ -22,7 +22,7 @@ class AboutPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              NavBar(),
+              const NavBar(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Padding(

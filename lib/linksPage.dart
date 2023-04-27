@@ -9,6 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Links extends StatefulWidget {
+  const Links({super.key});
+
   @override
   _LinksState createState() => _LinksState();
 }
@@ -23,7 +25,6 @@ class _LinksState extends State<Links> {
     super.initState();
     Firebase.initializeApp().whenComplete(() {
       _firebaseMessaging.getToken().then((value) {
-        print('FCM Token: $value');
       });
     });
 
@@ -71,7 +72,8 @@ class _LinksState extends State<Links> {
 
     return Scaffold(
         appBar: AppBar(
-            title: NavBar(),
+            title: const NavBar(),
+            automaticallyImplyLeading: false,
             toolbarHeight:
                 screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
             backgroundColor: Colors.blue,
@@ -93,12 +95,12 @@ class _LinksState extends State<Links> {
               ListTile(
                 title: Text(
                   AppLocalizations.of(context)!.commencer,
-                  style: TextStyle(fontSize: 30),
+                  style: const TextStyle(fontSize: 30),
                 ),
               ),
               ListTile(
                 title: Text(AppLocalizations.of(context)!.tabac),
-                subtitle: Text('http://www.stop-tabac.ch/'),
+                subtitle: const Text('http://www.stop-tabac.ch/'),
                 onTap: () {
                   launchUrl(
                     Uri.parse('http://www.stop-tabac.ch/'),
@@ -107,7 +109,7 @@ class _LinksState extends State<Links> {
               ),
               ListTile(
                 title: Text(AppLocalizations.of(context)!.alimentation),
-                subtitle: Text(
+                subtitle: const Text(
                     'https://swissheart.ch/fr/comment-rester-en-bonne-sante/une-vie-saine/alimentation'),
                 onTap: () {
                   launchUrl(
@@ -117,7 +119,7 @@ class _LinksState extends State<Links> {
                 },
               ),
               ListTile(
-                subtitle: Text(
+                subtitle: const Text(
                     'https://www.planetesante.ch/content/search?SearchText=alimentation+'),
                 onTap: () {
                   launchUrl(
@@ -127,7 +129,7 @@ class _LinksState extends State<Links> {
                 },
               ),
               ListTile(
-                subtitle: Text(
+                subtitle: const Text(
                     'https://www.planetesante.ch/Magazine/Alimentation-et-nutrition/Mieux-manger'),
                 onTap: () {
                   launchUrl(
@@ -137,7 +139,7 @@ class _LinksState extends State<Links> {
                 },
               ),
               ListTile(
-                subtitle: Text('https://www.mangerbouger.fr/manger-mieux'),
+                subtitle: const Text('https://www.mangerbouger.fr/manger-mieux'),
                 onTap: () {
                   launchUrl(
                     Uri.parse('https://www.mangerbouger.fr/manger-mieux'),
@@ -146,7 +148,7 @@ class _LinksState extends State<Links> {
               ),
               ListTile(
                 title: Text(AppLocalizations.of(context)!.alcool),
-                subtitle: Text(
+                subtitle: const Text(
                     'https://www.planetesante.ch/content/search?SearchText=alcool'),
                 onTap: () {
                   launchUrl(
@@ -156,7 +158,7 @@ class _LinksState extends State<Links> {
                 },
               ),
               ListTile(
-                subtitle: Text(
+                subtitle: const Text(
                     'https://www.stop-alcool.ch/fr/j-ai-decide-de-boire-moins'),
                 onTap: () {
                   launchUrl(
@@ -168,7 +170,7 @@ class _LinksState extends State<Links> {
               ListTile(
                 title: Text(AppLocalizations.of(context)!.activite),
                 subtitle:
-                    Text('https://www.jemebouge.ch/trouver-une-activite/'),
+                    const Text('https://www.jemebouge.ch/trouver-une-activite/'),
                 onTap: () {
                   launchUrl(
                     Uri.parse('https://www.jemebouge.ch/trouver-une-activite/'),
@@ -176,7 +178,7 @@ class _LinksState extends State<Links> {
                 },
               ),
               ListTile(
-                subtitle: Text(
+                subtitle: const Text(
                     'https://www.planetesante.ch/content/search?SearchText=activit%C3%A9+physique'),
                 onTap: () {
                   launchUrl(
@@ -186,7 +188,7 @@ class _LinksState extends State<Links> {
                 },
               ),
               ListTile(
-                subtitle: Text('https://www.pas-a-pas.ch/'),
+                subtitle: const Text('https://www.pas-a-pas.ch/'),
                 onTap: () {
                   launchUrl(
                     Uri.parse('https://www.pas-a-pas.ch/'),
@@ -195,7 +197,7 @@ class _LinksState extends State<Links> {
               ),
               ListTile(
                 title: Text(AppLocalizations.of(context)!.chute),
-                subtitle: Text(
+                subtitle: const Text(
                     'https://www.dalcroze.ch/cours/cours-seniors/rythmique-seniors/'),
                 onTap: () {
                   launchUrl(
@@ -207,12 +209,12 @@ class _LinksState extends State<Links> {
               ListTile(
                 title: Text(
                   AppLocalizations.of(context)!.region,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ),
               ListTile(
                 title: Text(AppLocalizations.of(context)!.fribourg),
-                subtitle: Text('https://www.liguessante-fr.ch/prevention/'),
+                subtitle: const Text('https://www.liguessante-fr.ch/prevention/'),
                 onTap: () {
                   launchUrl(
                     Uri.parse('https://www.liguessante-fr.ch/prevention/'),
@@ -221,7 +223,7 @@ class _LinksState extends State<Links> {
               ),
               ListTile(
                 title: Text(AppLocalizations.of(context)!.jura),
-                subtitle: Text('https://fondationo2.ch/'),
+                subtitle: const Text('https://fondationo2.ch/'),
                 onTap: () {
                   launchUrl(
                     Uri.parse('https://fondationo2.ch/'),
@@ -230,7 +232,7 @@ class _LinksState extends State<Links> {
               ),
               ListTile(
                 title: Text(AppLocalizations.of(context)!.vaud),
-                subtitle: Text('https://cours.unisante.ch/les-cours/'),
+                subtitle: const Text('https://cours.unisante.ch/les-cours/'),
                 onTap: () {
                   launchUrl(
                     Uri.parse('https://cours.unisante.ch/les-cours/'),
@@ -240,12 +242,12 @@ class _LinksState extends State<Links> {
               ListTile(
                 title: Text(
                   AppLocalizations.of(context)!.savoirplus,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ),
               ListTile(
                 title: Text(AppLocalizations.of(context)!.cancer),
-                subtitle: Text(
+                subtitle: const Text(
                     'https://www.planetesante.ch/content/search?SearchText=cancer'),
                 onTap: () {
                   launchUrl(
@@ -255,7 +257,7 @@ class _LinksState extends State<Links> {
                 },
               ),
               ListTile(
-                subtitle: Text(
+                subtitle: const Text(
                     'https://alimentation.liguecancer.ch/prevention-du-cancer/manger-equilibre/?gclid=CjwKCAjwq-WgBhBMEiwAzKSH6FQH-fm_DUwyPcrMiT3AJ7L5zU4EDGnbsEScOk_eTbkeDtRC7WAPSxoC19MQAvD_BwE'),
                 onTap: () {
                   launchUrl(

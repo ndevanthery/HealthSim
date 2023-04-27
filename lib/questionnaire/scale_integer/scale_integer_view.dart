@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:survey_kit/survey_kit.dart';
 import 'package:survey_kit/survey_kit.dart' as survey;
 
@@ -53,7 +52,7 @@ class _ScaleIntegerViewState extends State<ScaleIntegerView> {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(14.0),
+            padding: const EdgeInsets.all(14.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,13 +82,13 @@ class _ScaleIntegerViewState extends State<ScaleIntegerView> {
                         children: [
                           Text(
                             widget.minValue.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16.0,
                             ),
                           ),
                           Text(
                             widget.maxValue.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16.0,
                             ),
                           ),

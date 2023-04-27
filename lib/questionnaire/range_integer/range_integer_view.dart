@@ -36,7 +36,6 @@ class _RangeIntegerViewState extends State<RangeIntegerView> {
     controller.text =
         widget.defaultVal() == null ? "" : widget.defaultVal().toString();
     var val = int.tryParse(controller.text);
-    print(val);
     val ??= -1;
     if (val > widget.maxValue || val < widget.minValue) {
       isvalid = false;
@@ -61,45 +60,42 @@ class _RangeIntegerViewState extends State<RangeIntegerView> {
               widget.step.stepIdentifier.id, //Identification for NavigableTask,
           value: isvalid ? int.parse(controller.text) : null),
       title: Text(widget.title),
-      child: Container(
-        child: TextFormField(
-          keyboardType: TextInputType.number,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: textFieldInputDecoration(hint: widget.hint),
-          controller: controller,
-          onChanged: ((value) {
-            setState(() {});
-          }),
-          validator: (value) {
-            if (value == "" || value == null) {
-              SchedulerBinding.instance.addPostFrameCallback((duration) {
-                setState(() {
-                  isvalid = false;
-                });
-              });
-
-              return null;
-            }
-            var val = int.tryParse(value);
-            print(val);
-            val ??= -1;
-            if (val > widget.maxValue || val < widget.minValue) {
-              SchedulerBinding.instance.addPostFrameCallback((duration) {
-                setState(() {
-                  isvalid = false;
-                });
-              });
-              return widget.errorMessage;
-            }
-            isvalid = true;
+      child: TextFormField(
+        keyboardType: TextInputType.number,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        decoration: textFieldInputDecoration(hint: widget.hint),
+        controller: controller,
+        onChanged: ((value) {
+          setState(() {});
+        }),
+        validator: (value) {
+          if (value == "" || value == null) {
             SchedulerBinding.instance.addPostFrameCallback((duration) {
               setState(() {
-                isvalid = true;
+                isvalid = false;
               });
             });
+
             return null;
-          },
-        ),
+          }
+          var val = int.tryParse(value);
+          val ??= -1;
+          if (val > widget.maxValue || val < widget.minValue) {
+            SchedulerBinding.instance.addPostFrameCallback((duration) {
+              setState(() {
+                isvalid = false;
+              });
+            });
+            return widget.errorMessage;
+          }
+          isvalid = true;
+          SchedulerBinding.instance.addPostFrameCallback((duration) {
+            setState(() {
+              isvalid = true;
+            });
+          });
+          return null;
+        },
       ),
     );
   }
@@ -113,7 +109,7 @@ InputDecoration textFieldInputDecoration({String hint = ''}) => InputDecoration(
         right: 10,
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.zero,
         ),
         borderSide: BorderSide(
@@ -121,7 +117,7 @@ InputDecoration textFieldInputDecoration({String hint = ''}) => InputDecoration(
         ),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.zero,
         ),
         borderSide: BorderSide(
