@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:healthsim/linksPage.dart';
 import 'package:healthsim/navbar/navBar.dart';
@@ -26,7 +25,7 @@ class _ResultPageState extends State<ResultPage> {
   double _exerciseValue = 2;
   late ModelAnswer simulationQuestionnaire;
   late ModelAnswer normalValue;
-  late TextEditingController _controller = TextEditingController();
+  late final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -86,9 +85,6 @@ class _ResultPageState extends State<ResultPage> {
           3,
           DateTime.now());
     }
-    print("riskCancer ${riskCancer(widget.resultQuestionnaire)}");
-    print("riskDiab ${riskDiabete(widget.resultQuestionnaire)}");
-    print("riskAVC ${riskAVC(widget.resultQuestionnaire)}");
   }
 
   @override
@@ -96,7 +92,7 @@ class _ResultPageState extends State<ResultPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: NavBar(),
+        title: const NavBar(),
         automaticallyImplyLeading: false,
         toolbarHeight:
             screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
@@ -149,7 +145,7 @@ class _ResultPageState extends State<ResultPage> {
                             child: Text(
                               AppLocalizations.of(context)!
                                   .retourauquestionnaire,
-                              style: TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 20),
                             )))),
                 Expanded(
                     child: Container(
@@ -165,7 +161,7 @@ class _ResultPageState extends State<ResultPage> {
                             },
                             child: Text(
                                 AppLocalizations.of(context)!.resultprintbutton,
-                                style: TextStyle(fontSize: 20))))),
+                                style: const TextStyle(fontSize: 20))))),
                 Expanded(
                     child: Container(
                         alignment: Alignment.centerLeft,
@@ -174,10 +170,10 @@ class _ResultPageState extends State<ResultPage> {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Links()));
+                                      builder: (context) => const Links()));
                             },
                             child: Text(AppLocalizations.of(context)!.links,
-                                style: TextStyle(fontSize: 20))))),
+                                style: const TextStyle(fontSize: 20))))),
               ]),
               MediaQuery.of(context).size.width < 600
                   ? Text(
@@ -329,7 +325,7 @@ class _ResultPageState extends State<ResultPage> {
                               ),
                             ],
                           ),
-                          SizedBox(width: 300),
+                          const SizedBox(width: 300),
                           Row(
                             children: [
                               mySimulatorLine(
@@ -460,7 +456,7 @@ class _ResultPageState extends State<ResultPage> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 50,
                             ),
                             Expanded(
@@ -612,7 +608,7 @@ class _ResultPageState extends State<ResultPage> {
                             ))
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
@@ -683,7 +679,7 @@ class _ResultPageState extends State<ResultPage> {
                       ))
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(

@@ -10,7 +10,7 @@ class BottomColumns extends StatelessWidget {
   List<Widget> pageColumn(double width) {
     return <Widget>[
       Builder(builder: (context) {
-        return Container(
+        return SizedBox(
           width: width,
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,7 +42,7 @@ class BottomColumns extends StatelessWidget {
         );
       }),
       Builder(builder: (context) {
-        return Container(
+        return SizedBox(
           width: width,
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,7 +72,7 @@ class BottomColumns extends StatelessWidget {
         );
       }),
       Builder(builder: (context) {
-        return Container(
+        return SizedBox(
           width: width,
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

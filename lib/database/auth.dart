@@ -37,8 +37,7 @@ class AuthService {
 
       return res.user!.uid;
     } catch (e) {
-/*       print(e.toString());
- */
+
       return null;
     }
   }

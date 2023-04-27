@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:survey_kit/survey_kit.dart';
 import 'package:survey_kit/survey_kit.dart' as survey;
 
@@ -52,45 +51,43 @@ class _BooleanCustomViewState extends State<BooleanCustomView> {
         value: value!,
       ),
       title: Text(widget.title),
-      child: Container(
-        child: Column(
-          children: [
-            Column(
-              children: [
-                Divider(
-                  color: Colors.grey,
-                ),
-                SelectionListTile(
-                  text: widget.positiveAnswer,
-                  onTap: () {
-                    if (value == true) {
-                      value = null;
-                    } else {
-                      value = true;
-                    }
-                    isvalid = value != null;
-                    setState(() {});
-                  },
-                  isSelected: value == true,
-                ),
-                SelectionListTile(
-                  text: widget.negativeAnswer,
-                  onTap: () {
-                    if (value == false) {
-                      value = null;
-                    } else {
-                      value = false;
-                    }
-                    isvalid = value != null;
+      child: Column(
+        children: [
+          Column(
+            children: [
+              const Divider(
+                color: Colors.grey,
+              ),
+              SelectionListTile(
+                text: widget.positiveAnswer,
+                onTap: () {
+                  if (value == true) {
+                    value = null;
+                  } else {
+                    value = true;
+                  }
+                  isvalid = value != null;
+                  setState(() {});
+                },
+                isSelected: value == true,
+              ),
+              SelectionListTile(
+                text: widget.negativeAnswer,
+                onTap: () {
+                  if (value == false) {
+                    value = null;
+                  } else {
+                    value = false;
+                  }
+                  isvalid = value != null;
 
-                    setState(() {});
-                  },
-                  isSelected: value == false,
-                ),
-              ],
-            ),
-          ],
-        ),
+                  setState(() {});
+                },
+                isSelected: value == false,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

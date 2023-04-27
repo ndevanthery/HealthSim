@@ -3,17 +3,14 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
 import 'package:healthsim/questionnaire/boolean_custom/boolean_custom_step.dart';
-import 'package:healthsim/questionnaire/range_double/range_double_step.dart';
 import 'package:healthsim/questionnaire/range_integer/range_integer_step.dart';
 import 'package:healthsim/questionnaire/scale_integer/scale_integer_step.dart';
 import 'package:provider/provider.dart';
 import 'package:survey_kit/survey_kit.dart';
-import 'package:survey_kit/survey_kit.dart' as survey;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../authentification/user_provider.dart';
@@ -115,7 +112,6 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                   SurveyController(onNextStep: (context, resultFunction) {
                 memoryResults[indexMemory] = resultFunction().result;
                 indexMemory++;
-                print(memoryResults);
                 setState(() {});
                 BlocProvider.of<SurveyPresenter>(context).add(
                   NextStep(
@@ -128,7 +124,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
                 setState(() {});
                 BlocProvider.of<SurveyPresenter>(context).add(
                   StepBack(
-                    resultFunction != null ? resultFunction.call() : null,
+                    resultFunction?.call(),
                   ),
                 );
               })),
@@ -251,7 +247,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
   }
 
   _onResult(SurveyResult result) {
-    late final user;
+    late final String? user;
     try {
       user = Provider.of<UserProvider>(context).user?.id;
     } catch (e) {
@@ -265,8 +261,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
       } else {
         userFinal = user;
       }
-      var mapped = result.results.map((e) => e.results.first.result).toList();
-      print("${mapped.length} ${memoryResults.length}");
+      result.results.map((e) => e.results.first.result).toList();
 
       //Pick the results and put it in variables
       bool gender = result.results.elementAt(1).results.first.result;
@@ -302,7 +297,7 @@ class _QuestionnaireState extends State<QuestionnairePage> {
           sport = result.results.elementAt(20).results.first.result ?? 0,
           alcool = result.results.elementAt(21).results.first.result ?? 0; */
 
-      print("$age $weight $height");
+
 
       //create new variable that be in the database
       int genderFinal,

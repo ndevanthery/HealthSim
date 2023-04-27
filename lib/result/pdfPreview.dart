@@ -1,8 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -149,7 +147,7 @@ class _PDFPreviewCustomState extends State<PDFPreviewCustom> {
         diabeteRiskTitle = AppLocalizations.of(context)!.resultdiabrisktitle;
 
     //variable for the result part
-    var normalValue;
+    ModelAnswer normalValue;
     if (widget.resultQuestionnaire.gender == 0) {
       normalValue = ModelAnswer(
           widget.resultQuestionnaire.gender,
@@ -198,7 +196,7 @@ class _PDFPreviewCustomState extends State<PDFPreviewCustom> {
 
     var riskCancerPop = riskCancer(normalValue), riskCancerYou = riskCancer(widget.resultQuestionnaire);
     double timesRiskCancer=0.0;
-    var textResultCancer;
+    String textResultCancer;
     if(riskCancerPop>riskCancerYou){
       //less than population
       timesRiskCancer = riskCancerYou/riskCancerPop;
@@ -216,7 +214,8 @@ class _PDFPreviewCustomState extends State<PDFPreviewCustom> {
     }
 
     var riskAVCPop = riskAVC(normalValue), riskAVCYou = riskAVC(widget.resultQuestionnaire);
-    var timesRiskAVC, textResultAVC;
+    double timesRiskAVC=0.0;
+    String textResultAVC;
     if(riskAVCPop>riskAVCYou){
       //less than population
       timesRiskAVC = riskAVCYou/riskAVCPop;
@@ -234,7 +233,8 @@ class _PDFPreviewCustomState extends State<PDFPreviewCustom> {
     }
 
     var riskDiabetePop = riskDiabete(normalValue), riskDiabeteYou = riskDiabete(widget.resultQuestionnaire);
-    var timesRiskDiabete, textResultDiabete;
+    double timesRiskDiabete =0.0;
+    String textResultDiabete;
     if(riskDiabetePop>riskDiabeteYou){
       //less than population
       timesRiskDiabete = riskDiabeteYou/riskDiabetePop;

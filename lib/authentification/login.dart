@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
-          title: NavBar(),
+          title: const NavBar(),
           toolbarHeight:
               screenWidth >= 600 && screenWidth < maxWidthScreen ? 100 : 200,
           backgroundColor: Colors.blue,
@@ -57,24 +57,24 @@ class _LoginPageState extends State<LoginPage> {
                 TextField(
                   controller: emailController,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                     alignLabelWithHint: true,
                     label: Text(AppLocalizations.of(context)!.email),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(
                             color:
-                                error ? Color(0xFFFF00000) : Color(0xFF000000)),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                                error ? const Color(0xFFFF0000) : const Color(0xFF000000)),
+                        borderRadius: const BorderRadius.all(Radius.circular(50))),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             color:
-                                error ? Color(0xFFFF00000) : Color(0xFF000000)),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                                error ? const Color(0xFFFF0000) : const Color(0xFF000000)),
+                        borderRadius: const BorderRadius.all(Radius.circular(50))),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             color:
-                                error ? Color(0xFFFF00000) : Color(0xFF000000)),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                                error ? const Color(0xFFFF0000) : const Color(0xFF000000)),
+                        borderRadius: const BorderRadius.all(Radius.circular(50))),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -100,25 +100,25 @@ class _LoginPageState extends State<LoginPage> {
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                           color:
-                              error ? Color(0xFFFF00000) : Color(0xFF000000)),
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                              error ? const Color(0xFFFF0000) : const Color(0xFF000000)),
+                      borderRadius: const BorderRadius.all(Radius.circular(50)),
                     ),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             color:
-                                error ? Color(0xFFFF00000) : Color(0xFF000000)),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                                error ? const Color(0xFFFF0000) : const Color(0xFF000000)),
+                        borderRadius: const BorderRadius.all(Radius.circular(50))),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             color:
-                                error ? Color(0xFFFF00000) : Color(0xFF000000)),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                                error ? const Color(0xFFFF0000) : const Color(0xFF000000)),
+                        borderRadius: const BorderRadius.all(Radius.circular(50))),
                   ),
                 ),
                 const SizedBox(height: 20),
                 Text(
                   error ? "Wrong username or password ! " : "",
-                  style: TextStyle(fontSize: 18, color: Colors.red),
+                  style: const TextStyle(fontSize: 18, color: Colors.red),
                 ),
                 const SizedBox(height: 60),
                 ElevatedButton(
@@ -133,18 +133,17 @@ class _LoginPageState extends State<LoginPage> {
                       });
                       bool isError = await login(
                           emailController.text, passController.text);
-                      print(isError);
                       setState(() {
                         loading = false;
                         error = isError;
                       });
                     },
                     child: Text(AppLocalizations.of(context)!.senregistrer)),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 if (loading)
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                     width: 50,
                     child: LoadingIndicator(

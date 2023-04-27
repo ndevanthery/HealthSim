@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:healthsim/questionnaire/ModelAnswer.dart';
 
-import '../questionnaire/questionnaire.dart';
 
 double riskAVC(ModelAnswer resultQuestionnaire) {
   //standard score
@@ -15,7 +14,7 @@ double riskAVC(ModelAnswer resultQuestionnaire) {
 // syst, chol, hdl
   List<double> difIfHigh = [40, 2.9, -1.1], nbStandard = [110, 3.0, 2.0];
 
-  var syst, chol, hdl;
+  var syst = 0.0, chol = 0.0, hdl = 0.0;
 //put value in syst, chol and hdl if don't have it
   if (resultQuestionnaire.syst == -1) {
     syst = nbStandard.elementAt(0) +
