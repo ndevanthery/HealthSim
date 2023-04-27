@@ -8,10 +8,10 @@
     "contact": "Contact",
     "@contact":{
     },
-    "creercompte": "S'enregistrer",
+    "creercompte": "Inscription",
     "@creercompte":{
     },
-    "senregistrer": "Se connecter",
+    "senregistrer": "Connexion",
     "@senregistrer":{
     },
     "votresantetitre": "Votre santé \nc'est votre avenir",
